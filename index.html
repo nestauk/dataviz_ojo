@@ -202,6 +202,8 @@ let no_x_pos_small;
 // stacked bar chart
 const prop_space_x = 0.95
 const prop_space_y = 0.9
+// Height adjustment for NUTS2 area names
+const height_adj_nuts_text = ['0.5em', '0em', '-0.5em','-1em']
 
 // Parameters for occupations
 let sankey;
@@ -221,7 +223,10 @@ let no_skills;
 const color_skills_range = [d3.rgb(255,90,0), '#EB0085',d3.rgb(255,184,25), '#24C7C9',
  '#B4D905']
 const color_skills_domain = ['broad_skill_group_1', 'broad_skill_group_2', 'broad_skill_group_3', 'broad_skill_group_4', 'broad_skill_group_5']
-const color_skills = d3.scaleOrdinal().domain(color_skills_domain).range(color_skills_range)
+const color_skills = d3.scaleOrdinal()
+color_skills.domain(color_skills_domain)
+color_skills.range(color_skills_range)
+
 const color_nuts2_names = '#000000'
 const color_nuts2_names_bground = '#FFFFFF' 
 
@@ -272,7 +277,8 @@ function setup(data){
     .attr('class', 'nuts2_group')
 
   // NUTS 2 areas rectangles
-  svg.selectAll('.nuts2_group').selectAll('.nuts2_skills')
+  svg.selectAll('.nuts2_group')
+  .selectAll('.nuts2_skills')
   .data(function(d,i) { return d.skills })
   .enter().append('rect')
   .attr('class', 'nuts2_skills')
@@ -283,7 +289,8 @@ function setup(data){
   .attr('ry', '3px')
 
   // NUTS 2 area names background - wide screen
-  svg.selectAll('.nuts2_group').selectAll('.nuts2_names_long_bground')
+  svg.selectAll('.nuts2_group')
+  .selectAll('.nuts2_names_long_bground')
   .data(function(d,i) { return d.names_long })
   .enter().append('text')
   .attr('class', 'nuts2_names_long_bground')
@@ -292,14 +299,16 @@ function setup(data){
   .style('stroke', color_nuts2_names_bground)
 
   // NUTS 2 area names - wide screen
-  svg.selectAll('.nuts2_group').selectAll('.nuts2_names_long')
+  svg.selectAll('.nuts2_group')
+  .selectAll('.nuts2_names_long')
   .data(function(d,i) { return d.names_long })
   .enter().append('text')
   .attr('class', 'nuts2_names_long')
   .text(function(d,i) { return d[0].toUpperCase()})
 
   // NUTS 2 area names background - narrow screen
-  svg.selectAll('.nuts2_group').selectAll('.nuts2_names_short_bground')
+  svg.selectAll('.nuts2_group')
+  .selectAll('.nuts2_names_short_bground')
   .data(function(d,i) { return d.names_short })
   .enter().append('text')
   .attr('class', 'nuts2_names_short_bground')
@@ -307,14 +316,16 @@ function setup(data){
   .style('stroke', color_nuts2_names_bground)
 
   // NUTS 2 area names - narrow screen
-  svg.selectAll('.nuts2_group').selectAll('.nuts2_names_short')
+  svg.selectAll('.nuts2_group')
+  .selectAll('.nuts2_names_short')
   .data(function(d,i) { return d.names_short })
   .enter().append('text')
   .attr('class', 'nuts2_names_short')
   .text(function(d,i) { return d[0].toUpperCase()})
 
   // Style of NUTS 2 area names
-  svg.selectAll('.nuts2_group').selectAll('.nuts2_names_long, .nuts2_names_long_bground,.nuts2_names_short, .nuts2_names_short_bground')
+  svg.selectAll('.nuts2_group')
+  .selectAll('.nuts2_names_long,.nuts2_names_long_bground,.nuts2_names_short, .nuts2_names_short_bground')
   .style('text-anchor', 'middle')
   .style('fill', color_nuts2_names)
   .style('font-size', '10px')
@@ -567,7 +578,10 @@ function resize() {
     bodyWidth = document.body.clientWidth*0.95    
   }
   let width = bodyWidth*0.85  
-    , margin = {top: 0, right: (bodyWidth-width)/2, bottom: bodyWidth*0, left: (bodyWidth-width)/2}
+    , margin = {top: 0, 
+                right: (bodyWidth-width)/2, 
+                bottom: bodyWidth*0, 
+                left: (bodyWidth-width)/2}
     , height = 700 
 
   xScale.range([0, width]);
@@ -584,40 +598,67 @@ function resize() {
   svg.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
   // Positions of NUTS 2 group
-  svg.selectAll('.nuts2_group').attr('transform', function(d,i) { return (width<small_width) ? 'translate('+xScale(d.x_pos_small)+','+yScale(d.y_pos_small)+')' : 'translate('+xScale(d.x_pos)+','+yScale(d.y_pos)+')'})
+  svg.selectAll('.nuts2_group')
+  .attr('transform', function(d,i) { 
+    let translate = 'translate('+xScale(d.x_pos_small)+','+yScale(d.y_pos_small)+')'      
+    if (width<small_width) {
+      translate = 'translate('+xScale(d.x_pos_small)+','+yScale(d.y_pos_small)+')'
+    } 
+    return translate
+  })
 
   // Demand by skill group
-  svg.selectAll('.nuts2_group').selectAll('.nuts2_skills')
-  .attr('x', function(d,i) { return (width<small_width) ?  xScale((prop_space_x*d.percent_cumulative/no_x_pos_small)-(prop_space_x*50/no_x_pos_small)) : xScale((prop_space_x*d.percent_cumulative/no_x_pos)-prop_space_x*50/no_x_pos) })  
-  .attr('y', function(d,i) { return (width<small_width) ?  yScale(100+(prop_space_y*50/no_y_pos_small)) : yScale(100+(prop_space_y*50/no_y_pos))})
-  .attr('width', function(d,i) { return (width<small_width) ? xScale(prop_space_x*d.percent/no_x_pos_small) : xScale(prop_space_x*d.percent/no_x_pos) })
-  .attr('height', function(d,i) { return (width<small_width) ? yScale(100-(prop_space_y*100/no_y_pos_small)) : yScale(100-(prop_space_y*100/no_y_pos))})
-  .style('stroke-width', function(d,i) { return xScale(0.2)})
+  if (width<small_width) {
+    svg.selectAll('.nuts2_group').selectAll('.nuts2_skills')
+    .attr('x', function(d,i) { 
+      return xScale((prop_space_x*d.percent_cumulative/no_x_pos_small)-(prop_space_x*50/no_x_pos_small))})  
+    .attr('y', function(d,i) { return yScale(100+(prop_space_y*50/no_y_pos_small))})
+    .attr('width', function(d,i) { return xScale(prop_space_x*d.percent/no_x_pos_small)})
+    .attr('height', function(d,i) { return yScale(100-(prop_space_y*100/no_y_pos_small))})
+    .style('stroke-width', function(d,i) { return xScale(0.2)})
+  } else {
+    svg.selectAll('.nuts2_group').selectAll('.nuts2_skills')
+    .attr('x', function(d,i) { 
+      return xScale((prop_space_x*d.percent_cumulative/no_x_pos)-prop_space_x*50/no_x_pos) })  
+    .attr('y', function(d,i) { return yScale(100+(prop_space_y*50/no_y_pos))})
+    .attr('width', function(d,i) { return xScale(prop_space_x*d.percent/no_x_pos) })
+    .attr('height', function(d,i) { return yScale(100-(prop_space_y*100/no_y_pos))})
+    .style('stroke-width', function(d,i) { return xScale(0.2)})
+  }
 
 
   // NUTS 2 area names - wide screen
-  svg.selectAll('.nuts2_group').selectAll('.nuts2_names_long_bground')
+  svg.selectAll('.nuts2_group')
+  .selectAll('.nuts2_names_long_bground')
   .attr('dy', function(d,i) { return i+'em' })
   .style('stroke-width', function(d,i) { return xScale(0.7)})
 
   svg.selectAll('.nuts2_group').selectAll('.nuts2_names_long')
   .attr('dy', function(d,i) { return i+'em' })
 
-  svg.selectAll('.nuts2_group').selectAll('.nuts2_names_long_bground, .nuts2_names_long')
-  .attr('y', function(d,i) { return d[1]==1 ? '0.5em' : d[1]==2 ? '0em' : d[1]==3 ? '-0.5em' : '-1em'})
+  svg.selectAll('.nuts2_group')
+  .selectAll('.nuts2_names_long_bground, .nuts2_names_long')
+  .attr('y', function(d,i) { 
+    let no_lines = d[1]
+    return height_adj_nuts_text[no_lines-1]})
   .style('opacity', function(d,i) { return (width<small_width) ? 0 : 1})
 
 
   // NUTS 2 area names - narrow screen
-  svg.selectAll('.nuts2_group').selectAll('.nuts2_names_short_bground')
+  svg.selectAll('.nuts2_group')
+  .selectAll('.nuts2_names_short_bground')
   .attr('dy', function(d,i) { return i+'em' })
   .style('stroke-width', function(d,i) { return xScale(0.7)})
 
-  svg.selectAll('.nuts2_group').selectAll('.nuts2_names_short')
+  svg.selectAll('.nuts2_group')
+  .selectAll('.nuts2_names_short')
   .attr('dy', function(d,i) { return i+'em' })
 
-  svg.selectAll('.nuts2_group').selectAll('.nuts2_names_short_bground, .nuts2_names_short')
-  .attr('y', function(d,i) { return d[1]==1 ? '0.5em' : d[1]==2 ? '0em' : d[1]==3 ? '-0.5em' : '-1em'})
+  svg.selectAll('.nuts2_group')
+  .selectAll('.nuts2_names_short_bground, .nuts2_names_short')
+  .attr('y', function(d,i) { 
+    let no_lines = d[1]
+    return height_adj_nuts_text[no_lines-1]})
   .style('opacity', function(d,i) { return (width<small_width) ? 1 : 0})
 
 
@@ -700,13 +741,9 @@ function resize() {
   // Text to indicate salary associated with each ring
   svg_3.selectAll('.salary_rings_text, .salary_rings_text_bground')
   .attr('transform', function(d,i) { 
-
-    let x_pos = (xScale_s(50)+yScale_s(d)*Math.cos((1.5*Math.PI)))
-    
-    let y_pos = (xScale_s(50)+yScale_s(d)*Math.sin((1.5*Math.PI)))  
-
-      return 'translate('+x_pos+ ',' + y_pos + ')' 
-
+    let x_pos = xScale_s(50)+yScale_s(d)*Math.cos(1.5*Math.PI)
+    let y_pos = xScale_s(50)+yScale_s(d)*Math.sin(1.5*Math.PI)  
+    return 'translate('+x_pos+ ',' + y_pos + ')' 
   })
 
   // Skill labels - background
@@ -716,40 +753,65 @@ function resize() {
   // Skill labels
   svg_3.selectAll('.salary_skills_name,.salary_skills_name_bground')
   .attr('transform', function(d,i) { 
-
-    let x_pos = (xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries)))
-    
-    let y_pos = (xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries))))  
- 
+    let radius = yScale_s(d.salaries.upper_bound.upper_q) 
+    let x_pos = xScale_s(50)+radius*Math.cos(2*Math.PI*(d.index-rotate_adj)/no_salaries)
+    let y_pos = xScale_s(50)+radius*Math.sin(2*Math.PI*(d.index-rotate_adj)/no_salaries)
+    let rotate =  null 
     if (360*((d.index-rotate_adj)/no_salaries)>90) {
-
-      return 'translate('+x_pos+ ',' + y_pos + ')rotate(' + ((360*((d.index-rotate_adj)/no_salaries))-180) + ')' 
-
+      rotate = (360*(d.index-rotate_adj)/no_salaries)-180
     } else {
-
-     return 'translate('+x_pos+ ',' + y_pos + ')rotate(' + ((360*((d.index-rotate_adj)/no_salaries))) + ')' 
-
+      rotate = (360*(d.index-rotate_adj)/no_salaries)
     } 
+    let translate_rotate = 'translate('+x_pos+','+y_pos+')rotate('+rotate+')' 
+    return translate_rotate
   })
-  .attr('dy', function(d,i) { return (360*((d.index-rotate_adj)/no_salaries)>90) ? '0.8em' : '-0.2em' })
-  .style('text-anchor', function(d,i) { return (360*((d.index-rotate_adj)/no_salaries)>90) ? 'start' : 'end' })
+  .attr('dy', function(d,i) { 
+    let dy_adj = '-0.2em'
+    if (360*((d.index-rotate_adj)/no_salaries)>90) {
+      dy_adj = '0.8em'
+    } 
+    return dy_adj })
+  .style('text-anchor', function(d,i) { 
+    let text_anchor = 'end'
+    if (360*((d.index-rotate_adj)/no_salaries)>90) {
+      text_anchor = 'start'
+    } 
+    return text_anchor })
   .style('opacity', function(d,i) { return (width<550) ? 0 : (i%5==0) ? 1 : 0})
 
 
   // Lower quartile of lower lower bound to median of lower bound
   svg_3.selectAll('.lower_bounds')
-  .attr('width', function(d,i) { return yScale_s(lowest_salary_shown+d.salaries.lower_bound.median-d.salaries.lower_bound.lower_q)})  
-  .attr('transform', function(d,i) { return 'translate(' + (xScale_s(50)+(yScale_s(d.salaries.lower_bound.lower_q)*Math.cos((i-rotate_adj)*2*Math.PI/no_salaries))) + ',' + (xScale_s(50)+(yScale_s(d.salaries.lower_bound.lower_q)*Math.sin((i-rotate_adj)*2*Math.PI/no_salaries))) + ')rotate(' +((360*(i-rotate_adj)/no_salaries))+')' })
+  .attr('width', function(d,i) { 
+    return yScale_s(lowest_salary_shown+d.salaries.lower_bound.median-d.salaries.lower_bound.lower_q)})  
+  .attr('transform', function(d,i) { 
+    let radius = yScale_s(d.salaries.lower_bound.lower_q) 
+    let x_pos = xScale_s(50)+radius*Math.cos(2*Math.PI*(d.index-rotate_adj)/no_salaries)
+    let y_pos = xScale_s(50)+radius*Math.sin(2*Math.PI*(d.index-rotate_adj)/no_salaries)
+    let rotate = 360*(i-rotate_adj)/no_salaries
+    return 'translate('+x_pos+','+y_pos+')rotate('+rotate+')' })
 
   // Median of lower bound to median of upper bound
   svg_3.selectAll('.medians')
-  .attr('width', function(d,i) { return yScale_s(lowest_salary_shown+d.salaries.upper_bound.median-d.salaries.lower_bound.median)})  
-  .attr('transform', function(d,i) { return 'translate(' + (xScale_s(50)+(yScale_s(d.salaries.lower_bound.median)*Math.cos((i-rotate_adj)*2*Math.PI/no_salaries))) + ',' + (xScale_s(50)+(yScale_s(d.salaries.lower_bound.median)*Math.sin((i-rotate_adj)*2*Math.PI/no_salaries))) + ')rotate(' +((360*(i-rotate_adj)/no_salaries))+')' })
+  .attr('width', function(d,i) { 
+    return yScale_s(lowest_salary_shown+d.salaries.upper_bound.median-d.salaries.lower_bound.median)})  
+  .attr('transform', function(d,i) { 
+    let radius = yScale_s(d.salaries.lower_bound.median) 
+    let x_pos = xScale_s(50)+radius*Math.cos(2*Math.PI*(d.index-rotate_adj)/no_salaries)
+    let y_pos = xScale_s(50)+radius*Math.sin(2*Math.PI*(d.index-rotate_adj)/no_salaries)
+    let rotate = 360*(i-rotate_adj)/no_salaries
+    return 'translate('+x_pos+','+y_pos+')rotate('+rotate+')' })
 
   // Median of upper bound to upper quartile of upper bound
   svg_3.selectAll('.upper_bounds')
-  .attr('width', function(d,i) { return yScale_s(lowest_salary_shown+d.salaries.upper_bound.upper_q-d.salaries.upper_bound.median)})  
-  .attr('transform', function(d,i) { return 'translate(' + (xScale_s(50)+(yScale_s(d.salaries.upper_bound.median)*Math.cos((i-rotate_adj)*2*Math.PI/no_salaries))) + ',' + (xScale_s(50)+(yScale_s(d.salaries.upper_bound.median)*Math.sin((i-rotate_adj)*2*Math.PI/no_salaries))) + ')rotate(' +((360*(i-rotate_adj)/no_salaries))+')' })
+  .attr('width', function(d,i) { 
+    return yScale_s(lowest_salary_shown+d.salaries.upper_bound.upper_q-d.salaries.upper_bound.median)})  
+  .attr('transform', function(d,i) { 
+    let radius = yScale_s(d.salaries.upper_bound.median) 
+    let x_pos = xScale_s(50)+radius*Math.cos(2*Math.PI*(d.index-rotate_adj)/no_salaries)
+    let y_pos = xScale_s(50)+radius*Math.sin(2*Math.PI*(d.index-rotate_adj)/no_salaries)
+    let rotate = 360*(i-rotate_adj)/no_salaries
+    return 'translate('+x_pos+','+y_pos+')rotate('+rotate+')' })
 
   // Height (effectively width) of three sets of rectangles
   svg_3.selectAll('.lower_bounds, .medians, .upper_bounds')
@@ -798,29 +860,34 @@ function resize() {
 
   // Determine position of skill labels
   function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-      let angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
-      return {
-          x: centerX + (radius * Math.cos(angleInRadians)),
-          y: centerY + (radius * Math.sin(angleInRadians))
-      };
+    let angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
+    return {
+      x: centerX + (radius * Math.cos(angleInRadians)),
+      y: centerY + (radius * Math.sin(angleInRadians))
+    };
   }
 
   // Determine position of skill labels
   function describeArc(x, y, radius, startAngle, endAngle){
-      let start = polarToCartesian(x, y, radius, endAngle);
-      let end = polarToCartesian(x, y, radius, startAngle);
-      let arcSweep = endAngle - startAngle <= 180 ? '0' : '1';
-      let d = [
-          'M', start.x, start.y, 
-          'A', radius, radius, 0, 1, 1, end.x, end.y
-      ].join(' ');
-      return d;       
+    let start = polarToCartesian(x, y, radius, endAngle);
+    let end = polarToCartesian(x, y, radius, startAngle);
+    let arcSweep = endAngle - startAngle <= 180 ? '0' : '1';
+    let d = [
+      'M', start.x, start.y, 
+      'A', radius, radius, 0, 1, 1, end.x, end.y
+    ].join(' ');
+    return d;       
   }
 
   // Skill labels 
   svg_m.selectAll('.skills_arcs')
   .attr('d', function(d,i) { 
-    return describeArc(xScale_m(50), yScale_m(yMax-(100/(no_skills+1))*(i+1)), xScale_m(radius_circles*1.1), 160, -160)
+    let x = xScale_m(50)
+    let y = yScale_m(yMax-(100/(no_skills+1))*(i+1))
+    let radius = xScale_m(radius_circles*1.1)
+    let startAngle = 160
+    let endAngle = -160
+    return describeArc(x, y, radius, startAngle, endAngle)
   });
 
   // Skill labels - background
