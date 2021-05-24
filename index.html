@@ -1,20 +1,26 @@
 <!DOCTYPE html>
 
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Open Jobs Observatory: Open, up-to-date and actionable insights on UK skill demands | Nesta</title>
-<meta name="description" content="The observatory contains insights from online job adverts, with a focus on the skills being requested by employers."/>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
-<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Open Jobs Observatory: Open, up-to-date and actionable insights on UK skill demands | Nesta</title>
+  <meta name="description" content="The observatory contains insights from online job adverts, with a focus on the skills being requested by employers."/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 
+  <script src="https://unpkg.com/d3@6.7.0/dist/d3.min.js"></script>
+  <script src="https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js"></script>
 
-<!-- <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@nesta_uk" />
-<meta name="twitter:title" content="Open Jobs Observatory" />
-<meta name="twitter:description" content="Insights on skills from job adverts"/>
-<meta name="twitter:image" content="https://data-viz.nesta.org.uk/xxxx/img/twitter_image.png" />
- -->
+  <!-- <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@nesta_uk" />
+  <meta name="twitter:title" content="Open Jobs Observatory" />
+  <meta name="twitter:description" content="Insights on skills from job adverts"/>
+  <meta name="twitter:image" content="https://data-viz.nesta.org.uk/xxxx/img/twitter_image.png" />
+   -->
+  
+</head>
+
 
 <body>
 
@@ -121,9 +127,6 @@
 
 
 </body>
-
-<script src="js/d3.min.js"></script> 
-<script src="js/d3-sankey.min.js"></script> 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <!--     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1360665-16"></script>
@@ -246,7 +249,6 @@ d3.json("data/data.json")
 
 // Define shapes
 function setup(data){
-
 
   //////////////////////  
   // LOCATIONS        //
