@@ -1,41 +1,40 @@
 @font-face {
-    font-family: AvertaRegular;
-    src: url("Intelligent Design - Averta-Regular.otf") format("opentype"),
-    url('css/367A1E_4_0.eot');
+  font-family: AvertaRegular;
+  src: url('Intelligent Design - Averta-Regular.otf') format('opentype'),
+  url('css/367A1E_4_0.eot');
 }
 
 @font-face {
-    font-family: AvertaLight;
-    src: url("Intelligent Design - Averta-Light.otf") format("opentype"),
-    url('css/367A1E_2_0.eot');
+  font-family: AvertaLight;
+  src: url('Intelligent Design - Averta-Light.otf') format('opentype'),
+  url('css/367A1E_2_0.eot');
 }
 
 @font-face {
-    font-family: AvertaBold;
-    src: url("Intelligent Design - Averta-Bold.otf") format("opentype"),
-    url('css/367A1E_0_0.eot');
+  font-family: AvertaBold;
+  src: url('Intelligent Design - Averta-Bold.otf') format('opentype'),
+  url('css/367A1E_0_0.eot');
 }
 
 @font-face {
-    font-family: AvertaItalic;
-    src: url("Intelligent Design - Averta-RegularItalic.otf") format("opentype"),
-    url('css/367A1E_5_0.eot');
+  font-family: AvertaItalic;
+  src: url('Intelligent Design - Averta-RegularItalic.otf') format('opentype'),
+  url('css/367A1E_5_0.eot');
 }
-
 
 body {
-  font-family: "AvertaRegular", sans-serif;
   background-color: #FFFFFF; 
-  color: #231F20;
-  font-size: 18px;
-  line-height: 1.8;
-  font-weight: 500;
-  -webkit-font-smoothing: antialiased; 
-  margin: 0px;
-  padding: 0px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
+  color: #231F20;
+  font-family: 'AvertaRegular', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.8;
+  margin: 0px;
+  -moz-box-sizing: border-box;
+  padding: 0px;
+  -webkit-font-smoothing: antialiased; 
+  -webkit-box-sizing: border-box;
 }
 
 #chart, #chart_m, #chart_2, #chart_3 {
@@ -44,45 +43,45 @@ body {
 }
 
 .container_title {
-  position: relative;
   background: linear-gradient( rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) ), url();   
-  margin: 0px auto;
-  max-width: 1380px;
-  width: 100%;
   background-position: center center;
   background-repeat: no-repeat; 
   background-size: cover;  
   color: #FFFFFF;
-  font-family: "AvertaLight", sans-serif;
+  font-family: 'AvertaLight', sans-serif;
+  position: relative;
+  margin: 0px auto;
+  max-width: 1380px;
+  width: 100%;
 }
 
 .container_title_text {
-  padding: 60px 28px 14px 28px;
-  max-width: 800px;
   font-size: 46.2222px;
   line-height: 54.4667px;
+  max-width: 800px;
+  padding: 60px 28px 14px 28px;
 }
 
 .container_subtitle_text {
-  padding: 0px 28px 21px 28px;
-  max-width: 800px;
   font-size: 23.111px;
   line-height: 32.3555px;
+  max-width: 800px;
+  padding: 0px 28px 21px 28px;
 }      
 
 .container_date {
-  padding: 0px 28px 0px 28px;
-  max-width: 800px;
   font-size: 18px;
   line-height: 32.4px;
+  max-width: 800px;
+  padding: 0px 28px 0px 28px;
 }  
 
 .container_author {
-  font-family: "AvertaRegular", sans-serif;
-  padding: 30px 28px 50px 28px;
-  max-width: 800px;
   font-size: 14.2222px;
+  font-family: 'AvertaRegular', sans-serif;
   line-height: 19.9111px;
+  max-width: 800px;
+  padding: 30px 28px 50px 28px;
 } 
 
 .container_author a {
@@ -94,28 +93,27 @@ body {
   color: #FF0041;
 }
 
-
 .container_parent {
   margin: 0px auto;
+  max-width: 1380px;
   overflow: hidden;
   width: 95%;
-  max-width: 1380px;
 }
 
 .container_left_col {
-  margin: 0px auto;
   float:left;
   flex-basis: 0;
+  margin: 0px auto;
   min-width: 0; 
   max-width: 0; 
 } 
 
 .container_text {
-  margin: 0px auto;
   float:right;
   flex-basis: 100%;
-  min-width: 100%;
+  margin: 0px auto;
   max-width: 100%;
+  min-width: 100%;
 } 
 
 .container_text a {
@@ -127,8 +125,8 @@ body {
 }
 
 .introduction {
-  font-family: "AvertaRegular", sans-serif;
   color: rgb(106,88,71);
+  font-family: 'AvertaRegular', sans-serif;
   font-size: 18.667px;
   font-weight: 500;
   line-height: 33.6001px;
@@ -136,11 +134,11 @@ body {
 }
 
 .text_content {
-  position: relative;
-  margin: 0px auto;
-  padding: 20px 28px 20px 28px;  
   font-size: 18px;     
   line-height: 32.4px; 
+  margin: 0px auto;
+  padding: 20px 28px 20px 28px;  
+  position: relative;
 }
 
 .text_content p {
@@ -152,8 +150,8 @@ body {
 }
 
 .text_content a {
-  cursor: pointer;
   color: #FF0041;
+  cursor: pointer;
   transition: 0.3s;
 }
 
@@ -162,35 +160,35 @@ body {
 }
 
 h2 {
-  font-family: "AvertaBold", sans-serif;
-  margin-bottom: 28px;
+  font-family: 'AvertaBold', sans-serif;
   font-size: 23.111px;
   font-weight: 700;
   line-height: 32.3555px;
+  margin-bottom: 28px;
 }
 
 h3 {
-  font-family: "AvertaBold", sans-serif;
-  margin-bottom: 0px;
+  font-family: 'AvertaBold', sans-serif;
   font-size: 18.6667px;
   font-weight: 700;
   line-height: 26.1334px;
+  margin-bottom: 0px;
   text-align: center;
 }
 
 .notes {
   color: #706467;
-  line-height: 1.5;
   font-size: 14px;
+  line-height: 1.5;
   padding-top: 20px;
   padding-bottom: 30px;
 }
 
 img {
-  width: 95%;
-  max-width: 1000px;
-  margin: 0px auto; 
   display: block;
+  margin: 0px auto; 
+  max-width: 1000px;
+  width: 95%;
  }
 
 /* Larger than 800px */
@@ -225,12 +223,11 @@ img {
   }
 }  
 
-
 /* Larger than 1250px */
 @media only screen and (min-width: 1250px) {
   .container_parent {
-    width: 83.5%;
     max-width: 1380px;
+    width: 83.5%;
   }
   .container_text {
     flex-basis: 85%;
@@ -263,64 +260,64 @@ img {
 }
 
 
-
 .app-footer {
+  background-color: #fff;
+  border-top: 3px solid rgba(160, 143, 125, 0.2);
   margin: 80px auto 0px auto;
   max-width: 1380px;
-  border-top: 3px solid rgba(160, 143, 125, 0.2);
-  background-color: #fff;
   text-align: left;
 }
 
 .app-footer__container {
-  padding: 26.25px 17.5px 26.25px 17.5px;
   margin: 0 auto;
+  padding: 26.25px 17.5px 26.25px 17.5px;
 }
 
 .app-footer__icons {
-  padding: 0px 0px 17.5px 0px;
-  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  flex-direction: row;
+  overflow-x: hidden
+  padding: 0px 0px 17.5px 0px;
+  position: relative;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
-  flex-direction: row;
-  overflow-x: hidden
 }
 
 .page__footer .share-item__icon {
-    fill: #fff
+  fill: #fff
 }
 
 .app-footer__icons .site-by-torchbox {
-    position: absolute;
-    right: -44px;
-    top: 0
+  position: absolute;
+  right: -44px;
+  top: 0
 }
 
 .footer-link-item {
-    font-size: 15px;
-    font-size: .83333rem;
-    margin-right: 14px;
-    color: #6a5847;
-    text-align: left;
+  color: #6a5847;
+  font-size: 15px;
+  font-size: .83333rem;
+  margin-right: 14px;
+  text-align: left;
 }
 
 .footer-link-item__link {
-    color: #231f20;
-    text-decoration: none;
-    padding-right: 15px;
+  color: #231f20;
+  padding-right: 15px;
+  text-decoration: none;
 }
 
 .footer-link-item__link:hover {
-    color: #e61f47
+  color: #e61f47
 }
 
 .footer-links {
+  align-items: center;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -328,19 +325,18 @@ img {
   -webkit-box-align: center;
   -webkit-align-items: center;
   -ms-flex-align: center;
-  align-items: center
 }
 
 .footer-links__container {
-  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  flex-direction: row;
+  -ms-flex-direction: row;
+  padding: 0px 0px 0px 17.5px;    
+  position: relative;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
   -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  padding: 0px 0px 0px 17.5px;    
 }
