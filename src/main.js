@@ -1,53 +1,71 @@
-//////////////////////  
+/* external dependencies */
+
+import {select} from 'd3-selection';
+import {scaleLinear, scaleOrdinal} from 'd3-scale';
+import {sankey, sankeyLinkHorizontal} from 'd3-sankey';
+
+/* data */
+
+import data from '../data/data.json';
+
+/* Hot Module Replacement (https://parceljs.org/hmr.html) */
+
+if (module.hot) {
+  module.hot.accept()
+}
+
+/* main */
+
+//////////////////////
 // MARGIN          //
-//////////////////////  
- 
-let chartSVG_m = d3.select('#chart_m').append('svg')
+//////////////////////
+
+let chartSVG_m = select('#chart_m').append('svg')
 let svg_m = chartSVG_m.append('g')
 
-//////////////////////  
+//////////////////////
 // LOCATIONS        //
-//////////////////////  
- 
-let chartSVG = d3.select('#chart').append('svg')
+//////////////////////
+
+let chartSVG = select('#chart').append('svg')
 let svg = chartSVG.append('g')
 
-//////////////////////  
+//////////////////////
 // OCCUPATIONS      //
-//////////////////////  
+//////////////////////
 
-let chartSVG_2 = d3.select('#chart_2').append('svg')
+let chartSVG_2 = select('#chart_2').append('svg')
 let svg_2 = chartSVG_2.append('g')
 
-//////////////////////  
+//////////////////////
 // SALARIES         //
-//////////////////////  
+//////////////////////
 
-let chartSVG_3 = d3.select('#chart_3').append('svg')
+let chartSVG_3 = select('#chart_3').append('svg')
 let svg_3 = chartSVG_3.append('g')
 
 
 
-//////////////////////////  
+//////////////////////////
 // SCALES & PARAMETERS  //
-//////////////////////////  
+//////////////////////////
 
 // Universals for scales
 const small_width = 750
-const xMin = 0; 
+const xMin = 0;
 const xMax = 100;
 const yMin = 0;
 const yMax = 100;
-const xScale = d3.scaleLinear().domain([xMin,xMax])
-const yScale = d3.scaleLinear().domain([yMin,yMax])
+const xScale = scaleLinear().domain([xMin,xMax])
+const yScale = scaleLinear().domain([yMin,yMax])
 
 // Scales for margins
-const xScale_m = d3.scaleLinear().domain([xMin,xMax])
-const yScale_m = d3.scaleLinear().domain([yMin,yMax])
+const xScale_m = scaleLinear().domain([xMin,xMax])
+const yScale_m = scaleLinear().domain([yMin,yMax])
 
 // Scales for salaries
-const xScale_s = d3.scaleLinear()
-const yScale_s = d3.scaleLinear()
+const xScale_s = scaleLinear()
+const yScale_s = scaleLinear()
 
 
 // Parameters for locations
@@ -63,7 +81,7 @@ const prop_space_y = 0.9
 const height_adj_nuts_text = ['0.5em', '0em', '-0.5em','-1em']
 
 // Parameters for occupations
-let sankey;
+let sankeyGenerator;
 
 // Parameters for salaries
 let no_salaries;
@@ -77,15 +95,26 @@ const radius_circles = 20
 let no_skills;
 
 // Colours
-const color_skills_range = [d3.rgb(255,90,0), '#EB0085',d3.rgb(255,184,25), '#24C7C9',
- '#B4D905']
-const color_skills_domain = ['broad_skill_group_1', 'broad_skill_group_2', 'broad_skill_group_3', 'broad_skill_group_4', 'broad_skill_group_5']
-const color_skills = d3.scaleOrdinal()
+const color_skills_range = [
+	'rgb(255,90,0)',
+	'#EB0085',
+	'rgb(255,184,25)',
+	'#24C7C9',
+	'#B4D905'
+]
+const color_skills_domain = [
+	'broad_skill_group_1',
+	'broad_skill_group_2',
+	'broad_skill_group_3',
+	'broad_skill_group_4',
+	'broad_skill_group_5'
+]
+const color_skills = scaleOrdinal()
 color_skills.domain(color_skills_domain)
 color_skills.range(color_skills_range)
 
 const color_nuts2_names = '#000000'
-const color_nuts2_names_bground = '#FFFFFF' 
+const color_nuts2_names_bground = '#FFFFFF'
 
 const color_skills_names = '#575757'
 const color_skills_names_bground = '#FFFFFF'
@@ -101,20 +130,16 @@ const color_salary_axis = '#FFFFFF'
 const color_salary_axis_bground = '#000000'
 
 
-//////////////////////  
+//////////////////////
 // DEFINE SHAPES    //
-//////////////////////  
-
-// Load data
-d3.json('data/data.json')
-  .then(setup)
+//////////////////////
 
 // Define shapes
 function setup(data){
 
-  //////////////////////  
+  //////////////////////
   // LOCATIONS        //
-  //////////////////////  
+  //////////////////////
 
   // Number of x and y positions in the map
   let all_x_pos = data['locations'].map(function(d,i) { return d.x_pos})
@@ -126,7 +151,7 @@ function setup(data){
   let all_y_pos_small = data['locations'].map(function(d,i) { return d.y_pos_small})
   no_y_pos_small = all_y_pos_small.filter((item, i, ar) => ar.indexOf(item) === i).length;
 
-  // Group for each NUTS2 area       
+  // Group for each NUTS2 area
   svg.selectAll('.nuts2_group')
     .data(data['locations'])
     .enter()
@@ -141,7 +166,7 @@ function setup(data){
   .attr('class', 'nuts2_skills')
   .style('fill',function(d,i){ return color_skills(d.broad_skill_group) })
   .style('stroke',function(d,i){ return color_skills(d.broad_skill_group) })
-  .style('mix-blend-mode', 'multiply')  
+  .style('mix-blend-mode', 'multiply')
   .attr('rx', '3px')
   .attr('ry', '3px')
 
@@ -189,28 +214,28 @@ function setup(data){
   .style('font-weight', 'bold')
 
 
-  //////////////////////  
+  //////////////////////
   // OCCUPATIONS      //
-  //////////////////////  
+  //////////////////////
 
-  // To adjust sankey in resize() 
+  // To adjust sankey in resize()
   window.data_occupations = data['occupations'];
 
-  sankey = d3.sankey()
+  sankeyGenerator = sankey()
   .nodeId(d => d.name)
   .nodeSort(null)
   .nodeWidth(5)
   .nodePadding(15)
   .extent([[1, 5], [700 - 1, 800 - 5]]);
 
-  data_reformatted = sankey({
+  let data_reformatted_1 = sankeyGenerator({
     nodes: data['occupations']['nodes'],
-    links: data['occupations']['links'] 
-  }); 
+    links: data['occupations']['links']
+  });
 
   // Black rectangles
   svg_2.selectAll('.occupation_skill_rect')
-  .data(data_reformatted['nodes'])
+  .data(data_reformatted_1['nodes'])
   .enter().append('rect')
   .attr('class', 'occupation_skill_rect')
   .attr('fill', color_occupation_rect)
@@ -219,30 +244,30 @@ function setup(data){
 
   // Paths
   svg_2.selectAll('.occupation_skill_links')
-  .data(data_reformatted['links'])
+  .data(data_reformatted_1['links'])
   .enter().append('path')
   .attr('class', 'occupation_skill_links')
-  .style('stroke', function(d,i) { return color_skills(d.target.name)}) 
+  .style('stroke', function(d,i) { return color_skills(d.target.name)})
   .style('fill', 'none')
   .style('mix-blend-mode', 'multiply');
 
   // Background to occupation and skill labels
   svg_2.selectAll('.occupation_skill_text_bground')
-  .data(data_reformatted['nodes'])
+  .data(data_reformatted_1['nodes'])
   .enter().append('text')
   .attr('class', 'occupation_skill_text_bground')
-  .style('fill', color_occupation_skill_names_bground)  
-  .style('stroke', color_occupation_skill_names_bground)  
+  .style('fill', color_occupation_skill_names_bground)
+  .style('stroke', color_occupation_skill_names_bground)
   .text(function(d,i) { return d.name.toUpperCase()})
 
   // Occupation and skill labels
   svg_2.selectAll('.occupation_skill_text')
-  .data(data_reformatted['nodes'])
+  .data(data_reformatted_1['nodes'])
   .enter().append('text')
   .attr('class', 'occupation_skill_text')
-  .style('fill', color_occupation_skill_names)  
+  .style('fill', color_occupation_skill_names)
   .text(function(d,i) { return d.name.toUpperCase()})
-      
+
   // Occupation and skill labels - styles
   svg_2.selectAll('.occupation_skill_text, .occupation_skill_text_bground')
   .style('font-size', '10px')
@@ -252,13 +277,13 @@ function setup(data){
 
 
 
-  //////////////////////  
+  //////////////////////
   // SALARIES         //
-  //////////////////////  
+  //////////////////////
 
   // Scales for salaries
   xScale_s.domain([xMin,xMax])
-  
+
   // Set parameter values
   // Add 5 to no_salaries to leave space for the salary_rings_text
   no_salaries = data['salaries'].length+5
@@ -331,8 +356,8 @@ function setup(data){
   .append('text')
   .attr('class', 'salary_skills_name_bground')
   .text(function(d) { return d.skill_name.toUpperCase() })
-  .style('fill', color_salary_names_bground)    
-  .style('stroke', color_salary_names_bground) 
+  .style('fill', color_salary_names_bground)
+  .style('stroke', color_salary_names_bground)
 
   // Names of skills
   svg_3.selectAll('.salary_skills_name')
@@ -340,7 +365,7 @@ function setup(data){
   .append('text')
   .attr('class', 'salary_skills_name')
   .text(function(d) { return d.skill_name.toUpperCase() })
-  .style('fill', color_salary_names)  
+  .style('fill', color_salary_names)
 
   // Names of skills - styles
   svg_3.selectAll('.salary_skills_name, .salary_skills_name_bground')
@@ -349,12 +374,12 @@ function setup(data){
 
 
 
-  //////////////////////  
+  //////////////////////
   // MARGIN           //
   //////////////////////
 
   // Parameters for margins
-  no_skills = data['skills'].length  
+  no_skills = data['skills'].length
 
   // Circles for skills
   svg_m.selectAll('.skills_circles')
@@ -421,33 +446,33 @@ function setup(data){
 function resize() {
 
 
-  //////////////////////  
+  //////////////////////
   // UNIVERSAL        //
-  //////////////////////  
+  //////////////////////
 
-  let width_container_parent = document.getElementsByClassName('container_parent')[0].clientWidth; 
+  let width_container_parent = document.getElementsByClassName('container_parent')[0].clientWidth;
   let bodyWidth = null
   if (width_container_parent>=1380) {
     bodyWidth = 1380*0.85
   } else if (document.body.clientWidth>1250) {
     bodyWidth = document.body.clientWidth*0.835*0.85
   } else {
-    bodyWidth = document.body.clientWidth*0.95    
+    bodyWidth = document.body.clientWidth*0.95
   }
-  let width = bodyWidth*0.85  
-    , margin = {top: 0, 
-                right: (bodyWidth-width)/2, 
-                bottom: bodyWidth*0, 
+  let width = bodyWidth*0.85
+    , margin = {top: 0,
+                right: (bodyWidth-width)/2,
+                bottom: bodyWidth*0,
                 left: (bodyWidth-width)/2}
-    , height = 700 
+    , height = 700
 
   xScale.range([0, width]);
   yScale.range([height, 0]);
 
 
-  //////////////////////  
+  //////////////////////
   // LOCATIONS        //
-  //////////////////////  
+  //////////////////////
 
   // SVG
   chartSVG.attr('width', width + margin.left + margin.right)
@@ -456,27 +481,27 @@ function resize() {
 
   // Positions of NUTS 2 group
   svg.selectAll('.nuts2_group')
-  .attr('transform', function(d,i) { 
-    let translate = 'translate('+xScale(d.x_pos)+','+yScale(d.y_pos)+')'      
+  .attr('transform', function(d,i) {
+    let translate = 'translate('+xScale(d.x_pos)+','+yScale(d.y_pos)+')'
     if (width<small_width) {
       translate = 'translate('+xScale(d.x_pos_small)+','+yScale(d.y_pos_small)+')'
-    } 
+    }
     return translate
   })
 
   // Demand by skill group
   if (width<small_width) {
     svg.selectAll('.nuts2_group').selectAll('.nuts2_skills')
-    .attr('x', function(d,i) { 
-      return xScale((prop_space_x*d.percent_cumulative/no_x_pos_small)-(prop_space_x*50/no_x_pos_small))})  
+    .attr('x', function(d,i) {
+      return xScale((prop_space_x*d.percent_cumulative/no_x_pos_small)-(prop_space_x*50/no_x_pos_small))})
     .attr('y', function(d,i) { return yScale(100+(prop_space_y*50/no_y_pos_small))})
     .attr('width', function(d,i) { return xScale(prop_space_x*d.percent/no_x_pos_small)})
     .attr('height', function(d,i) { return yScale(100-(prop_space_y*100/no_y_pos_small))})
     .style('stroke-width', function(d,i) { return xScale(0.2)})
   } else {
     svg.selectAll('.nuts2_group').selectAll('.nuts2_skills')
-    .attr('x', function(d,i) { 
-      return xScale((prop_space_x*d.percent_cumulative/no_x_pos)-prop_space_x*50/no_x_pos) })  
+    .attr('x', function(d,i) {
+      return xScale((prop_space_x*d.percent_cumulative/no_x_pos)-prop_space_x*50/no_x_pos) })
     .attr('y', function(d,i) { return yScale(100+(prop_space_y*50/no_y_pos))})
     .attr('width', function(d,i) { return xScale(prop_space_x*d.percent/no_x_pos) })
     .attr('height', function(d,i) { return yScale(100-(prop_space_y*100/no_y_pos))})
@@ -495,7 +520,7 @@ function resize() {
 
   svg.selectAll('.nuts2_group')
   .selectAll('.nuts2_names_long_bground, .nuts2_names_long')
-  .attr('y', function(d,i) { 
+  .attr('y', function(d,i) {
     let no_lines = d[1]
     return height_adj_nuts_text[no_lines-1]})
   .style('opacity', function(d,i) { return (width<small_width) ? 0 : 1})
@@ -513,16 +538,16 @@ function resize() {
 
   svg.selectAll('.nuts2_group')
   .selectAll('.nuts2_names_short_bground, .nuts2_names_short')
-  .attr('y', function(d,i) { 
+  .attr('y', function(d,i) {
     let no_lines = d[1]
     return height_adj_nuts_text[no_lines-1]})
   .style('opacity', function(d,i) { return (width<small_width) ? 1 : 0})
 
 
 
-  //////////////////////  
+  //////////////////////
   // OCCUPATIONS      //
-  //////////////////////  
+  //////////////////////
 
   // SVG
   chartSVG_2.attr('width', width + margin.left + margin.right)
@@ -530,18 +555,18 @@ function resize() {
   svg_2.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
   // Adjust sankey for width and height
-  sankey.size([width, height])
+  sankeyGenerator.size([width, height])
   .extent([[1, 10], [width - 1, height - 10]]);
 
   // Adjust positions
-  data_reformatted = sankey({
+  let data_reformatted_2 = sankeyGenerator({
       nodes: data_occupations['nodes'],
-      links: data_occupations['links'] 
-    }); 
+      links: data_occupations['links']
+    });
 
-  // Black rectangles 
+  // Black rectangles
   svg_2.selectAll('.occupation_skill_rect')
-  .data(data_reformatted['nodes'])
+  .data(data_reformatted_2['nodes'])
   .attr('x', function(d,i) { return d.x0})
   .attr('y', function(d,i) { return d.y0})
   .attr('width', function(d,i) { return (d.x1 - d.x0)})
@@ -549,28 +574,28 @@ function resize() {
 
   // Background to occupation and skill labels
   svg_2.selectAll('.occupation_skill_text_bground')
-  .data(data_reformatted['nodes'])
+  .data(data_reformatted_2['nodes'])
   .attr('x', function(d,i) { return d.x0})
   .attr('y', function(d,i) { return d.y0})
   .style('stroke-width', function(d,i) { return xScale(0.7)})
 
   // Occupation and skill labels
   svg_2.selectAll('.occupation_skill_text')
-  .data(data_reformatted['nodes'])
+  .data(data_reformatted_2['nodes'])
   .attr('x', function(d,i) { return d.x0})
   .attr('y', function(d,i) { return d.y0})
 
   // Paths
   svg_2.selectAll('.occupation_skill_links')
-  .data(data_reformatted['links'])
-  .attr('d', d3.sankeyLinkHorizontal())
+  .data(data_reformatted_2['links'])
+  .attr('d', sankeyLinkHorizontal())
   .attr('stroke-width', function(d,i) { return Math.max(1, d.width) });
 
 
 
-  //////////////////////  
+  //////////////////////
   // SALARIES         //
-  //////////////////////  
+  //////////////////////
 
   // Vary the height as the chart is circular
   let height_s = width
@@ -597,10 +622,10 @@ function resize() {
 
   // Text to indicate salary associated with each ring
   svg_3.selectAll('.salary_rings_text, .salary_rings_text_bground')
-  .attr('transform', function(d,i) { 
+  .attr('transform', function(d,i) {
     let x_pos = xScale_s(50)+yScale_s(d)*Math.cos(1.5*Math.PI)
-    let y_pos = xScale_s(50)+yScale_s(d)*Math.sin(1.5*Math.PI)  
-    return 'translate('+x_pos+ ',' + y_pos + ')' 
+    let y_pos = xScale_s(50)+yScale_s(d)*Math.sin(1.5*Math.PI)
+    return 'translate('+x_pos+ ',' + y_pos + ')'
   })
 
   // Skill labels - background
@@ -609,40 +634,40 @@ function resize() {
 
   // Skill labels
   svg_3.selectAll('.salary_skills_name,.salary_skills_name_bground')
-  .attr('transform', function(d,i) { 
-    let radius = yScale_s(d.salaries.upper_bound.upper_q) 
+  .attr('transform', function(d,i) {
+    let radius = yScale_s(d.salaries.upper_bound.upper_q)
     let x_pos = xScale_s(50)+radius*Math.cos(2*Math.PI*(d.index-rotate_adj)/no_salaries)
     let y_pos = xScale_s(50)+radius*Math.sin(2*Math.PI*(d.index-rotate_adj)/no_salaries)
-    let rotate =  null 
+    let rotate =  null
     if (360*((d.index-rotate_adj)/no_salaries)>90) {
       rotate = (360*(d.index-rotate_adj)/no_salaries)-180
     } else {
       rotate = (360*(d.index-rotate_adj)/no_salaries)
-    } 
-    let translate_rotate = 'translate('+x_pos+','+y_pos+')rotate('+rotate+')' 
+    }
+    let translate_rotate = 'translate('+x_pos+','+y_pos+')rotate('+rotate+')'
     return translate_rotate
   })
-  .attr('dy', function(d,i) { 
+  .attr('dy', function(d,i) {
     let dy_adj = '-0.2em'
     if (360*((d.index-rotate_adj)/no_salaries)>90) {
       dy_adj = '0.8em'
-    } 
+    }
     return dy_adj })
-  .style('text-anchor', function(d,i) { 
+  .style('text-anchor', function(d,i) {
     let text_anchor = 'end'
     if (360*((d.index-rotate_adj)/no_salaries)>90) {
       text_anchor = 'start'
-    } 
+    }
     return text_anchor })
   .style('opacity', function(d,i) { return (width<550) ? 0 : (i%5==0) ? 1 : 0})
 
 
   // Lower quartile of lower lower bound to median of lower bound
   svg_3.selectAll('.lower_bounds')
-  .attr('width', function(d,i) { 
-    return yScale_s(lowest_salary_shown+d.salaries.lower_bound.median-d.salaries.lower_bound.lower_q)})  
-  .attr('transform', function(d,i) { 
-    let radius = yScale_s(d.salaries.lower_bound.lower_q) 
+  .attr('width', function(d,i) {
+    return yScale_s(lowest_salary_shown+d.salaries.lower_bound.median-d.salaries.lower_bound.lower_q)})
+  .attr('transform', function(d,i) {
+    let radius = yScale_s(d.salaries.lower_bound.lower_q)
     let x_pos = xScale_s(50)+radius*Math.cos(2*Math.PI*(d.index-rotate_adj)/no_salaries)
     let y_pos = xScale_s(50)+radius*Math.sin(2*Math.PI*(d.index-rotate_adj)/no_salaries)
     let rotate = 360*(i-rotate_adj)/no_salaries
@@ -650,10 +675,10 @@ function resize() {
 
   // Median of lower bound to median of upper bound
   svg_3.selectAll('.medians')
-  .attr('width', function(d,i) { 
-    return yScale_s(lowest_salary_shown+d.salaries.upper_bound.median-d.salaries.lower_bound.median)})  
-  .attr('transform', function(d,i) { 
-    let radius = yScale_s(d.salaries.lower_bound.median) 
+  .attr('width', function(d,i) {
+    return yScale_s(lowest_salary_shown+d.salaries.upper_bound.median-d.salaries.lower_bound.median)})
+  .attr('transform', function(d,i) {
+    let radius = yScale_s(d.salaries.lower_bound.median)
     let x_pos = xScale_s(50)+radius*Math.cos(2*Math.PI*(d.index-rotate_adj)/no_salaries)
     let y_pos = xScale_s(50)+radius*Math.sin(2*Math.PI*(d.index-rotate_adj)/no_salaries)
     let rotate = 360*(i-rotate_adj)/no_salaries
@@ -661,10 +686,10 @@ function resize() {
 
   // Median of upper bound to upper quartile of upper bound
   svg_3.selectAll('.upper_bounds')
-  .attr('width', function(d,i) { 
-    return yScale_s(lowest_salary_shown+d.salaries.upper_bound.upper_q-d.salaries.upper_bound.median)})  
-  .attr('transform', function(d,i) { 
-    let radius = yScale_s(d.salaries.upper_bound.median) 
+  .attr('width', function(d,i) {
+    return yScale_s(lowest_salary_shown+d.salaries.upper_bound.upper_q-d.salaries.upper_bound.median)})
+  .attr('transform', function(d,i) {
+    let radius = yScale_s(d.salaries.upper_bound.median)
     let x_pos = xScale_s(50)+radius*Math.cos(2*Math.PI*(d.index-rotate_adj)/no_salaries)
     let y_pos = xScale_s(50)+radius*Math.sin(2*Math.PI*(d.index-rotate_adj)/no_salaries)
     let rotate = 360*(i-rotate_adj)/no_salaries
@@ -676,9 +701,9 @@ function resize() {
 
 
 
-  //////////////////////  
+  //////////////////////
   // MARGIN          //
-  //////////////////////  
+  //////////////////////
 
   let bodyWidth_m = null
   if (width_container_parent>=1380) {
@@ -686,12 +711,12 @@ function resize() {
   } else if (document.body.clientWidth>1250) {
     bodyWidth_m = document.body.clientWidth*0.835*0.15
   } else {
-    bodyWidth_m = document.body.clientWidth*0.95*0   
+    bodyWidth_m = document.body.clientWidth*0.95*0
   }
 
-  let bodyHeight_m = document.getElementsByClassName('container_text')[0].clientHeight; 
+  let bodyHeight_m = document.getElementsByClassName('container_text')[0].clientHeight;
 
-  let height_m = bodyHeight_m*0.975  
+  let height_m = bodyHeight_m*0.975
     , margin_m = {top: (bodyHeight_m-height_m), right: 0, bottom: 0, left: 0}
     , width_m = bodyWidth_m
 
@@ -702,7 +727,7 @@ function resize() {
   chartSVG_m.attr('width', width_m)
   .attr('height', height_m + margin_m.top + margin_m.bottom)
   svg_m.attr('transform', 'translate(' + margin_m.left + ',' + margin_m.top + ')');
-  
+
   // Circles for skills
   svg_m.selectAll('.skills_circles')
   .attr('cx', function(d,i) { return xScale_m(50) })
@@ -730,15 +755,15 @@ function resize() {
     let end = polarToCartesian(x, y, radius, startAngle);
     let arcSweep = endAngle - startAngle <= 180 ? '0' : '1';
     let d = [
-      'M', start.x, start.y, 
+      'M', start.x, start.y,
       'A', radius, radius, 0, 1, 1, end.x, end.y
     ].join(' ');
-    return d;       
+    return d;
   }
 
-  // Skill labels 
+  // Skill labels
   svg_m.selectAll('.skills_arcs')
-  .attr('d', function(d,i) { 
+  .attr('d', function(d,i) {
     let x = xScale_m(50)
     let y = yScale_m(yMax-(100/(no_skills+1))*(i+1))
     let radius = xScale_m(radius_circles*1.1)
@@ -754,6 +779,7 @@ function resize() {
 
 };
 
-
 // Resize
 window.addEventListener('resize', resize);
+
+setup(data);

@@ -6,11 +6,11 @@
   <title>Open Jobs Observatory: Open, up-to-date and actionable insights on UK skill demands | Nesta</title>
   <meta name='description' content='The observatory contains insights from online job adverts, with a focus on the skills being requested by employers.'/>
   <meta name='viewport' content='width=device-width, initial-scale=1' />
-  <link rel='shortcut icon' href='img/favicon.ico' type='image/x-icon' />
-  <link rel='stylesheet' type='text/css' href='css/stylesheet.css'>
+  <link rel='shortcut icon' href='../assets/img/favicon.ico' type='image/x-icon' />
+  <link rel='stylesheet' type='text/css' href='stylesheet.css'>
 
-  <script src='https://unpkg.com/d3@6.7.0/dist/d3.min.js'></script>
-  <script src='https://unpkg.com/d3-sankey@0.12.3/dist/d3-sankey.min.js'></script>
+	<!-- FIXME https://github.com/parcel-bundler/parcel/issues/1762 -->
+	<script src="https://unpkg.com/regenerator-runtime@0.13.1/runtime.js"></script>
 
   <!-- <meta name='twitter:card' content='summary_large_image' />
   <meta name='twitter:site' content='@nesta_uk' />
@@ -18,7 +18,7 @@
   <meta name='twitter:description' content='Insights on skills from job adverts'/>
   <meta name='twitter:image' content='https://data-viz.nesta.org.uk/xxxx/img/twitter_image.png' />
    -->
-  
+
 </head>
 
 
@@ -27,59 +27,59 @@
   <div class='container_title'>
     <div class='container_title_text'>Title goes here</div>
     <div class='container_subtitle_text'>Subtitle goes here</div>
-    <div class='container_date'>weekday, day month year</div>        
+    <div class='container_date'>weekday, day month year</div>
     <div class='container_author'>
       <a href='https://www.nesta.org.uk/team/karlis-kanders/' target='_blank'; >Author One</a> and <a href='http://www.nesta.org.uk/users/cath-sleeman' target='_blank';>Author Two</a>
-    </div>        
+    </div>
   </div>
 
 
   <div class='container_parent'>
 
     <div class='container_left_col'>
-      <div id='chart_m'></div> 
-    </div>  
+      <div id='chart_m'></div>
+    </div>
 
-    <div class='container_text'>  
-
-      <div class='text_content'>
-        
-        <div class='introduction'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div> 
-
-        <h2>Heading goes here</h2>       
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-        <h3>How do skill demands vary across the UK?</h3>       
-
-      </div>
-      
-      <div id='chart'></div> 
+    <div class='container_text'>
 
       <div class='text_content'>
-        
-        <h2>Heading goes here</h2>       
+
+        <div class='introduction'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </div>
+
+        <h2>Heading goes here</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-        <h3>Which skills are required in the most advertised occupations?</h3>       
+        <h3>How do skill demands vary across the UK?</h3>
 
       </div>
 
-      <div id='chart_2'></div> 
+      <div id='chart'></div>
 
       <div class='text_content'>
-        
-        <h2>Heading goes here</h2>       
+
+        <h2>Heading goes here</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
-        <h3>What salaries are associated with the most in-demand skills?</h3>       
+        <h3>Which skills are required in the most advertised occupations?</h3>
 
       </div>
 
-      <div id='chart_3'></div> 
+      <div id='chart_2'></div>
 
       <div class='text_content'>
-        
-        <h2>Heading goes here</h2>       
+
+        <h2>Heading goes here</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+        <h3>What salaries are associated with the most in-demand skills?</h3>
+
+      </div>
+
+      <div id='chart_3'></div>
+
+      <div class='text_content'>
+
+        <h2>Heading goes here</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
       </div>
@@ -88,7 +88,7 @@
 
   </div>
 
-  
+
   <div class='app-footer'>
     <div class='app-footer__container'>
       <div class='app-footer__icons'>
@@ -113,7 +113,7 @@
         </div>
 
       </div>
-      
+
       <div class='footer-link-item'>
           © 2021 Nesta Nesta is a registered charity in England and Wales 1144091 and Scotland SC042833. Our main address is 58 Victoria Embankment, London, EC4Y 0DS. You can reach us by phone on 020 7438 2500 or drop us a line at information@nesta.org.uk.
       </div>
@@ -128,7 +128,7 @@
 
 </body>
 
-<script src='js/main.js'></script>
+<script src='main.js'></script>
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->

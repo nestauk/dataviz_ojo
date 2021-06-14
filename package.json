@@ -1,0 +1,27 @@
+{
+	"author": "nestauk",
+	"bugs": {
+		"url": "https://github.com/nestauk/dataviz_ojo/issues"
+	},
+	"description": "The observatory contains insights from online job adverts, with a focus on the skills being requested by employers.",
+	"dependencies": {
+		"d3-sankey": "^0.12.3",
+		"d3-scale": "^4.0.0",
+		"d3-selection": "^3.0.0"
+	},
+	"devDependencies": {
+		"parcel-bundler": "^1.12.3"
+	},
+	"homepage": "https://github.com/nestauk/dataviz_ojo#readme",
+	"license": "MIT",
+	"name": "dataviz_ojo",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/nestauk/dataviz_ojo.git"
+	},
+	"scripts": {
+		"build": "parcel build src/index.html",
+		"dev": "parcel src/index.html"
+	},
+	"version": "0.0.1"
+}

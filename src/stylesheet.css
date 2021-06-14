@@ -1,29 +1,29 @@
 @font-face {
   font-family: AvertaRegular;
-  src: url('Intelligent Design - Averta-Regular.otf') format('opentype'),
-  url('css/367A1E_4_0.eot');
+  src: url('../assets/fonts/Intelligent Design - Averta-Regular.otf') format('opentype'),
+  url('../assets/fonts/367A1E_4_0.eot');
 }
 
 @font-face {
   font-family: AvertaLight;
-  src: url('Intelligent Design - Averta-Light.otf') format('opentype'),
-  url('css/367A1E_2_0.eot');
+  src: url('../assets/fonts/Intelligent Design - Averta-Light.otf') format('opentype'),
+  url('../assets/fonts/367A1E_2_0.eot');
 }
 
 @font-face {
   font-family: AvertaBold;
-  src: url('Intelligent Design - Averta-Bold.otf') format('opentype'),
-  url('css/367A1E_0_0.eot');
+  src: url('../assets/fonts/Intelligent Design - Averta-Bold.otf') format('opentype'),
+  url('../assets/fonts/367A1E_0_0.eot');
 }
 
 @font-face {
   font-family: AvertaItalic;
-  src: url('Intelligent Design - Averta-RegularItalic.otf') format('opentype'),
-  url('css/367A1E_5_0.eot');
+  src: url('../assets/fonts/Intelligent Design - Averta-RegularItalic.otf') format('opentype'),
+  url('../assets/fonts/367A1E_5_0.eot');
 }
 
 body {
-  background-color: #FFFFFF; 
+  background-color: #FFFFFF;
   box-sizing: border-box;
   color: #231F20;
   font-family: 'AvertaRegular', sans-serif;
@@ -33,7 +33,7 @@ body {
   margin: 0px;
   -moz-box-sizing: border-box;
   padding: 0px;
-  -webkit-font-smoothing: antialiased; 
+  -webkit-font-smoothing: antialiased;
   -webkit-box-sizing: border-box;
 }
 
@@ -43,10 +43,10 @@ body {
 }
 
 .container_title {
-  background: linear-gradient( rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) ), url();   
+  background: linear-gradient( rgba(0, 0, 0, 1), rgba(0, 0, 0, 1) ), url();
   background-position: center center;
-  background-repeat: no-repeat; 
-  background-size: cover;  
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #FFFFFF;
   font-family: 'AvertaLight', sans-serif;
   position: relative;
@@ -67,14 +67,14 @@ body {
   line-height: 32.3555px;
   max-width: 800px;
   padding: 0px 28px 21px 28px;
-}      
+}
 
 .container_date {
   font-size: 18px;
   line-height: 32.4px;
   max-width: 800px;
   padding: 0px 28px 0px 28px;
-}  
+}
 
 .container_author {
   font-size: 14.2222px;
@@ -82,7 +82,7 @@ body {
   line-height: 19.9111px;
   max-width: 800px;
   padding: 30px 28px 50px 28px;
-} 
+}
 
 .container_author a {
   color: #FFFFFF;
@@ -104,9 +104,9 @@ body {
   float:left;
   flex-basis: 0;
   margin: 0px auto;
-  min-width: 0; 
-  max-width: 0; 
-} 
+  min-width: 0;
+  max-width: 0;
+}
 
 .container_text {
   float:right;
@@ -114,7 +114,7 @@ body {
   margin: 0px auto;
   max-width: 100%;
   min-width: 100%;
-} 
+}
 
 .container_text a {
   color: #e61f47;
@@ -134,10 +134,10 @@ body {
 }
 
 .text_content {
-  font-size: 18px;     
-  line-height: 32.4px; 
+  font-size: 18px;
+  line-height: 32.4px;
   margin: 0px auto;
-  padding: 20px 28px 20px 28px;  
+  padding: 20px 28px 20px 28px;
   position: relative;
 }
 
@@ -186,7 +186,7 @@ h3 {
 
 img {
   display: block;
-  margin: 0px auto; 
+  margin: 0px auto;
   max-width: 1000px;
   width: 95%;
  }
@@ -205,7 +205,7 @@ img {
     font-size: 23.1111px;
     line-height: 41.5999px;
   }
-}  
+}
 
 /* Larger than 1100px */
 @media only screen and (min-width: 1100px) {
@@ -221,7 +221,7 @@ img {
   .container_author {
     padding: 30px 35px 70px 35px;
   }
-}  
+}
 
 /* Larger than 1250px */
 @media only screen and (min-width: 1250px) {
@@ -239,22 +239,22 @@ img {
     min-width: 15%;
     max-width: 15%;
   }
-}  
+}
 
 .show {display:block;}
 
-::placeholder { 
+::placeholder {
   color: #3C1252;
   font-weight: bold;
-  opacity: 1; 
+  opacity: 1;
 }
 
-:-ms-input-placeholder { 
+:-ms-input-placeholder {
   color: #3C1252;
   font-weight: bold;
 }
 
-::-ms-input-placeholder { 
+::-ms-input-placeholder {
   color: #3C1252;
   font-weight: bold;
 }
@@ -279,7 +279,7 @@ img {
   display: -ms-flexbox;
   display: flex;
   flex-direction: row;
-  overflow-x: hidden
+  overflow-x: hidden;
   padding: 0px 0px 17.5px 0px;
   position: relative;
   -webkit-box-orient: horizontal;
@@ -334,7 +334,7 @@ img {
   display: flex;
   flex-direction: row;
   -ms-flex-direction: row;
-  padding: 0px 0px 0px 17.5px;    
+  padding: 0px 0px 0px 17.5px;
   position: relative;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
