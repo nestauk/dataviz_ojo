@@ -2,6 +2,7 @@
 	// import ChartOccupations from './ChartOccupations.svelte'
 	// import ChartSalaries from './ChartSalaries.svelte'
 	import ChartLocations from './ChartLocations.svelte'
+	import LegendLocations from './LegendLocations.svelte'
 	import Intro from './Intro.svelte'
 	import Margin from './Margin.svelte'
 	import Section from './Section.svelte';
@@ -41,6 +42,7 @@
 			]}
 			question='How do skill demands vary across the UK?'
 		/>
+		<LegendLocations />
 		<ChartLocations />
 
 		<!-- occupations -->
