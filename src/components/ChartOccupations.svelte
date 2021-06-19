@@ -1,68 +1,100 @@
 <script>
 	import data from '../../data/data.json';
 	import {
-		color_occupation_rect,
-		color_occupation_skill_names_bground,
+		color_occup_rect,
+		color_occup_skill_names,
+		color_occup_skill_names_bground,
 		color_skills,
 	} from '../shared/colours';
+	import {
+		chartsHeight, 
+	} from '../shared/geometry';
+	import {
+		_margin,
+		_width,
+		_xScale,
+	} from '../stores';
+	import {
+		sankey,
+		sankeyLinkHorizontal,
+	} from 'd3-sankey';
 
-	const sankeyGenerator = sankey()
+	/* reactive vars */
+	$: width = $_width + $_margin.left + $_margin.right;
+	$: height = chartsHeight + $_margin.top + $_margin.bottom;
+	$: sankeyGenerator = sankey()
 		.nodeId(d => d.name)
 		.nodeSort(null)
 		.nodeWidth(5)
 		.nodePadding(15)
-		.extent([[1, 5], [700 - 1, 800 - 5]]);
-
-	let layout = sankeyGenerator({
+		.size([$_width, height])
+		.extent([[1, 10], [$_width - 1, height - 10]]);
+	$: layout = sankeyGenerator({
     links: data.occupations.links,
     nodes: data.occupations.nodes,
-  });
+  	});
+	$: thickStroke = $_xScale(0.7);
+
 </script>
 
 <div>
-	<svg>
-		<g>
-			<!-- Black rectangles -->
-			{#each layout.nodes as d}
-				<rect
-					class='occupation_skill_rect'
-					fill={color_occupation_rect}
-					rx='4px'
-					ry='4px'
-				/>
-			{/each}
+	{#if width && height}
+		<svg {width} {height}>
+			<g transform='translate({$_margin.left},{$_margin.top})'>
 
-			<!-- paths -->
-			{#each layout.links as d}
-				<path
-					class='occupation_skill_links'
-					stroke={color_skills(d.target.name)}
-				/>
-			{/each}
+				<!-- paths -->
+				{#each layout.links as d}
+					<path
+						class='occupation_skill_links'
+						stroke={color_skills(d.target.name)}
+						d={sankeyLinkHorizontal()(d)}
+						stroke-width={d.width}
+					/>
+				{/each}
 
-			<!-- Background to occupation and skill labels -->
-			{#each layout.nodes as d}
-				<text
-					class='occupation_skill_text_bground'
-					dy='-0.2em'
-					fill={color_occupation_skill_names_bground}
-					stroke={color_occupation_skill_names_bground}
-					text-anchor={d => d.targetLinks.length>0 ? 'end' : 'start'}
-				>
-					{d.name.toUpperCase()}
-				</text>
-				<text
-					class='occupation_skill_text'
-					dy='-0.2em'
-					fill={color_occupation_skill_names_bground}
-					text-anchor={d => d.targetLinks.length>0 ? 'end' : 'start'}
-				>
-					{d.name.toUpperCase()}
-				</text>
-			{/each}
-		</g>
-	</svg>
+
+				{#each layout.nodes as d}	
+					<!-- Black rectangles -->
+					<rect
+						class='occupation_skill_rect'
+						fill={color_occup_rect}
+						rx='4px'
+						ry='4px'
+						x={d.x0}
+						y={d.y0}
+						width={d.x1-d.x0}
+						height={d.y1-d.y0}
+					/>
+
+					<!-- Occupation and skill labels -->
+					<text
+						class='occupation_skill_text_bground'
+						dy='-0.2em'
+						fill={color_occup_skill_names_bground}
+						stroke={color_occup_skill_names_bground}
+						stroke-width={thickStroke}
+						x={d.x0}
+						y={d.y0}
+						text-anchor={d.targetLinks.length>0 ? 'end' : 'start'}
+					>
+						{d.name.toUpperCase()}
+					</text>
+					<text
+						class='occupation_skill_text'
+						dy='-0.2em'
+						fill={color_occup_skill_names}
+						x={d.x0}
+						y={d.y0}
+						text-anchor={d.targetLinks.length>0 ? 'end' : 'start'}
+					>
+						{d.name.toUpperCase()}
+					</text>
+				{/each}
+			</g>
+		</svg>
+	{/if}
 </div>
+
 
 <style>
 .occupation_skill_links {
@@ -73,6 +105,6 @@
 .occupation_skill_text,
 .occupation_skill_text_bground {
 	font-size: 10px;
-  font-weight: bold;
+  	font-weight: bold;
 }
 </style>

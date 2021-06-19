@@ -19,18 +19,18 @@ export const color_skills =
 	.domain(color_skills_domain)
 	.range(color_skills_range);
 
-const color_nuts2_names = '#000000'
+export const color_nuts2_names = '#000000'
 export const color_nuts2_names_bground = '#FFFFFF'
 
-const color_skills_names = '#575757'
-const color_skills_names_bground = '#FFFFFF'
+export const color_skills_names = '#575757'
+export const color_skills_names_bground = '#FFFFFF'
 
-const color_occupation_rect = '#000000'
-const color_occupation_skill_names = '#000000'
-const color_occupation_skill_names_bground = '#FFFFFF'
+export const color_occup_rect = '#000000'
+export const color_occup_skill_names = '#000000'
+export const color_occup_skill_names_bground = '#FFFFFF'
 
-const color_salary_rings = '#000000'
-const color_salary_names = '#000000'
-const color_salary_names_bground = '#FFFFFF'
-const color_salary_axis = '#FFFFFF'
-const color_salary_axis_bground = '#000000'
+export const color_salary_rings = '#000000'
+export const color_salary_names = '#000000'
+export const color_salary_names_bground = '#FFFFFF'
+export const color_salary_axis = '#FFFFFF'
+export const color_salary_axis_bground = '#000000'
