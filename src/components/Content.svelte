@@ -1,6 +1,6 @@
 <script>
 	import ChartOccupations from './ChartOccupations.svelte'
-	// import ChartSalaries from './ChartSalaries.svelte'
+	import ChartSalaries from './ChartSalaries.svelte'
 	import ChartLocations from './ChartLocations.svelte'
 	import LegendLocations from './LegendLocations.svelte'
 	import Intro from './Intro.svelte'
@@ -63,7 +63,7 @@
 			]}
 			question='What salaries are associated with the most in-demand skills?'
 		/>
-		<!-- <ChartSalaries /> -->
+		<ChartSalaries />
 
 		<!-- section -->
 		<Section

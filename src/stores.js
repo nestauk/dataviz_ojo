@@ -29,7 +29,14 @@ export const _margin = derived(
 	})
 );
 
+// X scales
 export const _xScale = derived(
+	_width,
+	width => scaleLinear().domain([xMin, xMax]).range([0, width])
+)
+
+// X scale for salaries
+export const _xScale_s = derived(
 	_width,
 	width => scaleLinear().domain([xMin, xMax]).range([0, width])
 )

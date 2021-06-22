@@ -9,11 +9,13 @@ export const xMax = 100;
 export const yMin = 0;
 export const yMax = 100;
 
+// Y scale for charts
 export const yScale =
 	scaleLinear()
 	.domain([yMin, yMax])
 	.range([chartsHeight, 0]);
 
+// Y scale for legends
 export const yScaleLeg =
 	scaleLinear()
 	.domain([yMin, yMax])

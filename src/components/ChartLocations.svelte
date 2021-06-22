@@ -41,7 +41,6 @@
 	let no_y_pos_small = all_y_pos_small.filter((item, i, ar) => ar.indexOf(item) === i).length;
 
 	/* reactive vars */
-
 	$: width = $_width + $_margin.left + $_margin.right;
 	$: height = chartsHeight + $_margin.top + $_margin.bottom;
 	$: isSmall = width < small_width;
