@@ -4,6 +4,8 @@ import {derived, writable} from 'svelte/store';
 import {xMax, xMin} from './shared/geometry';
 
 export const _innerWidth = writable();
+export const _height_container_title = writable();
+export const _width_container_title = writable();
 export const _height_container_parent = writable();
 export const _width_container_parent = writable();
 export const _width_margin = writable();
@@ -38,5 +40,11 @@ export const _xScale = derived(
 // X scale for salaries
 export const _xScale_s = derived(
 	_width,
+	width => scaleLinear().domain([xMin, xMax]).range([0, width])
+)
+
+// X scale for title
+export const _xScale_t = derived(
+	_width_container_title,
 	width => scaleLinear().domain([xMin, xMax]).range([0, width])
 )

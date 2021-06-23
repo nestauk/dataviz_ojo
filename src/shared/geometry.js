@@ -2,6 +2,7 @@ import {scaleLinear} from 'd3-scale';
 
 export const chartsHeight = 700;
 export const legendsHeight = 200;
+export const titleHeight = 400;
 
 // Universals for scales
 export const xMin = 0;
@@ -20,3 +21,9 @@ export const yScaleLeg =
 	scaleLinear()
 	.domain([yMin, yMax])
 	.range([legendsHeight, 0]);
+
+// Y scale for title
+export const yScale_t =
+	scaleLinear()
+	.domain([yMin, yMax])
+	.range([titleHeight, 0]);

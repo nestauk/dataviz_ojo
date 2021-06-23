@@ -5,6 +5,7 @@
 	},
 	"description": "The observatory contains insights from online job adverts, with a focus on the skills being requested by employers.",
 	"dependencies": {
+		"d3-hierarchy": "^3.0.1",
 		"d3-sankey": "^0.12.3",
 		"d3-scale": "^4.0.0",
 		"d3-selection": "^3.0.0"
