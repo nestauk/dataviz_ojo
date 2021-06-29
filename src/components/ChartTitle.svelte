@@ -57,6 +57,7 @@
 	  	(hierarchy(data.skills_taxonomy)
 	      .sum(d => d.value)
 	      .sort((a, b) => b.value - a.value))
+
 </script>
 
 <div>

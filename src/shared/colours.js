@@ -38,3 +38,5 @@ export const color_salary_axis_bground = '#000000'
 export const color_stroke_treemap = '#FFFFFF'
 export const color_title_text = '#000000'
 export const color_title_text_bground = '#FFFFFF'
+
+export const color_legend_bground = '#FFF5ED'

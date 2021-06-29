@@ -24,9 +24,9 @@ export const _width = derived(_bodyWidth, bw => bw * 0.85);
 export const _margin = derived(
 	[_bodyWidth, _width],
 	([bodyWidth, width]) => ({
-		top: 0,
+		top: 20,
 		right: (bodyWidth - width) / 2,
-		bottom: 0,
+		bottom: 20,
 		left: (bodyWidth - width) / 2
 	})
 );

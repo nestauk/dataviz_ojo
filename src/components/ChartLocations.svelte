@@ -49,6 +49,7 @@
 	$: opacity = isSmall ? 1 : 0;
 	$: thinStroke = $_xScale(0.2);
 	$: thickStroke = $_xScale(0.7);
+
 </script>
 
 <div>
