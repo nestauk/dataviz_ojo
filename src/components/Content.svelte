@@ -12,6 +12,7 @@
 		_height_container_parent,
 		_width_container_parent,
 		_width_margin,
+		_height_container_text
 	} from '../stores';
 </script>
 
@@ -28,7 +29,10 @@
 		<Margin />
 	</div>
 
-	<div class='container_text'>
+	<div 
+		bind:clientHeight={$_height_container_text}
+		class='container_text'
+	>
 		<Intro
 			paragraphs={[
 				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'

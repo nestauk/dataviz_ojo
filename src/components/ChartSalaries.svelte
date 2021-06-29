@@ -44,7 +44,7 @@
 
 </script>
 
-<div>
+<div class='div_background'>
 	{#if width && height}
 		<svg {width} {height}>
 			<g transform='translate({$_margin.left},{$_margin.top})'>
@@ -196,20 +196,28 @@
 </div>
 
 <style>
+	.div_background {
+		line-height:  0px;
+	}
+
 	.salary_rings_text,
 	.salary_rings_text_bground {
 		text-anchor: end;
 		font-size: 11px;
 		font-weight: bold;
 	}
+
 	.salary_skills_name,
 	.salary_skills_name_bground {
 		font-size: 10px;
 		font-weight: bold;
 	}
+
 	.lower_bounds, .medians, .upper_bounds {
 		mix-blend-mode: multiply;
 	}
+
 	.lower_bounds, .upper_bounds {
 		opacity: 0.25;
-	}</style>
+	}
+</style>

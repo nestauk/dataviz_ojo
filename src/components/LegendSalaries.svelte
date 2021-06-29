@@ -21,13 +21,15 @@
 		.domain([0, 100])
 		.range([legendsHeight, 0]);
 	const small_width = 500
-	const y_positions = [65,45,20,0]
+	const y_positions = [63,52,17,7]
 	const legend_text = ['Upper quartile of MAX salaries',
 					  'Median of MAX salaries',
 					  'Median of MIN salaries',
 					  'Lower quartile of MIN salaries']
 	const color_skills_range = color_skills.range()
 	const no_broad_skills = color_skills_range.length
+	const titleLines = ['The salary ranges from all adverts that',
+						'mention the skill (£ MIN - £ MAX)']
 
 	/* reactive vars */
 	$: width = $_width + $_margin.left + $_margin.right;
@@ -39,28 +41,34 @@
 
 </script>
 
-<div class='div_background' style="background-color: {color_legend_bground}">
+<div class='div_background'>
 	{#if width && height}
 		<svg {width} {height}>
 			<g transform='translate({$_margin.left},{$_margin.top})'>
-				
-				<text
-					class='salary_legend_title'
-					fill={color_salary_names}
-					x={$_xScale(x_text_start-6)}
-					y={yScaleLeg(y_positions[0]+26)}
-				>
-					The salary ranges from all adverts that
-				</text>
 
-				<text
-					class='salary_legend_title'
-					fill={color_salary_names}
-					x={$_xScale(x_text_start-6)}
-					y={yScaleLeg(y_positions[0]+13)}
-				>
-					mention the skill (£ MIN - £ MAX)
-				</text>
+				<!-- Background colour -->
+				<rect
+					x={$_xScale(0)}
+					y={yScaleLeg(100)}
+					width={$_xScale(100)}
+					height={yScaleLeg(0)}
+					fill={color_legend_bground}
+				/>
+
+				<!-- Title of chart -->
+				{#each titleLines as d, i}
+
+					<text
+						class='salary_legend_title'
+						fill={color_salary_names}
+						x={$_xScale(x_text_start-6)}
+						y={yScaleLeg(y_positions[0]+23)}
+						dy={i*1.5+'em'}
+					>
+						{d}
+					</text>
+						
+				{/each}
 
 				<rect
 					class='salary_legend_long_rect'

@@ -20,7 +20,7 @@
 		scaleLinear()
 		.domain([0, 100])
 		.range([legendsHeight, 0]);
-	const small_width = 750
+	const small_width = 850
 	const color_skills_domain = color_skills.domain()
 	const no_broad_skills = color_skills_domain.length
 
@@ -34,10 +34,19 @@
 
 </script>
 
-<div class='div_background' style="background-color: {color_legend_bground}">
+<div class='div_background'>
 	{#if width && height}
 		<svg {width} {height}>
 			<g transform='translate({$_margin.left},{$_margin.top})'>
+
+				<!-- Background colour -->
+				<rect
+					x={$_xScale(0)}
+					y={yScaleLeg(100)}
+					width={$_xScale(100)}
+					height={yScaleLeg(0)}
+					fill={color_legend_bground}
+				/>
 
 				<!-- Title -->
 				<text
@@ -45,25 +54,29 @@
 					dy='0.3em'
 					text-anchor='start'
 					fill={color_nuts2_names}
-					x={$_xScale(0.25)}
-					y={(isSmall) ? yScaleLeg(95) : yScaleLeg(73)}
+					x={(isSmall) ? $_xScale(5.5) : $_xScale(5.5)}
+					y={(isSmall) ? yScaleLeg(90) : yScaleLeg(73)}
 				>
-					The mix of skills within a region's job adverts
+					The skill mix within a region's job adverts
 				</text>
 
 
-				<!-- Blocks -->				
+				<!-- Blocks and labels -->				
 				{#each color_skills_domain as d,i}
 
+					<!-- Blocks -->				
 					<rect
 						class='location_legend_rect'
 						fill={color_skills(d)}
-						x={(isSmall) ? $_xScale(0) : $_xScale(0.25+(i*100/no_broad_skills))}
-						y={(isSmall) ? yScaleLeg(85-((80/no_broad_skills)*i)) : yScaleLeg(60)}
-						width={(isSmall) ? $_xScale(10) : $_xScale(-0.5+100/(no_broad_skills))}
+						x={(isSmall) ? $_xScale(5) : $_xScale(5+(i*90/no_broad_skills))}
+						y={(isSmall) ? yScaleLeg(80-((80/no_broad_skills)*i)) : yScaleLeg(60)}
+						width={(isSmall) ? $_xScale(10) : $_xScale(90/(no_broad_skills))}
 						height={(isSmall) ? yScaleLeg(100-(80/(no_broad_skills+0.5))) : yScaleLeg(60)}
+						stroke={color_legend_bground}
+						stroke-width={(isSmall) ? thinStroke : thickStroke}
 					/>
 
+					<!-- Background labels (not needed on small screens) -->				
 					<text
 						class='location_legend_text_bground'
 						dy='0.3em'
@@ -71,19 +84,21 @@
 						fill={color_nuts2_names}
 						stroke-width={thickStroke}
 						stroke={color_nuts2_names_bground}
-						x={(isSmall) ? $_xScale(12) : $_xScale((i+0.5)*100/no_broad_skills)}
-						y={(isSmall) ? yScaleLeg(85-((80/no_broad_skills)*(i+0.5))) : yScaleLeg(40)}
+						x={(isSmall) ? $_xScale(17) : $_xScale(5+(i+0.5)*90/no_broad_skills)}
+						y={(isSmall) ? yScaleLeg(80-((80/no_broad_skills)*(i+0.5))) : yScaleLeg(40)}
+						opacity={(isSmall) ? 0 : 1}
 					>
 						{d}
 					</text>
 
+					<!-- Foreground labels -->				
 					<text
 						class='location_legend_text'
 						text-anchor={(isSmall) ? 'start': 'middle'}
 						dy='0.3em'
 						fill={color_nuts2_names}
-						x={(isSmall) ? $_xScale(12) : $_xScale((i+0.5)*100/no_broad_skills)}
-						y={(isSmall) ? yScaleLeg(85-((80/no_broad_skills)*(i+0.5))) : yScaleLeg(40)}
+						x={(isSmall) ? $_xScale(17) : $_xScale(5+(i+0.5)*90/no_broad_skills)}
+						y={(isSmall) ? yScaleLeg(80-((80/no_broad_skills)*(i+0.5))) : yScaleLeg(40)}
 					>
 						{d}
 					</text>
@@ -112,8 +127,10 @@
 	}
 
 	.location_legend_rect {
-		rx: 3px;
-		ry: 3px;
+		rx: 6px;
+		ry: 6px;
+	    stroke-linecap:  round; 
+	    stroke-linejoin: round; 	
 	}
 
 </style>

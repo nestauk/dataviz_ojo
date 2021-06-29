@@ -22,8 +22,7 @@ export const color_skills =
 export const color_nuts2_names = '#000000'
 export const color_nuts2_names_bground = '#FFFFFF'
 
-export const color_skills_names = '#575757'
-export const color_skills_names_bground = '#FFFFFF'
+export const color_skills_names = '#000000'
 
 export const color_occup_rect = '#000000'
 export const color_occup_skill_names = '#000000'

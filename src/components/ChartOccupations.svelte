@@ -27,17 +27,19 @@
 		.nodeSort(null)
 		.nodeWidth(5)
 		.nodePadding(15)
-		.size([$_width, height])
-		.extent([[1, 10], [$_width - 1, height - 10]]);
+		.size([$_width, chartsHeight])
+		.extent([[1, 10], [$_width - 1, chartsHeight - 10]]);
 	$: layout = sankeyGenerator({
     links: data.occupations.links,
     nodes: data.occupations.nodes,
   	});
 	$: thickStroke = $_xScale(0.7);
 
+	$: console.log($_margin.top)
+
 </script>
 
-<div>
+<div class='div_background'>
 	{#if width && height}
 		<svg {width} {height}>
 			<g transform='translate({$_margin.left},{$_margin.top})'>
@@ -97,6 +99,10 @@
 
 
 <style>
+.div_background {
+	line-height:  0px;
+}
+
 .occupation_skill_links {
 	fill: none;
 	mix-blend-mode: multiply;

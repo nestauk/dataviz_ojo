@@ -1,18 +1,23 @@
 <script>
-	import {scaleLinear} from 'd3-scale';
-
+	import {
+		scaleLinear
+	} from 'd3-scale';
 	import data from '../../data/data.json';
 	import {
-		color_skills_names_bground,
 		color_skills_names,
 		color_skills,
+		color_legend_bground
 	} from '../shared/colours';
-	import {xMax, xMin, yMax, yMin} from '../shared/geometry';
-	import {_innerWidth, _width_margin} from '../stores';
+	import {
+		_margin_m,
+		_width_m,
+		_height_m,
+	} from '../stores';
+
 
 	/* consts */
 
-	// Determine position of skill labels
+	// Convert polar to cartesian co-ordainations (for positioning of skill labels)
   function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
     let angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
     return {
@@ -21,11 +26,10 @@
     };
   }
 
-	// Determine position of skill labels
+	// Arc that describes skill labels
   function describeArc(x, y, radius, startAngle, endAngle){
     let start = polarToCartesian(x, y, radius, endAngle);
     let end = polarToCartesian(x, y, radius, startAngle);
-    let arcSweep = endAngle - startAngle <= 180 ? '0' : '1'; // FIXME unused
     let d = [
       'M', start.x, start.y,
       'A', radius, radius, 0, 1, 1, end.x, end.y
@@ -33,51 +37,55 @@
     return d;
   }
 
-	const gap = 20;
+  const yMax = 100
 	const no_skills = data.skills.length;
-	const radius_circles = 20;
-	const titleLines = ['Most frequently','demanded skills'];
+	const radius_circles = 30;
+	const titleLines = ['The most frequently','mentioned skills','in job adverts'];
+
 
 	/* reactive vars */
-
-	$: width = $_width_margin; // FIXME use $_width_margin directly
-	// $: width = $_width_container_parent >= 1380
-	// 	? 1380 * 0.15
-	// 	: $_innerWidth >= 1250
-	// 		? $_innerWidth * 0.835 * 0.15
-	// 		: 0;
-	$: margin = {
-		top: 20,
-		right: 0,
-		bottom: 20,
-		left: 0,
-	}
-	$: xScale = scaleLinear().domain([xMin,xMax]).range([0, width]);
-	$: r = xScale(radius_circles);
-	$: cx = xScale(50);
-	$: strokeWidth = xScale(3);
-	$: height = 2 * (r + gap) * no_skills;
-	$: yScale = scaleLinear().domain([yMin, yMax]).range([height, 0]);
+	$: _xScale_m =
+		scaleLinear()
+		.domain([0, yMax])
+		.range([0, $_width_m]);
+	$: _yScale_m =
+		scaleLinear()
+		.domain([0, 100])
+		.range([$_height_m, 0]);
+	$: width = $_width_m + $_margin_m.left + $_margin_m.right;
+	$: height = $_height_m + $_margin_m.top + $_margin_m.bottom;
+	$: r = _xScale_m(radius_circles);
+	$: cx = _xScale_m(50);
 	$: makeArc = index => {
-		let y = yScale(yMax - (100 / (no_skills+1)) * (index + 1))
-    let radius = xScale(radius_circles * 1.1);
+		let y = _yScale_m(yMax - 0.5 - (100 / (no_skills+1)) * (index + 1))
+    let radius = _xScale_m(radius_circles * 1.1);
     let startAngle = 160
     let endAngle = -160
     return describeArc(cx, y, radius, startAngle, endAngle)
 	}
 </script>
 
-<div>
+<div class='div_background'>
 	{#if width && height}
 		<svg {width} {height}>
-			<g transform='translate({margin.left},{margin.top})'>
+			<g transform='translate({$_margin_m.left},{$_margin_m.top})'>
+
+				<!-- Background colour -->
+					<rect
+						x={_xScale_m(0)}
+						y={_yScale_m(100)}
+						width={_xScale_m(100)}
+						height={_yScale_m(0)}
+						fill={color_legend_bground}
+					/>
+			
 				<!-- Circles for skills -->
 				{#each data.skills as d, i}
 					<circle
 						{cx}
 						{r}
 						class='skills_circles'
-						cy={yScale(yMax - (100 / (no_skills + 1)) * (i + 1))}
+						cy={_yScale_m(yMax - 0.5 - (100 / (no_skills + 1)) * (i + 1))}
 						fill={color_skills(d.broad_skill_group)}
 					/>
 				{/each}
@@ -91,45 +99,35 @@
 					/>
 				{/each}
 
-				{#each data.skills as d, i}
+				<!-- Labels -->
+				{#each data.skills as d,i}
 					<g class='arc_paths'>
-						<!-- Skills labels - background -->
+
 						<text>
 							<textPath
-								class='skills_text_bground'
-								fill={color_skills_names_bground}
+								class='skills_text'
+								fill={color_skills_names}
 								startOffset='50%'
-								stroke-width={strokeWidth}
-								stroke={color_skills_names_bground}
 								xlink:href='#s{i}'
 							>
-								{d.skill_name.toUpperCase()}
+								{d.skill_name}
 							</textPath>
 						</text>
 
-						<!-- Skills labels - background -->
-						<text>
-							<textPath
-								fill={color_skills_names_bground}
-								startOffset='50%'
-								xlink:href='#s{i}'
-							>
-								{d.skill_name.toUpperCase()}
-							</textPath>
-						</text>
 					</g>
+
 				{/each}
 
 				<!-- Title of chart -->
 				{#each titleLines as d, i}
 					<text
 						class='title'
-						dy={i == 0 ? '0.5em' : '2em'}
+						dy={1.5*i+'em'}
 						fill={color_skills_names}
 						x={cx}
-						y={yScale(yMax)}
+						y={_yScale_m(yMax-0.7)}
 					>
-						{d.toUpperCase()}
+						{d}
 					</text>
 				{/each}
 			</g>
@@ -138,23 +136,24 @@
 </div>
 
 <style>
-	.skills_circles {
-		mix-blend-mode: multiply;
+	.div_background {
+		line-height:  0px;
 	}
 
 	.skills_arcs {
 		fill: none;
 	}
 
-	.arc_paths {
+	.skills_text_bground, .skills_text {
 		font-size: 10px;
 		font-weight: bold;
 		text-anchor: middle;
+		text-transform: uppercase;
 	}
 
 	.title {
 		text-anchor: middle;
-		font-size: 12px;
+		font-size: 14px;
 		font-weight: bold;
 	}
 </style>

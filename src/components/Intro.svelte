@@ -1,4 +1,3 @@
-
 <script>
 	export let paragraphs = [];
 </script>
@@ -14,7 +13,8 @@
 		font-size: 18.667px;
 		font-weight: 500;
 		line-height: 33.6001px;
-		margin: 60px auto;
+		margin: 45px auto 30px auto;
+		padding: 0px 28px;
 	}
 
 	/* Larger than 800px */

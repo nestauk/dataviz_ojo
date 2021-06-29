@@ -14,8 +14,7 @@
 	} from '../stores';
 
 	/* consts */
-
-	const small_width = 750
+	const small_width = 850
 
 	// Proportion of each area (in each direction) that will be taken up by
 	// stacked bar chart
@@ -52,7 +51,7 @@
 
 </script>
 
-<div>
+<div  class='div_background'>
 	{#if width && height}
 		<svg {width} {height}>
 			<g transform='translate({$_margin.left},{$_margin.top})'>
@@ -67,7 +66,6 @@
 						)'
 					>
 						<!-- NUTS 2 areas rectangles -->
-
 						{#each location.skills as d}
 							<rect
 								class='nuts2_skills'
@@ -87,10 +85,9 @@
 						{/each}
 
 						<!-- NUTS 2 area names - wide screen -->
-
 						{#each location.names_long as d, i}
 
-							<!-- NUTS 2 area names background - wide screen -->
+							<!-- background -->
 							<text
 								class='nuts2_names_long_bground'
 								dy='{i}em'
@@ -98,47 +95,48 @@
 								stroke-width={thickStroke}
 								stroke={color_nuts2_names_bground}
 								y={height_adj_nuts_text[d[1] - 1]}
+								opacity={(isSmall) ? 0 : 1}
 							>
-								{d[0].toUpperCase()}
+								{d[0]}
 							</text>
 
-							<!-- NUTS 2 area names - wide screen -->
+							<!-- foreground -->
 							<text
 								class='nuts2_names_long'
 								dy='{i}em'
 								fill={color_nuts2_names}
 								y={height_adj_nuts_text[d[1] - 1]}
+								opacity={(isSmall) ? 0 : 1}
 							>
-								{d[0].toUpperCase()}
+								{d[0]}
 							</text>
 						{/each}
 
 						<!-- NUTS 2 area names - narrow screen -->
-
 						{#each location.names_short as d, i}
 
-							<!-- NUTS 2 area names background - narrow screen -->
+							<!-- background -->
 							<text
-								{opacity}
 								class='nuts2_names_short_bground'
 								dy='{i}em'
 								fill={color_nuts2_names}
 								stroke-width={thickStroke}
 								stroke={color_nuts2_names_bground}
 								y={height_adj_nuts_text[d[1] - 1]}
+								opacity={(isSmall) ? 1 : 0}
 							>
-								{d[0].toUpperCase()}
+								{d[0]}
 							</text>
 
-							<!-- NUTS 2 area names - narrow screen -->
+							<!-- foreground -->
 							<text
-								{opacity}
 								class='nuts2_names_short'
 								dy='{i}em'
 								fill={color_nuts2_names}
 								y={height_adj_nuts_text[d[1] - 1]}
+								opacity={(isSmall) ? 1 : 0}
 							>
-								{d[0].toUpperCase()}
+								{d[0]}
 							</text>
 						{/each}
 
@@ -150,6 +148,10 @@
 </div>
 
 <style>
+	.div_background {
+		line-height:  0px;
+	}
+	
 	.nuts2_names_long,
 	.nuts2_names_long_bground,
 	.nuts2_names_short,
@@ -157,6 +159,7 @@
 		text-anchor: middle;
 		font-size: 10px;
 		font-weight: bold;
+		text-transform: uppercase;
 	}
 
 	.nuts2_skills {
