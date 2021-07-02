@@ -23,14 +23,15 @@
 	const small_width = 850
 	const color_skills_domain = color_skills.domain()
 	const no_broad_skills = color_skills_domain.length
+	const thickStroke = '5px';
+	const thinStroke = '1px';
 
 	/* reactive vars */
 	$: width = $_width + $_margin.left + $_margin.right;
 	$: height = legendsHeight + $_margin.top + $_margin.bottom;
 	$: isSmall = width < small_width;
 	$: opacity = isSmall ? 1 : 0;
-	$: thinStroke = $_xScale(0.2);
-	$: thickStroke = $_xScale(0.7);
+
 
 </script>
 

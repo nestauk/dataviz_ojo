@@ -35,7 +35,6 @@
   	});
 	$: thickStroke = $_xScale(0.7);
 
-	$: console.log($_margin.top)
 
 </script>
 
