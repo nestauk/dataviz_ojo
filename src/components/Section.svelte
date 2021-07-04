@@ -11,10 +11,6 @@
 	{#each paragraphs as text}
 		<p>{text}</p>
 	{/each}
-
-	{#if question}
-		<h3>{question}</h3>
-	{/if}
 </div>
 
 <style>
@@ -22,7 +18,7 @@
 		font-size: 18px;
 		line-height: 32.4px;
 		margin: 0px auto;
-		padding: 20px 28px 20px 28px;
+		padding: 20px 28px;
 		position: relative;
 	}
 
@@ -50,14 +46,5 @@
 		font-weight: 700;
 		line-height: 32.3555px;
 		margin-bottom: 28px;
-	}
-
-	h3 {
-		font-family: 'AvertaBold', sans-serif;
-		font-size: 18.6667px;
-		font-weight: 700;
-		line-height: 26.1334px;
-		margin-bottom: 0px;
-		text-align: center;
 	}
 </style>

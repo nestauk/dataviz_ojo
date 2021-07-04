@@ -28,8 +28,8 @@
 					  'Lower quartile of MIN salaries']
 	const color_skills_range = color_skills.range()
 	const no_broad_skills = color_skills_range.length
-	const titleLines = ['The salary ranges from all adverts that',
-						'mention the skill (£ MIN - £ MAX)']
+	const titleLines = ['Annualised salary ranges from adverts',
+						'mentioning the skill (MIN salary - MAX salary)']
 
 	/* reactive vars */
 	$: width = $_width + $_margin.left + $_margin.right;

@@ -6,15 +6,20 @@
 		color_salary_axis_bground,
 		color_salary_axis,
 		color_salary_names_bground,
-		color_salary_names		
+		color_salary_names,		
+		color_tooltip_bground		
 	} from '../shared/colours';
 	import {
 		_margin,
 		_width,
 		_xScale_s,
 	} from '../stores';
-	import {scaleLinear} from 'd3-scale';
-
+	import {
+		scaleLinear
+	} from 'd3-scale';
+	import {
+		writable
+	} from 'svelte/store';
 
 	// Number of salaries (add 5 to leave space for salary_rings_text
 	let no_salaries = data.salaries.length+5
@@ -32,17 +37,75 @@
   	let highest_salary = Math.max.apply(Math, data.salaries.map(function(d,i) { return d.salaries.upper_bound.upper_q }))
   	let highest_salary_shown = Math.max(highest_salary,salary_rings[salary_rings.length-1])+3
 
+	// For really small screens 
+	// (stop showing mouseovers)
+	const very_small_width = 450
+
+	// Stroke widths
+	const thinStroke = '1px';
+	const thickStroke = '5px';
 
 	/* reactive vars */	
 	$: width = $_width + $_margin.left + $_margin.right;
 	$: height = $_width + $_margin.top + $_margin.bottom;
-	$: thinStroke = $_xScale_s(0.2);
-	$: thickStroke = $_xScale_s(0.7);
+	$: isVerySmall = width < very_small_width;	
   	$: yScale_s = scaleLinear()
   	.domain([lowest_salary_shown,highest_salary_shown])
   	.range([0, 0.5*(width - $_margin.left - $_margin.right)])
 
+
+	/* mouseovers */
+
+	// Format text for mouseovers
+	$: format_text = (text,d) => {
+		return text+': £'+Math.round(d)+'k pa'
+	}
+
+	const _tooltip = writable({isVisible: false});
+	const onMouseout = () => {
+	 	_tooltip.set({isVisible: false})
+	}
+	const showTooltip = (d, event) => {
+
+		const data_1_input = d.salaries.lower_bound.median
+		const data_2_input = d.salaries.upper_bound.median
+		
+		const left = $_xScale_s(50)+yScale_s(d.salaries.lower_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))
+		const top = event.pageY-400
+
+		const text_color = (d.broad_skill_group==color_skills.domain()[2] || d.broad_skill_group==color_skills.domain()[4] || d.broad_skill_group==color_skills.domain()[3]) ? '#000000' : '#FFFFFF'
+
+		_tooltip.set({
+			isVisible: true,
+			
+			left_margin: left+'px',
+			top_margin: top+'px',
+
+			background_color: color_skills(d.broad_skill_group),
+			text_color: text_color,
+
+			data_1: format_text('Median of MIN salaries', data_1_input),
+			data_2: format_text('Median of MAX salaries', data_2_input),
+
+			name: d.skill_name
+		})
+	}
+
+
 </script>
+
+<div class="tooltip" 
+	class:hidden={!$_tooltip.isVisible}
+	style="left:{$_tooltip.left_margin}; 
+		   top: {$_tooltip.top_margin};
+		   background-color: {$_tooltip.background_color};
+		   color: {$_tooltip.text_color};"
+>
+    <p><span class="line1_text">{$_tooltip.name}</span></p>
+    <p><span class="line2_text">Annualised salary ranges (MIN - MAX):</span></p>
+    <p><span class="line3_text">{$_tooltip.data_1}</span></p>
+    <p><span class="line4_text">{$_tooltip.data_2}</span></p>
+</div>
 
 <div class='div_background'>
 	{#if width && height}
@@ -100,6 +163,8 @@
 						width={yScale_s(lowest_salary_shown+d.salaries.lower_bound.median-d.salaries.lower_bound.lower_q)}
 						height={$_xScale_s(1.5)}
 						transform = translate({$_xScale_s(50)+yScale_s(d.salaries.lower_bound.lower_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.lower_bound.lower_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))}) 
+						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
+						on:mouseout = {onMouseout}								
 					/>
 
 					<rect
@@ -110,6 +175,8 @@
 						width={yScale_s(lowest_salary_shown+d.salaries.upper_bound.median-d.salaries.lower_bound.median)}
 						height={$_xScale_s(1.5)}
 						transform = translate({$_xScale_s(50)+yScale_s(d.salaries.lower_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.lower_bound.median)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))}) 
+						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
+						on:mouseout = {onMouseout}								
 					/>
 
  					<rect
@@ -120,6 +187,8 @@
 						width={yScale_s(lowest_salary_shown+d.salaries.upper_bound.upper_q-d.salaries.upper_bound.median)}
 						height={$_xScale_s(1.5)}
 						transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.median)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))}) 
+						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
+						on:mouseout = {onMouseout}								
 					/>
 
 				{/each}
@@ -205,12 +274,14 @@
 		text-anchor: end;
 		font-size: 11px;
 		font-weight: bold;
+		pointer-events: none;
 	}
 
 	.salary_skills_name,
 	.salary_skills_name_bground {
 		font-size: 10px;
 		font-weight: bold;
+		pointer-events: none;
 	}
 
 	.lower_bounds, .medians, .upper_bounds {
@@ -220,4 +291,38 @@
 	.lower_bounds, .upper_bounds {
 		opacity: 0.25;
 	}
+
+    .tooltip {
+    	position: absolute;
+	    padding: 5px;
+	    pointer-events: none;
+	    font-family: "AvertaRegular", Helvetica, sans-serif;
+	    border-radius: 3px;
+	    z-index: 6;
+	    border: 3px solid #FFF
+    }
+
+    .tooltip.hidden {
+        display: none;
+    }
+
+    .tooltip p {
+        margin: 0px;
+    	font-size: 12px;
+    	text-align: left;
+  		line-height: 1.8;
+  		padding-left: 5px;
+  		padding-right: 5px;
+  	}
+
+  	.line1_text {
+  		font-size:  14px;
+  		line-height: 2;
+  		font-weight: bold;
+  	}
+
+  	.line2_text {
+  		font-style: italic;
+  	}
+
 </style>
