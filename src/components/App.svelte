@@ -1,6 +1,7 @@
 <script>
 	import Content from './Content.svelte';
 	import Footer from './Nesta/Footer.svelte';
+	import Header from './Nesta/Header.svelte';
 	import MetaTwitter from './MetaTwitter.svelte';
 	import Title from './Title.svelte';
 	// import Analytics from './Nesta/Analytics.svelte';
@@ -14,6 +15,8 @@
 	<MetaTwitter />
 </svelte:head>
 
+
+<Header />
 <Title />
 <Content />
 <Footer />

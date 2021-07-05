@@ -7,7 +7,8 @@
 	import LegendOccupations from './LegendOccupations.svelte'
 	import Intro from './Intro.svelte'
 	import Margin from './Margin.svelte'
-	import Section from './Section.svelte';
+	import Section from './Section.svelte'
+	import Notes from './Notes.svelte';
 
 	import {
 		_height_container_parent,
@@ -50,17 +51,27 @@
 		<h2>How do skill demands vary across the UK?</h2>
 		<LegendLocations />
 		<ChartLocations />
+        <Notes 
+        	paragraphs={[
+        	'This is a short note that goes beneath each chart, giving more detail. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        	]}
+        /> 		
 
 		<!-- occupations -->
 		<Section
 			title='Heading goes here'
 			paragraphs={[
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariaturß. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
 			]}
 		/>
 		<h2>Which skills are required in the most advertised occupations?</h2>
 		<LegendOccupations />
 		<ChartOccupations />
+        <Notes 
+        	paragraphs={[
+        	'This is a short note that goes beneath each chart, giving more detail. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        	]}
+        /> 		
 
 		<!-- salaries -->
 		<Section
@@ -72,6 +83,11 @@
 		<h2>What salaries are associated with the most in-demand skills?</h2>
 		<LegendSalaries />
 		<ChartSalaries />
+        <Notes 
+        	paragraphs={[
+        	'This is a short note that goes beneath each chart, giving more detail. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+        	]}
+        /> 		
 
 		<!-- section -->
 		<Section
