@@ -6,38 +6,33 @@
 		color_salary_axis_bground,
 		color_salary_axis,
 		color_salary_names_bground,
-		color_salary_names,		
-		color_tooltip_bground		
+		color_salary_names,
 	} from '../shared/colours';
 	import {
 		_margin,
 		_width,
 		_xScale_s,
 	} from '../stores';
-	import {
-		scaleLinear
-	} from 'd3-scale';
-	import {
-		writable
-	} from 'svelte/store';
+	import {scaleLinear} from 'd3-scale';
+	import {writable} from 'svelte/store';
 
 	// Number of salaries (add 5 to leave space for salary_rings_text
 	let no_salaries = data.salaries.length+5
 
-    // Rotate the chart to ensure the min and max salaries straddle the top of the chart
-    let rotate_adj = 0.225*no_salaries
+	// Rotate the chart to ensure the min and max salaries straddle the top of the chart
+	let rotate_adj = 0.225*no_salaries
 
-    // Salaries for rings
+	// Salaries for rings
 	let salary_rings = [10,20,30,40,50];
 
-    // Calculate domain for salary scale (yScale_s)
-    // -5 and +3 to give extra space
-    let lowest_salary = Math.min.apply(Math, data.salaries.map(function(d,i) { return d.salaries.lower_bound.lower_q }))
-    let lowest_salary_shown = Math.min(salary_rings[0],lowest_salary)-5
-  	let highest_salary = Math.max.apply(Math, data.salaries.map(function(d,i) { return d.salaries.upper_bound.upper_q }))
-  	let highest_salary_shown = Math.max(highest_salary,salary_rings[salary_rings.length-1])+3
+	// Calculate domain for salary scale (yScale_s)
+	// -5 and +3 to give extra space
+	let lowest_salary = Math.min.apply(Math, data.salaries.map(function(d,i) { return d.salaries.lower_bound.lower_q }))
+	let lowest_salary_shown = Math.min(salary_rings[0],lowest_salary)-5
+	let highest_salary = Math.max.apply(Math, data.salaries.map(function(d,i) { return d.salaries.upper_bound.upper_q }))
+	let highest_salary_shown = Math.max(highest_salary,salary_rings[salary_rings.length-1])+3
 
-	// For really small screens 
+	// For really small screens
 	// (stop showing mouseovers)
 	const very_small_width = 450
 
@@ -45,13 +40,13 @@
 	const thinStroke = '1px';
 	const thickStroke = '5px';
 
-	/* reactive vars */	
+	/* reactive vars */
 	$: width = $_width + $_margin.left + $_margin.right;
 	$: height = $_width + $_margin.top + $_margin.bottom;
-	$: isVerySmall = width < very_small_width;	
-  	$: yScale_s = scaleLinear()
-  	.domain([lowest_salary_shown,highest_salary_shown])
-  	.range([0, 0.5*(width - $_margin.left - $_margin.right)])
+	$: isVerySmall = width < very_small_width;
+	$: yScale_s = scaleLinear()
+	.domain([lowest_salary_shown,highest_salary_shown])
+	.range([0, 0.5*(width - $_margin.left - $_margin.right)])
 
 
 	/* mouseovers */
@@ -69,7 +64,7 @@
 
 		const data_1_input = d.salaries.lower_bound.median
 		const data_2_input = d.salaries.upper_bound.median
-		
+
 		const left = $_xScale_s(50)+yScale_s(d.salaries.lower_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))
 		const top = event.pageY-400
 
@@ -77,7 +72,7 @@
 
 		_tooltip.set({
 			isVisible: true,
-			
+
 			left_margin: left+'px',
 			top_margin: top+'px',
 
@@ -94,17 +89,19 @@
 
 </script>
 
-<div class="tooltip" 
+<div class="tooltip"
 	class:hidden={!$_tooltip.isVisible}
-	style="left:{$_tooltip.left_margin}; 
-		   top: {$_tooltip.top_margin};
-		   background-color: {$_tooltip.background_color};
-		   color: {$_tooltip.text_color};"
+	style="
+		left:{$_tooltip.left_margin};
+		top: {$_tooltip.top_margin};
+		background-color: {$_tooltip.background_color};
+		color: {$_tooltip.text_color};
+	"
 >
-    <p><span class="line1_text">{$_tooltip.name}</span></p>
-    <p><span class="line2_text">Annualised salary ranges (MIN - MAX):</span></p>
-    <p><span class="line3_text">{$_tooltip.data_1}</span></p>
-    <p><span class="line4_text">{$_tooltip.data_2}</span></p>
+	<p><span class="line1_text">{$_tooltip.name}</span></p>
+	<p><span class="line2_text">Annualised salary ranges (MIN - MAX):</span></p>
+	<p><span class="line3_text">{$_tooltip.data_1}</span></p>
+	<p><span class="line4_text">{$_tooltip.data_2}</span></p>
 </div>
 
 <div class='div_background'>
@@ -126,7 +123,7 @@
 					/>
 				{/each}
 
-				<!-- Need a separate loop from above to prevent rings overlapping text -->	
+				<!-- Need a separate loop from above to prevent rings overlapping text -->
 				{#each salary_rings as d,i}
 					<!-- Salary associated with each ring - background -->
 					<text
@@ -162,9 +159,9 @@
 						ry='2px'
 						width={yScale_s(lowest_salary_shown+d.salaries.lower_bound.median-d.salaries.lower_bound.lower_q)}
 						height={$_xScale_s(1.5)}
-						transform = translate({$_xScale_s(50)+yScale_s(d.salaries.lower_bound.lower_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.lower_bound.lower_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))}) 
+						transform = translate({$_xScale_s(50)+yScale_s(d.salaries.lower_bound.lower_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.lower_bound.lower_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
 						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
-						on:mouseout = {onMouseout}								
+						on:mouseout = {onMouseout}
 					/>
 
 					<rect
@@ -174,9 +171,9 @@
 						ry='2px'
 						width={yScale_s(lowest_salary_shown+d.salaries.upper_bound.median-d.salaries.lower_bound.median)}
 						height={$_xScale_s(1.5)}
-						transform = translate({$_xScale_s(50)+yScale_s(d.salaries.lower_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.lower_bound.median)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))}) 
+						transform = translate({$_xScale_s(50)+yScale_s(d.salaries.lower_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.lower_bound.median)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
 						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
-						on:mouseout = {onMouseout}								
+						on:mouseout = {onMouseout}
 					/>
 
  					<rect
@@ -186,9 +183,9 @@
 						ry='2px'
 						width={yScale_s(lowest_salary_shown+d.salaries.upper_bound.upper_q-d.salaries.upper_bound.median)}
 						height={$_xScale_s(1.5)}
-						transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.median)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))}) 
+						transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.median)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
 						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
-						on:mouseout = {onMouseout}								
+						on:mouseout = {onMouseout}
 					/>
 
 				{/each}
@@ -206,7 +203,7 @@
 							fill={color_salary_names_bground}
 							stroke={color_salary_names_bground}
 							stroke-width={thickStroke}
-							transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries)-180)}) 
+							transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries)-180)})
 							dy='0.2em'
 							text-anchor='start'
 							opacity={(width<550) ? 0 : (i%5==0) ? 1 : 0}
@@ -218,7 +215,7 @@
 						<text
 							class='salary_skills_name'
 							fill={color_salary_names}
-							transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries)-180)}) 
+							transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries)-180)})
 							dy='0.2em'
 							text-anchor='start'
 							opacity={(width<550) ? 0 : (i%5==0) ? 1 : 0}
@@ -235,7 +232,7 @@
 							fill={color_salary_names_bground}
 							stroke={color_salary_names_bground}
 							stroke-width={thickStroke}
-							transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))}) 
+							transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
 							dy='1.5em'
 							text-anchor='end'
 							opacity={(width<550) ? 0 : (i%5==0) ? 1 : 0}
@@ -247,7 +244,7 @@
 						<text
 							class='salary_skills_name'
 							fill={color_salary_names}
-							transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))}) 
+							transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
 							dy='1.5em'
 							text-anchor='end'
 							opacity={(width<550) ? 0 : (i%5==0) ? 1 : 0}
@@ -257,7 +254,7 @@
 
 					{/if}
 
-				{/each}	
+				{/each}
 
 			</g>
 		</svg>
@@ -266,7 +263,7 @@
 
 <style>
 	.div_background {
-		line-height:  0px;
+		line-height: 0px;
 	}
 
 	.salary_rings_text,
@@ -292,37 +289,37 @@
 		opacity: 0.25;
 	}
 
-    .tooltip {
-    	position: absolute;
-	    padding: 5px;
-	    pointer-events: none;
-	    font-family: "AvertaRegular", Helvetica, sans-serif;
-	    border-radius: 3px;
-	    z-index: 6;
-	    border: 3px solid #FFF
-    }
+	.tooltip {
+		position: absolute;
+		padding: 5px;
+		pointer-events: none;
+		font-family: "AvertaRegular", Helvetica, sans-serif;
+		border-radius: 3px;
+		z-index: 6;
+		border: 3px solid #FFF
+	}
 
-    .tooltip.hidden {
-        display: none;
-    }
+	.tooltip.hidden {
+		display: none;
+	}
 
-    .tooltip p {
-        margin: 0px;
-    	font-size: 12px;
-    	text-align: left;
-  		line-height: 1.8;
-  		padding-left: 5px;
-  		padding-right: 5px;
-  	}
+	.tooltip p {
+		margin: 0px;
+		font-size: 12px;
+		text-align: left;
+		line-height: 1.8;
+		padding-left: 5px;
+		padding-right: 5px;
+	}
 
-  	.line1_text {
-  		font-size:  14px;
-  		line-height: 2;
-  		font-weight: bold;
-  	}
+	.line1_text {
+		font-size: 14px;
+		line-height: 2;
+		font-weight: bold;
+	}
 
-  	.line2_text {
-  		font-style: italic;
-  	}
+	.line2_text {
+		font-style: italic;
+	}
 
 </style>

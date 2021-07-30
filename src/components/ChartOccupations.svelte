@@ -5,10 +5,10 @@
 		color_occup_skill_names,
 		color_occup_skill_names_bground,
 		color_skills,
-		color_tooltip_bground		
+		color_tooltip_bground
 	} from '../shared/colours';
 	import {
-		chartsHeight, 
+		chartsHeight,
 	} from '../shared/geometry';
 	import {
 		_margin,
@@ -29,14 +29,14 @@
 	// For smaller screens
 	// (change layout of blocks)
 	const small_width = 850
-	// For really small screens 
+	// For really small screens
 	// (stop showing mouseovers)
 	const very_small_width = 450
 
 	/* reactive vars */
 	$: width = $_width + $_margin.left + $_margin.right;
 	$: height = chartsHeight + $_margin.top + $_margin.bottom;
-	$: isVerySmall = width < very_small_width;	
+	$: isVerySmall = width < very_small_width;
 	$: isSmall = width < small_width;
 
 	$: sankeyGenerator = sankey()
@@ -47,9 +47,9 @@
 		.size([$_width, chartsHeight])
 		.extent([[1, 10], [$_width - 1, chartsHeight - 10]]);
 	$: layout = sankeyGenerator({
-    links: data.occupations.links,
-    nodes: data.occupations.nodes,
-  	});
+		links: data.occupations.links,
+		nodes: data.occupations.nodes,
+	});
 
 
 	/* mouseovers */
@@ -76,13 +76,13 @@
 		const data_3_input = d.source.sourceLinks[2]
 		const data_4_input = d.source.sourceLinks[3]
 		const data_5_input = d.source.sourceLinks[4]
-		
+
 		const left = $_xScale(50)
 		const top = event.pageY-400
 
 		_tooltip.set({
 			isVisible: true,
-			
+
 			left_margin: left+'px',
 			top_margin: top+'px',
 			background_color: color_tooltip_bground,
@@ -109,34 +109,51 @@
 
 </script>
 
-<div class="tooltip" 
+<div
+	class="tooltip"
 	class:hidden={!$_tooltip.isVisible}
-	style="left:{$_tooltip.left_margin}; 
-		   top: {$_tooltip.top_margin};
-		   background-color: {$_tooltip.background_color};"
+	style="
+		left:{$_tooltip.left_margin};
+		top: {$_tooltip.top_margin};
+		background-color: {$_tooltip.background_color};
+	"
 >
-    <p class='line1_bground'><span class="line1_text">{$_tooltip.name}</span></p>
-    <p class='line2_bground'><span class="line2_text">Mix of all skills mentioned:</span></p>
-    <p class='line3_bground'
-    	style="background-color:{$_tooltip.background_1}">
-    	<span class="line3_text">{$_tooltip.data_1}</span>
-    </p>
-    <p class='line4_bground'
-    	style="background-color:{$_tooltip.background_2}">
-    	<span class="line4_text">{$_tooltip.data_2}</span>
-    </p>
-    <p class='line5_bground'
-    	style="background-color:{$_tooltip.background_3}">
-    	<span class="line5_text">{$_tooltip.data_3}</span>
-    </p>
-    <p class='line6_bground'
-    	style="background-color:{$_tooltip.background_4}">
-    	<span class="line6_text">{$_tooltip.data_4}</span>
-    </p>
-    <p class='line7_bground'
-    	style="background-color:{$_tooltip.background_5}">
-    	<span class="line7_text">{$_tooltip.data_5}</span>
-    </p>
+	<p class='line1_bground'>
+		<span class="line1_text">{$_tooltip.name}</span>
+	</p>
+	<p class='line2_bground'>
+		<span class="line2_text">Mix of all skills mentioned:</span>
+	</p>
+	<p
+		class='line3_bground'
+		style="background-color:{$_tooltip.background_1}"
+	>
+		<span class="line3_text">{$_tooltip.data_1}</span>
+	</p>
+	<p
+		class='line4_bground'
+		style="background-color:{$_tooltip.background_2}"
+	>
+		<span class="line4_text">{$_tooltip.data_2}</span>
+	</p>
+	<p
+		class='line5_bground'
+		style="background-color:{$_tooltip.background_3}"
+	>
+		<span class="line5_text">{$_tooltip.data_3}</span>
+	</p>
+	<p
+		class='line6_bground'
+		style="background-color:{$_tooltip.background_4}"
+	>
+		<span class="line6_text">{$_tooltip.data_4}</span>
+	</p>
+	<p
+		class='line7_bground'
+		style="background-color:{$_tooltip.background_5}"
+	>
+		<span class="line7_text">{$_tooltip.data_5}</span>
+	</p>
 </div>
 
 <div class='div_background'>
@@ -152,12 +169,11 @@
 						d={sankeyLinkHorizontal()(d)}
 						stroke-width={d.width}
 						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
-						on:mouseout = {onMouseout}						
+						on:mouseout = {onMouseout}
 					/>
 				{/each}
 
-
-				{#each layout.nodes as d}	
+				{#each layout.nodes as d}
 					<!-- Black rectangles -->
 					<rect
 						class='occupation_skill_rect'
@@ -202,7 +218,7 @@
 
 <style>
 	.div_background {
-		line-height:  0px;
+		line-height: 0px;
 	}
 
 	.occupation_skill_links {
@@ -213,45 +229,45 @@
 	.occupation_skill_text,
 	.occupation_skill_text_bground {
 		font-size: 10px;
-	  	font-weight: bold;
-	  	pointer-events: none;
+		font-weight: bold;
+		pointer-events: none;
 	}
 
-    .tooltip {
-    	position: absolute;
-	    padding: 5px;
-	    pointer-events: none;
-	    font-family: "AvertaRegular", Helvetica, sans-serif;
-	    border-radius: 3px;
-	    z-index: 6;
-	    border: 3px solid #FFF
-    }
+	.tooltip {
+		position: absolute;
+		padding: 5px;
+		pointer-events: none;
+		font-family: "AvertaRegular", Helvetica, sans-serif;
+		border-radius: 3px;
+		z-index: 6;
+		border: 3px solid #FFF
+	}
 
-    .tooltip.hidden {
-        display: none;
-    }
+	.tooltip.hidden {
+		display: none;
+	}
 
-    .tooltip p {
-        margin: 0px;
-    	font-size: 12px;
-    	color: #FFFFFF;
-    	text-align: left;
-  		line-height: 1.8;
-  		padding-left: 5px;
-  		padding-right: 5px;
-  	}
+	.tooltip p {
+		margin: 0px;
+		font-size: 12px;
+		color: #FFFFFF;
+		text-align: left;
+		line-height: 1.8;
+		padding-left: 5px;
+		padding-right: 5px;
+	}
 
-  	.line1_text {
-    	color: #000000;
-  		font-size:  14px;
-  		line-height: 2;
-  		font-weight: bold;
-  	}
+	.line1_text {
+		color: #000000;
+		font-size: 14px;
+		line-height: 2;
+		font-weight: bold;
+	}
 
-  	.line2_text {
-    	color: #000000;
-  		font-style: italic;
-  	}
+	.line2_text {
+		color: #000000;
+		font-style: italic;
+	}
 
 
 </style>

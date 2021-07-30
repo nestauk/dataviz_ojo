@@ -16,23 +16,8 @@
 	}
 
 	.text_content p {
-        color: #706467;
-        line-height: 1.5;
-        font-size: 14px;
-    }
-
-	/* .text_content a:link {
-		text-decoration: none;
+		color: #706467;
+		line-height: 1.5;
+		font-size: 14px;
 	}
-
-	.text_content a {
-		color: #FF0041;
-		cursor: pointer;
-		transition: 0.3s;
-	}
-
-	.text_content a:hover {
-		color: #231F20;
-	} */
-
 </style>

@@ -31,7 +31,7 @@
 		<Margin />
 	</div>
 
-	<div 
+	<div
 		bind:clientHeight={$_height_container_text}
 		class='container_text'
 	>
@@ -51,11 +51,11 @@
 		<h2>How do skill demands vary across the UK?</h2>
 		<LegendLocations />
 		<ChartLocations />
-        <Notes 
-        	paragraphs={[
-        	'This is a short note that goes beneath each chart, giving more detail. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        	]}
-        /> 		
+		<Notes
+			paragraphs={[
+				'This is a short note that goes beneath each chart, giving more detail. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+			]}
+		/>
 
 		<!-- occupations -->
 		<Section
@@ -67,11 +67,11 @@
 		<h2>Which skills are required in the most advertised occupations?</h2>
 		<LegendOccupations />
 		<ChartOccupations />
-        <Notes 
-        	paragraphs={[
-        	'This is a short note that goes beneath each chart, giving more detail. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        	]}
-        /> 		
+		<Notes
+			paragraphs={[
+			'This is a short note that goes beneath each chart, giving more detail. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+			]}
+		/>
 
 		<!-- salaries -->
 		<Section
@@ -83,11 +83,11 @@
 		<h2>What salaries are associated with the most in-demand skills?</h2>
 		<LegendSalaries />
 		<ChartSalaries />
-        <Notes 
-        	paragraphs={[
-        	'This is a short note that goes beneath each chart, giving more detail. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        	]}
-        /> 		
+		<Notes
+			paragraphs={[
+			'This is a short note that goes beneath each chart, giving more detail. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+			]}
+		/>
 
 		<!-- section -->
 		<Section

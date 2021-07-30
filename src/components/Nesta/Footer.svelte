@@ -67,12 +67,6 @@
 		-ms-flex-direction: row;
 	}
 
-	/* .app-footer__icons .site-by-torchbox {
-		position: absolute;
-		right: -44px;
-		top: 0
-	} */
-
 	.footer-link-item {
 		color: #6a5847;
 		font-size: 15px;

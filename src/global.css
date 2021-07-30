@@ -1,25 +1,25 @@
 @font-face {
-  font-family: AvertaRegular;
-  src: url('../assets/fonts/Intelligent Design - Averta-Regular.otf') format('opentype'),
-  url('../assets/fonts/367A1E_4_0.eot');
+	font-family: AvertaRegular;
+	src: url('../assets/fonts/Intelligent Design - Averta-Regular.otf') format('opentype'),
+	url('../assets/fonts/367A1E_4_0.eot');
 }
 
 @font-face {
-  font-family: AvertaLight;
-  src: url('../assets/fonts/Intelligent Design - Averta-Light.otf') format('opentype'),
-  url('../assets/fonts/367A1E_2_0.eot');
+	font-family: AvertaLight;
+	src: url('../assets/fonts/Intelligent Design - Averta-Light.otf') format('opentype'),
+	url('../assets/fonts/367A1E_2_0.eot');
 }
 
 @font-face {
-  font-family: AvertaBold;
-  src: url('../assets/fonts/Intelligent Design - Averta-Bold.otf') format('opentype'),
-  url('../assets/fonts/367A1E_0_0.eot');
+	font-family: AvertaBold;
+	src: url('../assets/fonts/Intelligent Design - Averta-Bold.otf') format('opentype'),
+	url('../assets/fonts/367A1E_0_0.eot');
 }
 
 @font-face {
-  font-family: AvertaItalic;
-  src: url('../assets/fonts/Intelligent Design - Averta-RegularItalic.otf') format('opentype'),
-  url('../assets/fonts/367A1E_5_0.eot');
+	font-family: AvertaItalic;
+	src: url('../assets/fonts/Intelligent Design - Averta-RegularItalic.otf') format('opentype'),
+	url('../assets/fonts/367A1E_5_0.eot');
 }
 
 body {

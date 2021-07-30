@@ -22,14 +22,18 @@
 		.range([legendsHeight, 0]);
 	const small_width = 500
 	const y_positions = [63,52,17,7]
-	const legend_text = ['Upper quartile of MAX salaries',
-					  'Median of MAX salaries',
-					  'Median of MIN salaries',
-					  'Lower quartile of MIN salaries']
+	const legend_text = [
+		'Upper quartile of MAX salaries',
+		'Median of MAX salaries',
+		'Median of MIN salaries',
+		'Lower quartile of MIN salaries'
+	]
 	const color_skills_range = color_skills.range()
 	const no_broad_skills = color_skills_range.length
-	const titleLines = ['Annualised salary ranges from adverts',
-						'mentioning the skill (MIN salary - MAX salary)']
+	const titleLines = [
+		'Annualised salary ranges from adverts',
+		'mentioning the skill (MIN salary - MAX salary)'
+	]
 
 	/* reactive vars */
 	$: width = $_width + $_margin.left + $_margin.right;
@@ -67,7 +71,7 @@
 					>
 						{d}
 					</text>
-						
+
 				{/each}
 
 				<rect
@@ -99,7 +103,7 @@
 						class='salary_legend_lines'
 						stroke={color_salary_names}
 						stroke-width={thinStroke}
-						d="M {$_xScale(x_text_start-1)},{yScaleLeg(d)} L 
+						d="M {$_xScale(x_text_start-1)},{yScaleLeg(d)} L
 						{$_xScale(x_text_start+2.5)},{yScaleLeg(d)}"
 					/>
 
@@ -113,7 +117,7 @@
 						{legend_text[i]}
 					</text>
 
-				{/each}	
+				{/each}
 
 			</g>
 		</svg>
@@ -123,7 +127,7 @@
 <style>
 
 	.div_background {
-		line-height:  0px;
+		line-height: 0px;
 	}
 
 	.salary_legend_title {
@@ -142,9 +146,9 @@
 	}
 
 	.salary_legend_text {
-		font-size:  11px;
-		text-anchor:  start;
-		font-style:  italic;
+		font-size: 11px;
+		text-anchor: start;
+		font-style: italic;
 	}
 
 </style>

@@ -62,10 +62,10 @@
 				</text>
 
 
-				<!-- Blocks and labels -->				
+				<!-- Blocks and labels -->
 				{#each color_skills_domain as d,i}
 
-					<!-- Blocks -->				
+					<!-- Blocks -->
 					<rect
 						class='location_legend_rect'
 						fill={color_skills(d)}
@@ -77,7 +77,7 @@
 						stroke-width={(isSmall) ? thinStroke : thickStroke}
 					/>
 
-					<!-- Background labels (not needed on small screens) -->				
+					<!-- Background labels (not needed on small screens) -->
 					<text
 						class='location_legend_text_bground'
 						dy='0.3em'
@@ -92,7 +92,7 @@
 						{d}
 					</text>
 
-					<!-- Foreground labels -->				
+					<!-- Foreground labels -->
 					<text
 						class='location_legend_text'
 						text-anchor={(isSmall) ? 'start': 'middle'}
@@ -104,7 +104,7 @@
 						{d}
 					</text>
 
-				{/each}	
+				{/each}
 			</g>
 		</svg>
 	{/if}
@@ -112,12 +112,12 @@
 
 <style>
 	.div_background {
-		line-height:  0px;
+		line-height: 0px;
 	}
 
 	.location_legend_title {
-		font-size:  14px;
-		font-weight:  bold;
+		font-size: 14px;
+		font-weight: bold;
 	}
 
 	.location_legend_text,
@@ -130,8 +130,8 @@
 	.location_legend_rect {
 		rx: 6px;
 		ry: 6px;
-	    stroke-linecap:  round; 
-	    stroke-linejoin: round; 	
+		stroke-linecap: round;
+		stroke-linejoin: round;
 	}
 
 </style>

@@ -18,26 +18,26 @@
 	/* consts */
 
 	// Convert polar to cartesian co-ordainations (for positioning of skill labels)
-  function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
-    let angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
-    return {
-      x: centerX + (radius * Math.cos(angleInRadians)),
-      y: centerY + (radius * Math.sin(angleInRadians))
-    };
-  }
+	function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+		let angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
+		return {
+			x: centerX + (radius * Math.cos(angleInRadians)),
+			y: centerY + (radius * Math.sin(angleInRadians))
+		};
+	}
 
 	// Arc that describes skill labels
-  function describeArc(x, y, radius, startAngle, endAngle){
-    let start = polarToCartesian(x, y, radius, endAngle);
-    let end = polarToCartesian(x, y, radius, startAngle);
-    let d = [
-      'M', start.x, start.y,
-      'A', radius, radius, 0, 1, 1, end.x, end.y
-    ].join(' ');
-    return d;
-  }
+	function describeArc(x, y, radius, startAngle, endAngle){
+		let start = polarToCartesian(x, y, radius, endAngle);
+		let end = polarToCartesian(x, y, radius, startAngle);
+		let d = [
+			'M', start.x, start.y,
+			'A', radius, radius, 0, 1, 1, end.x, end.y
+		].join(' ');
+		return d;
+	}
 
-  const yMax = 100
+	const yMax = 100
 	const no_skills = data.skills.length;
 	const radius_circles = 30;
 	const titleLines = ['The most frequently','mentioned skills','in job adverts'];
@@ -58,10 +58,10 @@
 	$: cx = _xScale_m(50);
 	$: makeArc = index => {
 		let y = _yScale_m(yMax - 0.5 - (100 / (no_skills+1)) * (index + 1))
-    let radius = _xScale_m(radius_circles * 1.1);
-    let startAngle = 160
-    let endAngle = -160
-    return describeArc(cx, y, radius, startAngle, endAngle)
+		let radius = _xScale_m(radius_circles * 1.1);
+		let startAngle = 160
+		let endAngle = -160
+		return describeArc(cx, y, radius, startAngle, endAngle)
 	}
 </script>
 
@@ -78,7 +78,7 @@
 						height={_yScale_m(0)}
 						fill={color_legend_bground}
 					/>
-			
+
 				<!-- Circles for skills -->
 				{#each data.skills as d, i}
 					<circle
@@ -137,7 +137,7 @@
 
 <style>
 	.div_background {
-		line-height:  0px;
+		line-height: 0px;
 	}
 
 	.skills_arcs {

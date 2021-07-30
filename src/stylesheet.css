@@ -1,44 +1,44 @@
 #chart, #chart_m, #chart_2, #chart_3 {
-  margin: 0px;
-  padding: 0px;
+	margin: 0px;
+	padding: 0px;
 }
 
 
 .notes {
-  color: #706467;
-  font-size: 14px;
-  line-height: 1.5;
-  padding-top: 20px;
-  padding-bottom: 30px;
+	color: #706467;
+	font-size: 14px;
+	line-height: 1.5;
+	padding-top: 20px;
+	padding-bottom: 30px;
 }
 
 img {
-  display: block;
-  margin: 0px auto;
-  max-width: 1000px;
-  width: 95%;
+	display: block;
+	margin: 0px auto;
+	max-width: 1000px;
+	width: 95%;
  }
 
 .show {display:block;}
 
 ::placeholder {
-  color: #3C1252;
-  font-weight: bold;
-  opacity: 1;
+	color: #3C1252;
+	font-weight: bold;
+	opacity: 1;
 }
 
 :-ms-input-placeholder {
-  color: #3C1252;
-  font-weight: bold;
+	color: #3C1252;
+	font-weight: bold;
 }
 
 ::-ms-input-placeholder {
-  color: #3C1252;
-  font-weight: bold;
+	color: #3C1252;
+	font-weight: bold;
 }
 
 
 
 .page__footer .share-item__icon {
-  fill: #fff
+	fill: #fff
 }

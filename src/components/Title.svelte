@@ -6,10 +6,11 @@
 	} from '../stores';
 </script>
 
-<div 
+<div
 	bind:clientHeight={$_height_container_title}
 	bind:clientWidth={$_width_container_title}
-	class='container_title'>
+	class='container_title'
+>
 	<ChartTitle/>
 </div>
 

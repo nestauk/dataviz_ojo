@@ -4,18 +4,18 @@
 		color_skills,
 		color_stroke_treemap,
 		color_title_text,
-		color_title_text_bground		
+		color_title_text_bground
 	} from '../shared/colours';
 	import {
-		titleHeight, 
-		yScale_t 
+		titleHeight,
+		yScale_t
 	} from '../shared/geometry';
 	import {
 		_width_container_title,
 		_xScale_t
 	} from '../stores';
 	import {
-		treemap, 
+		treemap,
 		hierarchy,
 		treemapSquarify
 	} from 'd3-hierarchy'
@@ -50,13 +50,14 @@
 	$: subtitle_text = isSmall ? ['Open and free', 'insights on UK', 'skill demands'] : ['Open and free insights on UK skill demands'];
 	$: date_text = [monthStart+' to '+monthEnd+', '+year]
 	$: root = treemap()
-	    .tile(treemapSquarify)
-	    .size([width, titleHeight])
-	    .padding(1)
-	    .round(true)
-	  	(hierarchy(data.skills_taxonomy)
-	      .sum(d => d.value)
-	      .sort((a, b) => b.value - a.value))
+		.tile(treemapSquarify)
+		.size([width, titleHeight])
+		.padding(1)
+		.round(true)(
+			hierarchy(data.skills_taxonomy)
+			.sum(d => d.value)
+			.sort((a, b) => b.value - a.value)
+		)
 
 </script>
 
@@ -67,7 +68,7 @@
 
 				<!-- Treemap -->
 				{#each root.leaves() as d,i}
-					<g 
+					<g
 						class='treemap_group'
 						transform=translate({d.x0},{d.y0})
 					>
@@ -110,7 +111,7 @@
 						rx='4px'
 						ry='4px'
 						opacity=0.95
-					/>				
+					/>
 					<!-- Sits behind subtitle -->
 					<rect
 						class='subtitle_bground_rect'
@@ -162,7 +163,7 @@
 				{/each}
 
 				<!-- Date -->
-				{#each date_text as d,i}				
+				{#each date_text as d,i}
 					<text
 						class='date_text'
 						fill={color_title_text}
