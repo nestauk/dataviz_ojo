@@ -192,6 +192,7 @@
 		font-size: 18px;
 		text-anchor: start;
 	}
+
 	/* Larger than 980px */
 	@media only screen and (min-width: 980px) {
 		.title_text {

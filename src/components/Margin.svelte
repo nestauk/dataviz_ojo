@@ -142,7 +142,7 @@
 		fill: none;
 	}
 
-	.skills_text_bground, .skills_text {
+	.skills_text {
 		font-size: 10px;
 		font-weight: bold;
 		text-anchor: middle;

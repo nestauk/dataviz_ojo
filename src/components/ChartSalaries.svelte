@@ -29,12 +29,12 @@
 	// -5 and +3 to give extra space
 	let lowest_salary = Math.min.apply(
 		Math,
-		data.salaries.map(function(d,i) { return d.salaries.lower_bound.lower_q })
+		data.salaries.map(d => d.salaries.lower_bound.lower_q)
 	)
 	let lowest_salary_shown = Math.min(salary_rings[0],lowest_salary)-5
 	let highest_salary = Math.max.apply(
 		Math,
-		data.salaries.map(function(d,i) { return d.salaries.upper_bound.upper_q })
+		data.salaries.map(d => d.salaries.upper_bound.upper_q)
 	)
 	let highest_salary_shown = Math.max(
 		highest_salary,

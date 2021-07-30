@@ -124,26 +124,40 @@
 		background-color: {$_tooltip.background_color};
 	"
 >
-	<p class='line1_bground'><span class="line1_text">{$_tooltip.name}</span></p>
-	<p class='line2_bground'><span class="line2_text">Mix of all skills mentioned:</span></p>
-	<p class='line3_bground'
-		style="background-color:{$_tooltip.background_1}">
+	<p class='line1_bground'>
+		<span class="line1_text">{$_tooltip.name}</span>
+	</p>
+	<p class='line2_bground'>
+		<span class="line2_text">Mix of all skills mentioned:</span>
+	</p>
+	<p
+		class='line3_bground'
+		style="background-color:{$_tooltip.background_1}"
+	>
 		<span class="line3_text">{$_tooltip.data_1}</span>
 	</p>
-	<p class='line4_bground'
-		style="background-color:{$_tooltip.background_2}">
+	<p
+		class='line4_bground'
+		style="background-color:{$_tooltip.background_2}"
+	>
 		<span class="line4_text">{$_tooltip.data_2}</span>
 	</p>
-	<p class='line5_bground'
-		style="background-color:{$_tooltip.background_3}">
+	<p
+		class='line5_bground'
+		style="background-color:{$_tooltip.background_3}"
+	>
 		<span class="line5_text">{$_tooltip.data_3}</span>
 	</p>
-	<p class='line6_bground'
-		style="background-color:{$_tooltip.background_4}">
+	<p
+		class='line6_bground'
+		style="background-color:{$_tooltip.background_4}"
+	>
 		<span class="line6_text">{$_tooltip.data_4}</span>
 	</p>
-	<p class='line7_bground'
-		style="background-color:{$_tooltip.background_5}">
+	<p
+		class='line7_bground'
+		style="background-color:{$_tooltip.background_5}"
+	>
 		<span class="line7_text">{$_tooltip.data_5}</span>
 	</p>
 </div>

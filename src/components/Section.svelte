@@ -2,7 +2,6 @@
 <script>
 	export let title = 'Heading goes here';
 	export let paragraphs = [];
-	export let question = null;
 </script>
 
 <div class='text_content'>
@@ -25,20 +24,6 @@
 	.text_content p {
 		margin-bottom: 28px
 	}
-
-	/* .text_content a:link {
-		text-decoration: none;
-	}
-
-	.text_content a {
-		color: #FF0041;
-		cursor: pointer;
-		transition: 0.3s;
-	}
-
-	.text_content a:hover {
-		color: #231F20;
-	} */
 
 	h2 {
 		font-family: 'AvertaBold', sans-serif;
