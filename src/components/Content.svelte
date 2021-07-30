@@ -18,54 +18,54 @@
 	} from '../stores';
 
 	const introParagraphs = [
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
-		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
-		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
-		`ea commodo consequat.`
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+		ea commodo consequat.`
 	];
 	const locationParagraphs = [
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
-		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
-		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
-		`ea commodo consequat.`
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+		ea commodo consequat.`
 	];
 	const notesParagraphs = [
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
-		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
-		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
-		`ea commodo consequat.`
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+		ea commodo consequat.`
 	];
 	const occupationsParagraphs = [
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
-		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
-		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
-		`ea commodo consequat.`
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+		ea commodo consequat.`
 	];
 	const occupationsNotesParagraphs = [
-		`This is a short note that goes beneath each chart, giving more detail. `
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
-		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
-		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
-		`ea commodo consequat.`
+		`This is a short note that goes beneath each chart, giving more detail.
+		Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+		ea commodo consequat.`
 	];
 	const salariesParagraphs = [
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
-		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
-		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
-		`ea commodo consequat.`
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+		ea commodo consequat.`
 	];
 	const salariesNotesParagraphs = [
-		`This is a short note that goes beneath each chart, giving more detail. `
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
-		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
-		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
-		`ea commodo consequat.`
+		`This is a short note that goes beneath each chart, giving more detail.
+		Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+		ea commodo consequat.`
 	];
 	const finalSectionParagraphs = [
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
-		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
-		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
-		`ea commodo consequat.`
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+		ea commodo consequat.`
 	];
 </script>
 
