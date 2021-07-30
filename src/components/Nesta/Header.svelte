@@ -1,13 +1,21 @@
-<div class="container_logo">
-	<div class="logo">
-		<a href="https://www.nesta.org.uk/">
-			<img src="../../../assets/img/Nesta_Horizontal_Logo_RGB_nobubbles.png" alt="Nesta">
+<script>
+	import nestaLogo
+		from '../../../assets/img/Nesta_Horizontal_Logo_RGB_nobubbles.png';
+</script>
+
+<div class='Header'>
+	<div class='logo'>
+		<a href='https://www.nesta.org.uk/'>
+			<img
+				alt='Nesta'
+				src={nestaLogo}
+			/>
 		</a>
 	</div>
 </div>
 
 <style>
-	.container_logo {
+	.Header {
 		margin: 0px auto;
 		max-width: 1380px;
 		width: 100%;
@@ -27,7 +35,7 @@
 
 	/* Larger than 800px */
 	@media only screen and (min-width: 800px) {
-		.container_logo {
+		.Header {
 			height: 70px;
 			padding-left: 60px;
 		}
