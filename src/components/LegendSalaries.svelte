@@ -100,8 +100,8 @@
 						class='salary_legend_lines'
 						stroke={color_salary_names}
 						stroke-width={thinStroke}
-						d="M {$_xScale(x_text_start-1)},{yScaleLeg(d)} L
-						{$_xScale(x_text_start+2.5)},{yScaleLeg(d)}"
+						d='M {$_xScale(x_text_start-1)},{yScaleLeg(d)} L
+						{$_xScale(x_text_start+2.5)},{yScaleLeg(d)}'
 					/>
 
 					<text

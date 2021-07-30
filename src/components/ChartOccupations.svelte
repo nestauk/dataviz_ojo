@@ -52,9 +52,9 @@
 		// If demand for skill is >1%
 		if (d.value>1) {
 			// Round to nearest integer
-			return d.target.name+": "+Math.round(d.value)+'%'
+			return d.target.name+': '+Math.round(d.value)+'%'
 		} else {
-			return d.target.name+": <1%"
+			return d.target.name+': <1%'
 		}
 	}
 
@@ -103,49 +103,49 @@
 </script>
 
 <div
-	class="tooltip"
+	class='tooltip'
 	class:hidden={!$_tooltip.isVisible}
-	style="
+	style='
 		left:{$_tooltip.left_margin};
 		top: {$_tooltip.top_margin};
 		background-color: {$_tooltip.background_color};
-	"
+	'
 >
 	<p class='line1_bground'>
-		<span class="line1_text">{$_tooltip.name}</span>
+		<span class='line1_text'>{$_tooltip.name}</span>
 	</p>
 	<p class='line2_bground'>
-		<span class="line2_text">Mix of all skills mentioned:</span>
+		<span class='line2_text'>Mix of all skills mentioned:</span>
 	</p>
 	<p
 		class='line3_bground'
-		style="background-color:{$_tooltip.background_1}"
+		style='background-color:{$_tooltip.background_1}'
 	>
-		<span class="line3_text">{$_tooltip.data_1}</span>
+		<span class='line3_text'>{$_tooltip.data_1}</span>
 	</p>
 	<p
 		class='line4_bground'
-		style="background-color:{$_tooltip.background_2}"
+		style='background-color:{$_tooltip.background_2}'
 	>
-		<span class="line4_text">{$_tooltip.data_2}</span>
+		<span class='line4_text'>{$_tooltip.data_2}</span>
 	</p>
 	<p
 		class='line5_bground'
-		style="background-color:{$_tooltip.background_3}"
+		style='background-color:{$_tooltip.background_3}'
 	>
-		<span class="line5_text">{$_tooltip.data_3}</span>
+		<span class='line5_text'>{$_tooltip.data_3}</span>
 	</p>
 	<p
 		class='line6_bground'
-		style="background-color:{$_tooltip.background_4}"
+		style='background-color:{$_tooltip.background_4}'
 	>
-		<span class="line6_text">{$_tooltip.data_4}</span>
+		<span class='line6_text'>{$_tooltip.data_4}</span>
 	</p>
 	<p
 		class='line7_bground'
-		style="background-color:{$_tooltip.background_5}"
+		style='background-color:{$_tooltip.background_5}'
 	>
-		<span class="line7_text">{$_tooltip.data_5}</span>
+		<span class='line7_text'>{$_tooltip.data_5}</span>
 	</p>
 </div>
 
@@ -230,7 +230,7 @@
 		position: absolute;
 		padding: 5px;
 		pointer-events: none;
-		font-family: "AvertaRegular", Helvetica, sans-serif;
+		font-family: 'AvertaRegular', Helvetica, sans-serif;
 		border-radius: 3px;
 		z-index: 6;
 		border: 3px solid #FFF

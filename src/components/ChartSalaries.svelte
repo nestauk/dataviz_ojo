@@ -105,19 +105,20 @@
 
 </script>
 
-<div class="tooltip"
+<div
+	class='tooltip'
 	class:hidden={!$_tooltip.isVisible}
-	style="
+	style='
 		left:{$_tooltip.left_margin};
 		top: {$_tooltip.top_margin};
 		background-color: {$_tooltip.background_color};
 		color: {$_tooltip.text_color};
-	"
+	'
 >
-	<p><span class="line1_text">{$_tooltip.name}</span></p>
-	<p><span class="line2_text">Annualised salary ranges (MIN - MAX):</span></p>
-	<p><span class="line3_text">{$_tooltip.data_1}</span></p>
-	<p><span class="line4_text">{$_tooltip.data_2}</span></p>
+	<p><span class='line1_text'>{$_tooltip.name}</span></p>
+	<p><span class='line2_text'>Annualised salary ranges (MIN - MAX):</span></p>
+	<p><span class='line3_text'>{$_tooltip.data_1}</span></p>
+	<p><span class='line4_text'>{$_tooltip.data_2}</span></p>
 </div>
 
 <div class='div_background'>
@@ -419,7 +420,7 @@
 		position: absolute;
 		padding: 5px;
 		pointer-events: none;
-		font-family: "AvertaRegular", Helvetica, sans-serif;
+		font-family: 'AvertaRegular', Helvetica, sans-serif;
 		border-radius: 3px;
 		z-index: 6;
 		border: 3px solid #FFF

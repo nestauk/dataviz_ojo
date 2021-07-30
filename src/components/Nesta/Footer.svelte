@@ -9,18 +9,36 @@
 			<div class='footer-links'>
 				<div class='footer-links__container'>
 					<div class='footer-link-item'>
-						<a class='footer-link-item__link' href='https://www.nesta.org.uk/press/'
-								target='_parent'>Press</a> <slot></slot>
-						<a class='footer-link-item__link' href='https://www.nesta.org.uk/jobs/'
-								target='_parent'>Jobs</a> <slot></slot>
-						<a class='footer-link-item__link' href='https://www.nesta.org.uk/privacy/'
-								target='_parent'>Privacy</a> <slot></slot>
-						<a class='footer-link-item__link' href='https://www.nesta.org.uk/cookies/'
-								target='_parent'>Cookies</a> <slot></slot>
-						<a class='footer-link-item__link' href='https://www.nesta.org.uk/terms-use/'
-								target='_parent'>Terms of use</a> <slot></slot>
-						<a class='footer-link-item__link' href='https://www.nesta.org.uk/contact-us/'
-								target='_parent'>Contact us</a> <slot></slot>
+						<a
+							class='footer-link-item__link'
+							href='https://www.nesta.org.uk/press/'
+							target='_parent'
+						>Press</a>
+						<a
+							class='footer-link-item__link'
+							href='https://www.nesta.org.uk/jobs/'
+							target='_parent'
+						>Jobs</a>
+						<a
+							class='footer-link-item__link'
+							href='https://www.nesta.org.uk/privacy/'
+							target='_parent'
+						>Privacy</a>
+						<a
+							class='footer-link-item__link'
+							href='https://www.nesta.org.uk/cookies/'
+							target='_parent'
+						>Cookies</a>
+						<a
+							class='footer-link-item__link'
+							href='https://www.nesta.org.uk/terms-use/'
+							target='_parent'
+						>Terms of use</a>
+						<a
+							class='footer-link-item__link'
+							href='https://www.nesta.org.uk/contact-us/'
+							target='_parent'
+						>Contact us</a>
 					</div>
 				</div>
 			</div>
