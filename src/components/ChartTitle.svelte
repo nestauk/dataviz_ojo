@@ -6,14 +6,8 @@
 		color_title_text,
 		color_title_text_bground
 	} from '../shared/colours';
-	import {
-		titleHeight,
-		yScale_t
-	} from '../shared/geometry';
-	import {
-		_width_container_title,
-		_xScale_t
-	} from '../stores';
+	import {titleHeight, yScale_t} from '../shared/geometry';
+	import {_widthContainerTitle, _xScaleT} from '../stores';
 	import {
 		treemap,
 		hierarchy,
@@ -21,6 +15,7 @@
 	} from 'd3-hierarchy'
 
 	/* consts */
+
 	const smallWidth = 980
 	const month = [
 		'January',
@@ -43,10 +38,11 @@
 	const year= splitDateEnd[2]
 
 	/* reactive vars */
-	$: width = $_width_container_title;
+
+	$: width = $_widthContainerTitle;
 	$: height = titleHeight;
 	$: isSmall = width < smallWidth;
-	$: thinStroke = $_xScale_t(0.2);
+	$: thinStroke = $_xScaleT(0.2);
 	$: title_text = isSmall
 		? ['The Open', 'Jobs', 'Observatory']
 		: ['The Open Jobs Observatory'];
@@ -63,7 +59,6 @@
 			.sum(d => d.value)
 			.sort((a, b) => b.value - a.value)
 		)
-
 </script>
 
 <div>

@@ -11,10 +11,10 @@
 	import Notes from './Notes.svelte';
 
 	import {
-		_height_container_parent,
-		_width_container_parent,
-		_width_margin,
-		_height_container_text
+		_heightContainerParent,
+		_heightContainerText,
+		_widthContainerParent,
+		_widthMargin,
 	} from '../stores';
 
 	const introParagraphs = [
@@ -70,20 +70,20 @@
 </script>
 
 <div
-	bind:clientHeight={$_height_container_parent}
-	bind:clientWidth={$_width_container_parent}
+	bind:clientHeight={$_heightContainerParent}
+	bind:clientWidth={$_widthContainerParent}
 	class='container_parent'
 >
 
 	<div
 		class='container_left_col'
-		bind:clientWidth={$_width_margin}
+		bind:clientWidth={$_widthMargin}
 	>
 		<Margin />
 	</div>
 
 	<div
-		bind:clientHeight={$_height_container_text}
+		bind:clientHeight={$_heightContainerText}
 		class='container_text'
 	>
 		<Intro paragraphs={introParagraphs} />

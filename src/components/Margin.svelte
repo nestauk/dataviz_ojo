@@ -1,7 +1,5 @@
 <script>
-	import {
-		scaleLinear
-	} from 'd3-scale';
+	import {scaleLinear} from 'd3-scale';
 	import data from '../../data/data.json';
 	import {
 		color_skills_names,
@@ -9,9 +7,9 @@
 		color_legend_bground
 	} from '../shared/colours';
 	import {
-		_margin_m,
-		_width_m,
-		_height_m,
+		_marginM,
+		_widthM,
+		_heightM,
 	} from '../stores';
 
 
@@ -47,13 +45,13 @@
 	$: _xScale_m =
 		scaleLinear()
 		.domain([0, yMax])
-		.range([0, $_width_m]);
+		.range([0, $_widthM]);
 	$: _yScale_m =
 		scaleLinear()
 		.domain([0, 100])
-		.range([$_height_m, 0]);
-	$: width = $_width_m + $_margin_m.left + $_margin_m.right;
-	$: height = $_height_m + $_margin_m.top + $_margin_m.bottom;
+		.range([$_heightM, 0]);
+	$: width = $_widthM + $_marginM.left + $_marginM.right;
+	$: height = $_heightM + $_marginM.top + $_marginM.bottom;
 	$: r = _xScale_m(radius_circles);
 	$: cx = _xScale_m(50);
 	$: makeArc = index => {
@@ -68,7 +66,7 @@
 <div class='div_background'>
 	{#if width && height}
 		<svg {width} {height}>
-			<g transform='translate({$_margin_m.left},{$_margin_m.top})'>
+			<g transform='translate({$_marginM.left},{$_marginM.top})'>
 
 				<!-- Background colour -->
 					<rect

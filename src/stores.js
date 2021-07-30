@@ -2,19 +2,19 @@ import {scaleLinear} from 'd3-scale';
 import {derived, writable} from 'svelte/store';
 import {xMax, xMin} from './shared/geometry';
 
+export const _heightContainerParent = writable();
+export const _heightContainerText = writable();
+export const _heightContainerTitle = writable();
 export const _innerWidth = writable();
-export const _height_container_title = writable();
-export const _width_container_title = writable();
-export const _height_container_parent = writable();
-export const _width_container_parent = writable();
-export const _width_margin = writable();
-export const _height_container_text = writable();
+export const _widthContainerParent = writable();
+export const _widthContainerTitle = writable();
+export const _widthMargin = writable();
 
 // Size of charts
 export const _bodyWidth = derived(
-	([_innerWidth, _width_container_parent]),
-	([innerWidth, width_container_parent]) =>
-		width_container_parent >= 1380
+	([_innerWidth, _widthContainerParent]),
+	([innerWidth, widthContainerParent]) =>
+		widthContainerParent >= 1380
 			? 1380 * 0.85
 			: innerWidth >= 1250
 				? innerWidth * 0.835 * 0.85
@@ -33,28 +33,27 @@ export const _margin = derived(
 
 
 // Size of left-hand margin
-export const _bodyWidth_m = derived(
-	([_innerWidth, _width_container_parent]),
-	([innerWidth, width_container_parent]) =>
-		width_container_parent >= 1380
+export const _bodyWidthM = derived(
+	([_innerWidth, _widthContainerParent]),
+	([innerWidth, widthContainerParent]) =>
+		widthContainerParent >= 1380
 			? 1380 * 0.15
 			: innerWidth >= 1250
 				? innerWidth * 0.835 * 0.15
 				: 0
 );
-export const _bodyHeight_m = derived(_height_container_text, hct => hct)
-export const _width_m = derived(_bodyWidth_m, bw => bw * 0.85)
-export const _height_m = derived(_bodyHeight_m, bh => bh * 0.975);
-export const _margin_m = derived(
-	[_bodyHeight_m, _height_m, _bodyWidth_m, _width_m],
-	([bodyHeight_m, height_m, bodyWidth_m, width_m]) => ({
-		top: (bodyHeight_m-height_m)/2,
-		right: (bodyWidth_m - width_m) / 2,
-		bottom: (bodyHeight_m-height_m)/2,
-		left: (bodyWidth_m - width_m) / 2
+export const _bodyHeightM = derived(_heightContainerText, hct => hct)
+export const _widthM = derived(_bodyWidthM, bw => bw * 0.85)
+export const _heightM = derived(_bodyHeightM, bh => bh * 0.975);
+export const _marginM = derived(
+	[_bodyHeightM, _heightM, _bodyWidthM, _widthM],
+	([bodyHeightM, heightM, bodyWidthM, widthM]) => ({
+		top: (bodyHeightM-heightM)/2,
+		right: (bodyWidthM - widthM) / 2,
+		bottom: (bodyHeightM-heightM)/2,
+		left: (bodyWidthM - widthM) / 2
 	})
 );
-
 
 
 // X scales for charts
@@ -64,13 +63,13 @@ export const _xScale = derived(
 )
 
 // X scale for salaries
-export const _xScale_s = derived(
+export const _xScaleS = derived(
 	_width,
 	width => scaleLinear().domain([xMin, xMax]).range([0, width])
 )
 
 // X scale for title
-export const _xScale_t = derived(
-	_width_container_title,
+export const _xScaleT = derived(
+	_widthContainerTitle,
 	width => scaleLinear().domain([xMin, xMax]).range([0, width])
 )

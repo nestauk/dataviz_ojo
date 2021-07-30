@@ -6,19 +6,14 @@
 		color_skills,
 		color_tooltip_bground
 	} from '../shared/colours';
-	import {
-		chartsHeight,
-		yScale
-	} from '../shared/geometry';
+	import {chartsHeight, yScale} from '../shared/geometry';
 	import {
 		_height,
 		_margin,
 		_width,
 		_xScale,
 	} from '../stores';
-	import {
-		writable
-	} from 'svelte/store';
+	import {writable} from 'svelte/store';
 
 	/* consts */
 

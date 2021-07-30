@@ -1,7 +1,5 @@
 <script>
-	import {
-		scaleLinear
-	} from 'd3-scale';
+	import {scaleLinear} from 'd3-scale';
 	import {
 		color_nuts2_names_bground,
 		color_nuts2_names,

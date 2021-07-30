@@ -1,14 +1,14 @@
 <script>
 	import ChartTitle from './ChartTitle.svelte';
 	import {
-		_height_container_title,
-		_width_container_title,
+		_heightContainerTitle,
+		_widthContainerTitle,
 	} from '../stores';
 </script>
 
 <div
-	bind:clientHeight={$_height_container_title}
-	bind:clientWidth={$_width_container_title}
+	bind:clientHeight={$_heightContainerTitle}
+	bind:clientWidth={$_widthContainerTitle}
 	class='container_title'
 >
 	<ChartTitle/>

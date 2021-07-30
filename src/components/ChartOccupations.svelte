@@ -7,21 +7,14 @@
 		color_skills,
 		color_tooltip_bground
 	} from '../shared/colours';
-	import {
-		chartsHeight,
-	} from '../shared/geometry';
+	import {chartsHeight} from '../shared/geometry';
 	import {
 		_margin,
 		_width,
 		_xScale,
 	} from '../stores';
-	import {
-		sankey,
-		sankeyLinkHorizontal,
-	} from 'd3-sankey';
-	import {
-		writable
-	} from 'svelte/store';
+	import {sankey, sankeyLinkHorizontal} from 'd3-sankey';
+	import {writable} from 'svelte/store';
 
 
 	/* consts */

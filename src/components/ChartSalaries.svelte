@@ -11,7 +11,7 @@
 	import {
 		_margin,
 		_width,
-		_xScale_s,
+		_xScaleS,
 	} from '../stores';
 	import {scaleLinear} from 'd3-scale';
 	import {writable} from 'svelte/store';
@@ -65,7 +65,7 @@
 		const data_1_input = d.salaries.lower_bound.median
 		const data_2_input = d.salaries.upper_bound.median
 
-		const left = $_xScale_s(50)+yScale_s(d.salaries.lower_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))
+		const left = $_xScaleS(50)+yScale_s(d.salaries.lower_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))
 		const top = event.pageY-400
 
 		const text_color = (d.broad_skill_group==color_skills.domain()[2] || d.broad_skill_group==color_skills.domain()[4] || d.broad_skill_group==color_skills.domain()[3]) ? '#000000' : '#FFFFFF'
@@ -116,8 +116,8 @@
 						fill='transparent'
 						stroke={color_salary_rings}
 						stroke-dasharray='5,5'
-						cx={$_xScale_s(50)}
-						cy={$_xScale_s(50)}
+						cx={$_xScaleS(50)}
+						cy={$_xScaleS(50)}
 						r={yScale_s(d)}
 						stroke-width={thinStroke}
 					/>
@@ -131,8 +131,8 @@
 						fill={color_salary_axis_bground}
 						stroke-width={thickStroke}
 						stroke={color_salary_axis_bground}
-						x={($_xScale_s(50)+yScale_s(d)*Math.cos((1.5*Math.PI)))}
-						y={($_xScale_s(50)+yScale_s(d)*Math.sin((1.5*Math.PI)))}
+						x={($_xScaleS(50)+yScale_s(d)*Math.cos((1.5*Math.PI)))}
+						y={($_xScaleS(50)+yScale_s(d)*Math.sin((1.5*Math.PI)))}
 					>
 						{(i==salary_rings.length-1 || i==0) ? '£'+d+'k per annum'.toUpperCase() : '£'+d+'k'.toUpperCase()}
 					</text>
@@ -141,8 +141,8 @@
 					<text
 						class='salary_rings_text'
 						fill={color_salary_axis}
-						x={($_xScale_s(50)+yScale_s(d)*Math.cos((1.5*Math.PI)))}
-						y={($_xScale_s(50)+yScale_s(d)*Math.sin((1.5*Math.PI)))}
+						x={($_xScaleS(50)+yScale_s(d)*Math.cos((1.5*Math.PI)))}
+						y={($_xScaleS(50)+yScale_s(d)*Math.sin((1.5*Math.PI)))}
 					>
 						{(i==salary_rings.length-1 || i==0) ? '£'+d+'k per annum'.toUpperCase() : '£'+d+'k'.toUpperCase()}
 					</text>
@@ -158,8 +158,8 @@
 						rx='2px'
 						ry='2px'
 						width={yScale_s(lowest_salary_shown+d.salaries.lower_bound.median-d.salaries.lower_bound.lower_q)}
-						height={$_xScale_s(1.5)}
-						transform = translate({$_xScale_s(50)+yScale_s(d.salaries.lower_bound.lower_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.lower_bound.lower_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
+						height={$_xScaleS(1.5)}
+						transform = translate({$_xScaleS(50)+yScale_s(d.salaries.lower_bound.lower_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScaleS(50)+yScale_s(d.salaries.lower_bound.lower_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
 						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
 						on:mouseout = {onMouseout}
 					/>
@@ -170,8 +170,8 @@
 						rx='2px'
 						ry='2px'
 						width={yScale_s(lowest_salary_shown+d.salaries.upper_bound.median-d.salaries.lower_bound.median)}
-						height={$_xScale_s(1.5)}
-						transform = translate({$_xScale_s(50)+yScale_s(d.salaries.lower_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.lower_bound.median)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
+						height={$_xScaleS(1.5)}
+						transform = translate({$_xScaleS(50)+yScale_s(d.salaries.lower_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScaleS(50)+yScale_s(d.salaries.lower_bound.median)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
 						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
 						on:mouseout = {onMouseout}
 					/>
@@ -182,8 +182,8 @@
 						rx='2px'
 						ry='2px'
 						width={yScale_s(lowest_salary_shown+d.salaries.upper_bound.upper_q-d.salaries.upper_bound.median)}
-						height={$_xScale_s(1.5)}
-						transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.median)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
+						height={$_xScaleS(1.5)}
+						transform = translate({$_xScaleS(50)+yScale_s(d.salaries.upper_bound.median)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScaleS(50)+yScale_s(d.salaries.upper_bound.median)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
 						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
 						on:mouseout = {onMouseout}
 					/>
@@ -203,7 +203,7 @@
 							fill={color_salary_names_bground}
 							stroke={color_salary_names_bground}
 							stroke-width={thickStroke}
-							transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries)-180)})
+							transform = translate({$_xScaleS(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScaleS(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries)-180)})
 							dy='0.2em'
 							text-anchor='start'
 							opacity={(width<550) ? 0 : (i%5==0) ? 1 : 0}
@@ -215,7 +215,7 @@
 						<text
 							class='salary_skills_name'
 							fill={color_salary_names}
-							transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries)-180)})
+							transform = translate({$_xScaleS(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScaleS(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries)-180)})
 							dy='0.2em'
 							text-anchor='start'
 							opacity={(width<550) ? 0 : (i%5==0) ? 1 : 0}
@@ -232,7 +232,7 @@
 							fill={color_salary_names_bground}
 							stroke={color_salary_names_bground}
 							stroke-width={thickStroke}
-							transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
+							transform = translate({$_xScaleS(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScaleS(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
 							dy='1.5em'
 							text-anchor='end'
 							opacity={(width<550) ? 0 : (i%5==0) ? 1 : 0}
@@ -244,7 +244,7 @@
 						<text
 							class='salary_skills_name'
 							fill={color_salary_names}
-							transform = translate({$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScale_s(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
+							transform = translate({$_xScaleS(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))},{$_xScaleS(50)+yScale_s(d.salaries.upper_bound.upper_q)*Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))})rotate({(360*((d.index-rotate_adj)/no_salaries))})
 							dy='1.5em'
 							text-anchor='end'
 							opacity={(width<550) ? 0 : (i%5==0) ? 1 : 0}

@@ -1,9 +1,6 @@
 <script>
+	import {scaleLinear} from 'd3-scale';
 	import {
-		scaleLinear
-	} from 'd3-scale';
-	import {
-		color_salary_names_bground,
 		color_salary_names,
 		color_skills,
 		color_legend_bground
@@ -15,6 +12,7 @@
 	} from '../stores';
 
 	/* consts */
+
 	const legendsHeight = 170
 	const yScaleLeg =
 		scaleLinear()
@@ -36,13 +34,12 @@
 	]
 
 	/* reactive vars */
+
 	$: width = $_width + $_margin.left + $_margin.right;
 	$: height = legendsHeight + $_margin.top + $_margin.bottom;
 	$: isSmall = width < small_width;
 	$: x_text_start = isSmall ? 15 : 35
 	$: thinStroke = $_xScale(0.1);
-
-
 </script>
 
 <div class='div_background'>
@@ -125,7 +122,6 @@
 </div>
 
 <style>
-
 	.div_background {
 		line-height: 0px;
 	}
