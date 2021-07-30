@@ -68,7 +68,6 @@
 	$: noXpos = isSmall ? no_x_pos_small : no_x_pos;
 	$: noYpos = isSmall ? no_y_pos_small : no_y_pos;
 
-
 	/* mouseovers */
 
 	// Format text for mouseovers

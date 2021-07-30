@@ -22,19 +22,20 @@
 
 	/* consts */
 	const smallWidth = 980
-	const month = new Array();
-	month[0] = "January";
-	month[1] = "February";
-	month[2] = "March";
-	month[3] = "April";
-	month[4] = "May";
-	month[5] = "June";
-	month[6] = "July";
-	month[7] = "August";
-	month[8] = "September";
-	month[9] = "October";
-	month[10] = "November";
-	month[11] = "December";
+	const month = [
+		'January',
+		'February',
+		'March',
+		'April',
+		'May',
+		'June',
+		'July',
+		'August',
+		'September',
+		'October',
+		'November',
+		'December',
+];
 	const splitDateStart = data.metadata.date_start.split('/');
 	const monthStart = month[splitDateStart[1] - 1];
 	const splitDateEnd = data.metadata.date_end.split('/');
@@ -46,8 +47,12 @@
 	$: height = titleHeight;
 	$: isSmall = width < smallWidth;
 	$: thinStroke = $_xScale_t(0.2);
-	$: title_text = isSmall ? ['The Open', 'Jobs', 'Observatory'] : ['The Open Jobs Observatory'];
-	$: subtitle_text = isSmall ? ['Open and free', 'insights on UK', 'skill demands'] : ['Open and free insights on UK skill demands'];
+	$: title_text = isSmall
+		? ['The Open', 'Jobs', 'Observatory']
+		: ['The Open Jobs Observatory'];
+	$: subtitle_text = isSmall
+		? ['Open and free', 'insights on UK', 'skill demands']
+		: ['Open and free insights on UK skill demands'];
 	$: date_text = [monthStart+' to '+monthEnd+', '+year]
 	$: root = treemap()
 		.tile(treemapSquarify)
@@ -180,25 +185,25 @@
 </div>
 
 <style>
-.title_text, .title_text_bground {
-	font-size: 46.2222px;
-	text-anchor: start;
-}
-.subtitle_text, .subtitle_text_bground {
-	font-size: 23.111px;
-	text-anchor: start;
-}
-.date_text, .date_text_bground {
-	font-size: 18px;
-	text-anchor: start;
-}
-/* Larger than 980px */
-@media only screen and (min-width: 980px) {
-	.title_text, .title_text_bground {
-		font-size: 72.889px;
+	.title_text {
+		font-size: 46.2222px;
+		text-anchor: start;
 	}
-	.subtitle_text, .subtitle_text_bground {
-		font-size: 33.7778px;
+	.subtitle_text {
+		font-size: 23.111px;
+		text-anchor: start;
 	}
-}
+	.date_text {
+		font-size: 18px;
+		text-anchor: start;
+	}
+	/* Larger than 980px */
+	@media only screen and (min-width: 980px) {
+		.title_text {
+			font-size: 72.889px;
+		}
+		.subtitle_text {
+			font-size: 33.7778px;
+		}
+	}
 </style>

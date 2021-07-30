@@ -16,6 +16,57 @@
 		_width_margin,
 		_height_container_text
 	} from '../stores';
+
+	const introParagraphs = [
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
+		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
+		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
+		`ea commodo consequat.`
+	];
+	const locationParagraphs = [
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
+		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
+		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
+		`ea commodo consequat.`
+	];
+	const notesParagraphs = [
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
+		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
+		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
+		`ea commodo consequat.`
+	];
+	const occupationsParagraphs = [
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
+		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
+		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
+		`ea commodo consequat.`
+	];
+	const occupationsNotesParagraphs = [
+		`This is a short note that goes beneath each chart, giving more detail. `
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
+		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
+		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
+		`ea commodo consequat.`
+	];
+	const salariesParagraphs = [
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
+		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
+		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
+		`ea commodo consequat.`
+	];
+	const salariesNotesParagraphs = [
+		`This is a short note that goes beneath each chart, giving more detail. `
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
+		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
+		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
+		`ea commodo consequat.`
+	];
+	const finalSectionParagraphs = [
+		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod `
+		`tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim `
+		`veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex `
+		`ea commodo consequat.`
+	];
 </script>
 
 <div
@@ -35,66 +86,42 @@
 		bind:clientHeight={$_height_container_text}
 		class='container_text'
 	>
-		<Intro
-			paragraphs={[
-				'Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-			]}
-		/>
+		<Intro paragraphs={introParagraphs} />
 
 		<!-- locations -->
 		<Section
 			title='Heading goes here'
-			paragraphs={[
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-			]}
+			paragraphs={locationParagraphs}
 		/>
 		<h2>How do skill demands vary across the UK?</h2>
 		<LegendLocations />
 		<ChartLocations />
-		<Notes
-			paragraphs={[
-				'This is a short note that goes beneath each chart, giving more detail. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-			]}
-		/>
+		<Notes paragraphs={notesParagraphs}/>
 
 		<!-- occupations -->
 		<Section
 			title='Heading goes here'
-			paragraphs={[
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariaturß. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-			]}
+			paragraphs={occupationsParagraphs}
 		/>
 		<h2>Which skills are required in the most advertised occupations?</h2>
 		<LegendOccupations />
 		<ChartOccupations />
-		<Notes
-			paragraphs={[
-			'This is a short note that goes beneath each chart, giving more detail. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-			]}
-		/>
+		<Notes paragraphs={occupationsNotesParagraphs}/>
 
 		<!-- salaries -->
 		<Section
 			title='Heading goes here'
-			paragraphs={[
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-			]}
+			paragraphs={salariesParagraphs}
 		/>
 		<h2>What salaries are associated with the most in-demand skills?</h2>
 		<LegendSalaries />
 		<ChartSalaries />
-		<Notes
-			paragraphs={[
-			'This is a short note that goes beneath each chart, giving more detail. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-			]}
-		/>
+		<Notes paragraphs={salariesNotesParagraphs} />
 
 		<!-- section -->
 		<Section
 			title='Heading goes here'
-			paragraphs={[
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-			]}
+			paragraphs={finalSectionParagraphs}
 		/>
 
 	</div>
@@ -135,14 +162,6 @@
 		text-align: center;
 		padding: 0px 28px;
 	}
-
-	/* .container_text a {
-		color: #e61f47;
-	}
-
-	.container_text a:hover {
-		color: #231f20;
-	} */
 
 	/* Larger than 1250px */
 	@media only screen and (min-width: 1250px) {
