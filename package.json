@@ -5,12 +5,18 @@
 	},
 	"description": "The observatory contains insights from online job adverts, with a focus on the skills being requested by employers.",
 	"dependencies": {
+		"d3-hierarchy": "^3.0.1",
 		"d3-sankey": "^0.12.3",
 		"d3-scale": "^4.0.0",
 		"d3-selection": "^3.0.0"
 	},
 	"devDependencies": {
-		"parcel-bundler": "^1.12.3"
+		"@babel/core": "^7.14.6",
+		"@babel/polyfill": "^7.12.1",
+		"@babel/runtime": "^7.14.6",
+		"parcel-bundler": "^1.12.3",
+		"parcel-plugin-svelte": "^4.0.8",
+		"svelte": "^3.38.2"
 	},
 	"homepage": "https://github.com/nestauk/dataviz_ojo#readme",
 	"license": "MIT",
