@@ -14,8 +14,9 @@
 		"@babel/core": "^7.14.6",
 		"@babel/polyfill": "^7.12.1",
 		"@babel/runtime": "^7.14.6",
-		"parcel-bundler": "^1.12.3",
-		"parcel-plugin-svelte": "^4.0.8",
+		"@parcel/transformer-image": "^2.0.0-rc.0",
+		"parcel": "^2.0.0-rc.0",
+		"parcel-transformer-svelte": "saabi/parcel-transformer-svelte#patch-1",
 		"svelte": "^3.38.2"
 	},
 	"homepage": "https://github.com/nestauk/dataviz_ojo#readme",
