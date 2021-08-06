@@ -16,6 +16,7 @@
 		"@babel/runtime": "^7.14.6",
 		"parcel-bundler": "^1.12.3",
 		"parcel-plugin-svelte": "^4.0.8",
+		"rimraf": "^2.7.1",
 		"svelte": "^3.38.2"
 	},
 	"homepage": "https://github.com/nestauk/dataviz_ojo#readme",
@@ -27,6 +28,7 @@
 	},
 	"scripts": {
 		"build": "parcel build src/index.html",
+		"cleardist": "rimraf dist",
 		"dev": "parcel src/index.html"
 	},
 	"version": "0.0.1"

@@ -13,8 +13,8 @@
 	let isReady = false;
 
 	onMount(async () => {
-		// Force repopulating the DOM to bind event handlers 
-		// and resync state of element sizes
+		// Populate the DOM after mounting to 
+		// bind resize event handlers correctly.
 		isReady = true;
 	});
 </script>
