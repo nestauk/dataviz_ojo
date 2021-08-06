@@ -1,5 +1,5 @@
 <script>
-	import {onMount, tick} from 'svelte';
+	import {onMount} from 'svelte';
 
 	import Content from './Content.svelte';
 	import Footer from './Nesta/Footer.svelte';
@@ -10,13 +10,11 @@
 
 	import {_innerWidth} from '../stores';
 
-	let isReady = true;
+	let isReady = false;
 
 	onMount(async () => {
 		// Force repopulating the DOM to bind event handlers 
 		// and resync state of element sizes
-		isReady = false;
-		await tick();
 		isReady = true;
 	});
 </script>
