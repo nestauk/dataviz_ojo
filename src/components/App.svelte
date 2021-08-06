@@ -1,4 +1,5 @@
 <script>
+	import {GoogleAnalytics} from '@beyonk/svelte-google-analytics';
 	import {onMount} from 'svelte';
 
 	import Content from './Content.svelte';
@@ -6,14 +7,14 @@
 	import Header from './Nesta/Header.svelte';
 	import MetaTwitter from './MetaTwitter.svelte';
 	import Title from './Title.svelte';
-	// import Analytics from './Nesta/Analytics.svelte';
 
+	import {isRelease} from '../shared/env';
 	import {_innerWidth} from '../stores';
 
 	let isReady = false;
 
 	onMount(async () => {
-		// Populate the DOM after mounting to 
+		// Populate the DOM after mounting to
 		// bind resize event handlers correctly.
 		isReady = true;
 	});
@@ -30,5 +31,9 @@
 	<Title />
 	<Content />
 	<Footer />
-	<!-- <Analytics /> -->
 {/if}
+
+<GoogleAnalytics
+	enabled={isRelease}
+	properties={['UA-1360665-16']}
+/>
