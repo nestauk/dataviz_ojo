@@ -1,4 +1,6 @@
 <script>
+	import {onMount} from 'svelte';
+
 	import Content from './Content.svelte';
 	import Footer from './Nesta/Footer.svelte';
 	import Header from './Nesta/Header.svelte';
@@ -7,6 +9,14 @@
 	// import Analytics from './Nesta/Analytics.svelte';
 
 	import {_innerWidth} from '../stores';
+
+	let isReady = false;
+
+	onMount(async () => {
+		// Populate the DOM after mounting to 
+		// bind resize event handlers correctly.
+		isReady = true;
+	});
 </script>
 
 <svelte:window bind:innerWidth={$_innerWidth}/>
@@ -15,9 +25,10 @@
 	<MetaTwitter />
 </svelte:head>
 
-
-<Header />
-<Title />
-<Content />
-<Footer />
-<!-- <Analytics /> -->
+{#if isReady}
+	<Header />
+	<Title />
+	<Content />
+	<Footer />
+	<!-- <Analytics /> -->
+{/if}
