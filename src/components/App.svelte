@@ -10,14 +10,14 @@
 
 	import {_innerWidth} from '../stores';
 
-	let show = true;
+	let isReady = true;
 
 	onMount(async () => {
 		// Force repopulating the DOM to bind event handlers 
 		// and resync state of element sizes
-		show = false;
+		isReady = false;
 		await tick();
-		show = true;
+		isReady = true;
 	});
 </script>
 
@@ -27,7 +27,7 @@
 	<MetaTwitter />
 </svelte:head>
 
-{#if show}
+{#if isReady}
 	<Header />
 	<Title />
 	<Content />
