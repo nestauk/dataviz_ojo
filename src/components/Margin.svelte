@@ -71,9 +71,9 @@
 				<!-- Background colour -->
 					<rect
 						x={_xScale_m(0)}
-						y={_yScale_m(100)}
+						y={_yScale_m(99)}
 						width={_xScale_m(100)}
-						height={_yScale_m(0)}
+						height={_yScale_m(1)}
 						fill={color_legend_bground}
 					/>
 
@@ -123,7 +123,7 @@
 						dy={1.5*i+'em'}
 						fill={color_skills_names}
 						x={cx}
-						y={_yScale_m(yMax-0.7)}
+						y={_yScale_m(yMax-1.7)}
 					>
 						{d}
 					</text>
@@ -152,6 +152,6 @@
 	.title {
 		text-anchor: middle;
 		font-size: 14px;
-		font-weight: bold;
+		font-style:  italic;
 	}
 </style>

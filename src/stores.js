@@ -44,13 +44,13 @@ export const _bodyWidthM = derived(
 );
 export const _bodyHeightM = derived(_heightContainerText, hct => hct)
 export const _widthM = derived(_bodyWidthM, bw => bw * 0.85)
-export const _heightM = derived(_bodyHeightM, bh => bh * 0.975);
+export const _heightM = derived(_bodyHeightM, bh => bh * 0.98);
 export const _marginM = derived(
 	[_bodyHeightM, _heightM, _bodyWidthM, _widthM],
 	([bodyHeightM, heightM, bodyWidthM, widthM]) => ({
-		top: (bodyHeightM-heightM)/2,
+		top: (bodyHeightM-heightM),
 		right: (bodyWidthM - widthM) / 2,
-		bottom: (bodyHeightM-heightM)/2,
+		bottom: 0,
 		left: (bodyWidthM - widthM) / 2
 	})
 );

@@ -38,5 +38,5 @@ export const color_stroke_treemap = '#FFFFFF'
 export const color_title_text = '#000000'
 export const color_title_text_bground = '#FFFFFF'
 
-export const color_legend_bground = '#FFF5ED'
-export const color_tooltip_bground = '#FFF5ED'
+export const color_legend_bground = '#FAF5EB'
+export const color_tooltip_bground = '#FAF5EB'
