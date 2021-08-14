@@ -14,6 +14,8 @@
 		_xScale,
 	} from '../stores';
 	import {writable} from 'svelte/store';
+	import {pointer} from 'd3-selection';
+
 
 	/* consts */
 
@@ -83,8 +85,8 @@
 	const showTooltip = (d, event) => {
 
 		const left = (isSmall)
-			? $_xScale(Math.min(d.x_pos_small,70))
-			: $_xScale(Math.min(d.x_pos,80));
+		 	? Math.min($_xScale(85),pointer(event)[0])
+		 	: Math.min($_xScale(95),pointer(event)[0]);
 		const top = event.pageY-400
 
 		_tooltip.set({
@@ -269,6 +271,9 @@
 						on:mouseover={!isVerySmall
 							? isevent => showTooltip(location, event)
 							: null}
+						on:mousemove={!isVerySmall
+							? isevent => showTooltip(location, event)
+							: null}							
 						on:mouseout={onMouseout}
 						fill='transparent'
 					/>
