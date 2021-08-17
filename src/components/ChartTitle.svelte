@@ -45,8 +45,8 @@
 		? ['The Open', 'Jobs', 'Observatory']
 		: ['The Open Jobs Observatory'];
 	$: subtitle_text = isSmall
-		? ['Open and free', 'insights on UK', 'skill demands']
-		: ['Open and free insights on UK skill demands'];
+		? ['Providing new', 'insights on UK', 'skill demands']
+		: ['Providing new insights on UK skill demands'];
 	$: date_text = ['Last updated: '+monthLastUpdated+' '+yearLastUpdated]
 	$: root = treemap()
 		.tile(treemapSquarify)
@@ -113,7 +113,7 @@
 					<!-- Sits behind subtitle -->
 					<rect
 						class='subtitle_bground_rect'
-						width=690
+						width=680
 						height={yScale_t(88)}
 						x=10
 						y={yScale_t(44)}

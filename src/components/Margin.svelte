@@ -75,6 +75,8 @@
 						width={_xScale_m(100)}
 						height={_yScale_m(1)}
 						fill={color_legend_bground}
+						rx='4px'
+						ry='4px'
 					/>
 
 				<!-- Circles for skills -->

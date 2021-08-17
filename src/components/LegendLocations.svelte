@@ -45,6 +45,8 @@
 					width={$_xScale(100)}
 					height={yScaleLeg(0)}
 					fill={color_legend_bground}
+					rx='4px'
+					ry='4px'
 				/>
 
 				<!-- Title -->

@@ -18,7 +18,7 @@
 	} from '../stores';
 
 	const introParagraphs = [
-		'The Open Jobs Observatory is a pilot project that shares free and up-to-date insights on UK skill demands.'
+		'The Open Jobs Observatory is a pilot project that shares free monthly insights on UK skill demands.'
 	];
 
 </script>
@@ -162,7 +162,7 @@
 	}
 
 	.text_content_box {
-		background-color: #A08E7E;
+		background-color: #3A2051;
 		font-size: 18px;
 		line-height: 32.4px;
 		margin: 0px auto;
