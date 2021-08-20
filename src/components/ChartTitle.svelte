@@ -18,24 +18,22 @@
 
 	const smallWidth = 980
 	const month = [
-		'January',
-		'February',
-		'March',
-		'April',
+		'Jan',
+		'Feb',
+		'Mar',
+		'Apr',
 		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December',
+		'Jun',
+		'Jul',
+		'Aug',
+		'Sep',
+		'Oct',
+		'Nov',
+		'Dec',
 ];
-	const splitDateStart = data.metadata.date_start.split('/');
-	const monthStart = month[splitDateStart[1] - 1];
-	const splitDateEnd = data.metadata.date_end.split('/');
-	const monthEnd = month[splitDateEnd[1] - 1];
-	const year= splitDateEnd[2]
+	const lastUpdated = data.metadata.last_updated.split('/');
+	const monthLastUpdated = month[lastUpdated[1] - 1];
+	const yearLastUpdated = lastUpdated[2]
 
 	/* reactive vars */
 
@@ -47,9 +45,9 @@
 		? ['The Open', 'Jobs', 'Observatory']
 		: ['The Open Jobs Observatory'];
 	$: subtitle_text = isSmall
-		? ['Open and free', 'insights on UK', 'skill demands']
-		: ['Open and free insights on UK skill demands'];
-	$: date_text = [monthStart+' to '+monthEnd+', '+year]
+		? ['Providing new', 'insights on UK', 'skill demands']
+		: ['Providing new insights on UK skill demands'];
+	$: date_text = ['Last updated: '+monthLastUpdated+' '+yearLastUpdated]
 	$: root = treemap()
 		.tile(treemapSquarify)
 		.size([width, titleHeight])
@@ -115,7 +113,7 @@
 					<!-- Sits behind subtitle -->
 					<rect
 						class='subtitle_bground_rect'
-						width=690
+						width=680
 						height={yScale_t(88)}
 						x=10
 						y={yScale_t(44)}
@@ -127,7 +125,7 @@
 					<!-- Sits behind date -->
 					<rect
 						class='date_bground_rect'
-						width=205
+						width=215
 						height={yScale_t(92)}
 						x=10
 						y={yScale_t(17)}

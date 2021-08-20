@@ -15,6 +15,7 @@
 	} from '../stores';
 	import {sankey, sankeyLinkHorizontal} from 'd3-sankey';
 	import {writable} from 'svelte/store';
+	import {pointer} from 'd3-selection';
 
 
 	/* consts */
@@ -70,8 +71,11 @@
 		const data_4_input = d.source.sourceLinks[3]
 		const data_5_input = d.source.sourceLinks[4]
 
-		const left = $_xScale(50)
+		const left = (isSmall)
+		 	? Math.min($_xScale(85),pointer(event)[0])
+		 	: Math.min($_xScale(95),pointer(event)[0]);
 		const top = event.pageY-400
+
 
 		_tooltip.set({
 			isVisible: true,
@@ -161,7 +165,10 @@
 						stroke={color_skills(d.target.name)}
 						d={sankeyLinkHorizontal()(d)}
 						stroke-width={d.width}
-						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
+						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : null}
+						on:mousemove={!isVerySmall
+							? isevent => showTooltip(d, event)
+							: null}													
 						on:mouseout = {onMouseout}
 					/>
 				{/each}

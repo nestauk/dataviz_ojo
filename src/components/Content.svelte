@@ -18,55 +18,9 @@
 	} from '../stores';
 
 	const introParagraphs = [
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-		ea commodo consequat.`
+		'The Open Jobs Observatory is a pilot project that shares free monthly insights on UK skill demands.'
 	];
-	const locationParagraphs = [
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-		ea commodo consequat.`
-	];
-	const notesParagraphs = [
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-		ea commodo consequat.`
-	];
-	const occupationsParagraphs = [
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-		ea commodo consequat.`
-	];
-	const occupationsNotesParagraphs = [
-		`This is a short note that goes beneath each chart, giving more detail.
-		Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-		ea commodo consequat.`
-	];
-	const salariesParagraphs = [
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-		ea commodo consequat.`
-	];
-	const salariesNotesParagraphs = [
-		`This is a short note that goes beneath each chart, giving more detail.
-		Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-		ea commodo consequat.`
-	];
-	const finalSectionParagraphs = [
-		`Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-		veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-		ea commodo consequat.`
-	];
+
 </script>
 
 <div
@@ -88,47 +42,88 @@
 	>
 		<Intro paragraphs={introParagraphs} />
 
+		<!-- what is the observatory -->
+		<div class='text_content'>
+			<h2>What is the Observatory?</h2>
+			<p>The Observatory provides insights on the skills mentioned in UK job adverts. We began collecting online job adverts in January 2021 and the Observatory now contains several million de-duplicated job adverts. Information on skill demands is not available from official vacancy statistics, and the need for timely and high-quality intelligence about skills has only been heightened by the COVID-19 pandemic.</p>
+			<p>This article provides an introduction to the Observatory, and the visualisations below show <a href='https://github.com/nestauk/ojo_daps_mirror'>the latest data series that are available to download</a>. These data series will be updated on a monthly basis.</p> 
+			<p><i>The pilot stage of the Observatory was created by Nesta, in partnership with the <a href='https://www.gov.uk/government/organisations/department-for-education'>Department for Education</a> as part of the <a href='https://challenges.org/careertech-challenge-prize/'>Career Tech Challenge</a>.</i></p>
+		</div>
+
+		<!-- why did we create the observatory -->
+		<div class='text_content'>
+			<h2>Why did we create the Observatory?</h2>
+			<p>We created the Observatory to provide free and timely access to information on skill demands. In recent years we have spoken to many groups, who are interested in understanding the skills requested by employers, but who don’t have easy access to this information. These groups include local authorities, who must decide where to focus their funding for further education, and career advice organisations, who must keep up to date with the latest in-demand skills required for many different occupations.</p> 
+			<p>A broader aim of the project is to show how we can build new data infrastructure that enriches the supply of labour market information. Although the Observatory contains less than a year’s worth of job adverts, we can already begin to provide insights on a number of areas, including:</p>
+			<ul>
+				<li>The most frequently-requested skills</li>
+				<li>The differences in skill demands across regions</li>
+				<li>The skills most frequently requested in high-vacancy occupation groups</li>
+				<li>The salaries that are typically associated with the most in-demand skills</li>
+			</ul>
+		</div>
+
 		<!-- locations -->
-		<Section
-			title='Heading goes here'
-			paragraphs={locationParagraphs}
-		/>
-		<h2>How do skill demands vary across the UK?</h2>
+		<h2 class='dataviz_heading'>How do skill demands vary across the UK?</h2>
 		<LegendLocations />
 		<ChartLocations />
-		<Notes paragraphs={notesParagraphs}/>
+		<div class='text_content'>
+			<p class='notes'>The chart above shows the make-up of skill demands across the UK. Each advert has been assigned to a <a href='https://en.wikipedia.org/wiki/NUTS_statistical_regions_of_the_United_Kingdom'>NUTS-2 area</a> (London areas have been merged) and each skill has been clustered into a skills taxonomy. The chart shows the broadest skill groups in the taxonomy.</p>
+		</div>
+
+		<!-- what do we mean by ‘skills’? -->
+		<div class='text_content'>
+			<h2>What do we mean by ‘skills’?</h2>
+			<p>We are using the word ‘skill’ in its broadest sense, and we are aiming to capture not only skills, but also knowledge, attitudes and values. We began with the 13,485 skills and competences in the <a href='https://ec.europa.eu/esco/portal'>European Skills/Competences, qualifications and occupations framework (ESCO)</a>. To detect these ‘skill entities’ within an online job posting, we looked at the available textual information on the skill’s preferred and alternative labels, as well as its description. We used natural language processing techniques to generate a set of ‘surface forms’ from these texts - simpler words and phrases that represent the underlying skills entity - and searched for them in the job postings. We created over 100,000 surface forms to detect within adverts. <a href='https://www.nesta.org.uk/project-updates/skills-extraction-OJO/'>Further detail on the skills extraction algorithm is provided in this technical article</a>.</p>
+			<p>In order to provide tractable insights on skills, we have clustered the surface forms to form a taxonomy. At the top (or ‘broadest’) level of the taxonomy, there are eight groups of skills, including one group that consists entirely of transversal skills. <a href='https://github.com/nestauk/ojd_daps_mirror/tree/dev/ojd_daps/flows/enrich/labs/skills/taxonomy'>The full skills taxonomy is available on Github</a>. We will continue to revise the taxonomy, as part of our work for the <a href='https://www.escoe.ac.uk/'>Economic Statistics Centre of Excellence (ESCoE)</a>, and we expect to publish a new version shortly which will then be incorporated within the Observatory.</p>   
+		</div>
 
 		<!-- occupations -->
-		<Section
-			title='Heading goes here'
-			paragraphs={occupationsParagraphs}
-		/>
-		<h2>Which skills are required in the most advertised occupations?</h2>
+		<h2 class='dataviz_heading'>Which skills are required in the most advertised occupations?</h2>
 		<LegendOccupations />
 		<ChartOccupations />
-		<Notes paragraphs={occupationsNotesParagraphs}/>
+		<div class='text_content'>
+			<p class='notes'>The chart above shows how select occupation groups (4-digit SOC codes) rely on each of the broad skill groups in the skills taxonomy. The occupation groups chosen were those which had the largest number of adverts assigned to them, in the latest month.</p>
+		</div>
+
+		<!-- how can I access the data? -->
+		<div class='text_content'>
+			<h2>How can I access the data?</h2>
+			<p><a href='https://github.com/nestauk/ojo_daps_mirror'>The data in the Observatory is free and can be downloaded from Github</a>. The series will be updated on a monthly basis, as long as the project continues. The series in the Observatory are highly experimental and are subject to revision, as we continue to improve aspects of the pipeline such as removing duplicate adverts and extracting skills. Before using the data in the Observatory, it is also important to remember that the skills mentioned within a job advert may not fully capture the skills required to perform a job. Moreover, not all vacant positions are advertised online or on the sites from which we have collected. Unfortunately we cannot share the underlying dataset of job adverts that have been collected.</p>   
+		</div>
+
+		<!-- finding green jobs -->
+		<div class='text_content_box'>
+			<h2>Finding green jobs</h2>
+			<p>Following the <a href='https://www.gov.uk/government/news/uk-government-launches-taskforce-to-support-drive-for-2-million-green-jobs-by-2030'>Government’s ambition to support the creation of two million green jobs by 2030</a>, we have used the Open Jobs Observatory to develop a preliminary methodology for detecting green job adverts. Developing the capacity to spot green jobs, and examining how these jobs are spread across industries, is critical for helping workers to transition into these roles. <a href='https://www.nesta.org.uk/project-updates/green-jobs-results-OJO/'>Our findings are presented in this article</a>, while the complete methodology is presented in this <a href='https://www.nesta.org.uk/project-updates/green-jobs-methodology-OJO/'>technical write-up</a>. <a href='https://github.com/nestauk/grjobs'>The code is available on Github</a>. Given Nesta’s commitment to creating <a href='https://www.nesta.org.uk/sustainable-future/'>a Sustainable Future</a>, we will continue to evolve our methodology for detecting green jobs.</p>
+		</div>
+
+		<!-- how was the observatory created? -->
+		<div class='text_content'>
+			<h2>How was the Observatory created?</h2>
+			<p>To contribute towards an open standard, <a href='https://github.com/nestauk/ojo_daps_mirror'>we have released our codebase</a> (under an MIT license) which consists of algorithms for extracting locations and skills as well as assigning occupation groups (SOC codes) to job adverts. This <a href='https://www.nesta.org.uk/project-updates/methodology-overview-OJO/'>slide deck provides a technical overview of our methodology</a>. We have also written in-depth articles that walk-through our three principal algorithms: <a href='https://www.nesta.org.uk/project-updates/skills-extraction-OJO/'>extracting skills</a>, <a href='https://www.nesta.org.uk/project-updates/SOC-assignment-OJO/'>assigning jobs to occupation groups</a> and <a href='https://www.nesta.org.uk/project-updates/location-extraction-OJO/'>identifying the locations of jobs</a>. By releasing our code and these other resources, we hope to contribute towards an open methodology for extracting key information from job adverts. Currently, there are very few such technical resources available.</p>   
+		</div>
 
 		<!-- salaries -->
-		<Section
-			title='Heading goes here'
-			paragraphs={salariesParagraphs}
-		/>
-		<h2>What salaries are associated with the most in-demand skills?</h2>
+		<h2 class='dataviz_heading'>What salaries are associated with the most in-demand skills?</h2>
 		<LegendSalaries />
 		<ChartSalaries />
-		<Notes paragraphs={salariesNotesParagraphs} />
+		<div class='text_content'>
+			<p class='notes'>The chart above shows the range of salaries that are associated with each of the most commonly requested skills. These are estimates rather than precise figures as many adverts do not contain a salary.</p>
+		</div>
 
-		<!-- section -->
-		<Section
-			title='Heading goes here'
-			paragraphs={finalSectionParagraphs}
-		/>
+		<!-- what are our future plans for the observatory? -->
+		<div class='text_content'>
+			<h2>What are our future plans for the Observatory?</h2>
+			<p>With continued support, there are a number of directions in which to grow the Observatory. One option is to expand the collection to other job boards, with their permission. We would also like to begin extracting qualifications from adverts. This will allow us to examine degree requirements in jobs, which can act as a barrier to employment. We will also continue to evolve our methodology for tagging jobs in green sectors with the aim of highlighting pathways to these jobs. Finally, as more adverts are collected, we will be able to investigate the issues of seasonality and representation across industries.</p>
+			<p>We welcome your feedback and we are particularly interested to hear if you have found the Observatory helpful, as well as any suggestions for future improvements. You can reach us by emailing <a href='mailto: dataanalytics@nesta.org.uk'>dataanalytics@nesta.org.uk</a>.</p>   
+		</div>
 
 	</div>
 
 </div>
 
-<!-- TBD: use grid -->
+
 <style>
 	.container_parent {
 		margin: 0px auto;
@@ -154,13 +149,68 @@
 		min-width: 100%;
 	}
 
+	.text_content {
+		font-size: 18px;
+		line-height: 32.4px;
+		margin: 0px auto;
+		padding: 20px 28px;
+		position: relative;
+	}
+
+	.text_content p {
+		margin-bottom: 28px
+	}
+
+	.text_content_box {
+		background-color: #3A2051;
+		font-size: 18px;
+		line-height: 32.4px;
+		margin: 0px auto;
+		padding: 20px 28px;
+		position: relative;
+	}
+
+	.text_content_box p {
+		margin-bottom: 28px;
+		color:  #FFFFFF;
+	}
+
+    .text_content_box a {
+        color: #FFFFFF;
+      }
+
+    .text_content_box a:hover {
+        color: #FFFFFF;
+    }
+
+	.text_content_box h2 {
+		color:  #FFFFFF;
+	}
+
 	h2 {
 		font-family: 'AvertaBold', sans-serif;
 		font-size: 23.111px;
 		font-weight: 700;
 		line-height: 32.3555px;
+		margin-bottom: 28px;
+	}
+
+	.dataviz_heading {
 		text-align: center;
-		padding: 0px 28px;
+	}
+
+    .text_content a {
+        color: #e61f47;
+      }
+
+    .text_content a:hover {
+        color: #231f20;
+    }
+
+	.notes {
+		color: #706467;
+		line-height: 1.5;
+		font-size: 14px;
 	}
 
 	/* Larger than 1250px */

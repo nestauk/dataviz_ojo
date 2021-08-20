@@ -13,7 +13,7 @@
 
 	/* consts */
 
-	const legendsHeight = 170
+	const legendsHeight = 220
 	const yScaleLeg =
 		scaleLinear()
 		.domain([0, 100])
@@ -30,7 +30,7 @@
 	const no_broad_skills = color_skills_range.length
 	const titleLines = [
 		'Annualised salary ranges from adverts',
-		'mentioning the skill (MIN salary - MAX salary)'
+		'that mention the skill (MIN - MAX salary)'
 	]
 
 	/* reactive vars */
@@ -38,7 +38,7 @@
 	$: width = $_width + $_margin.left + $_margin.right;
 	$: height = legendsHeight + $_margin.top + $_margin.bottom;
 	$: isSmall = width < small_width;
-	$: x_text_start = isSmall ? 15 : 35
+	$: x_text_start = isSmall ? 10 : 35
 	$: thinStroke = $_xScale(0.1);
 </script>
 
@@ -54,6 +54,8 @@
 					width={$_xScale(100)}
 					height={yScaleLeg(0)}
 					fill={color_legend_bground}
+					rx='4px'
+					ry='4px'
 				/>
 
 				<!-- Title of chart -->

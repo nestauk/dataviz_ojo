@@ -27,7 +27,7 @@
 </svelte:head>
 
 {#if isReady}
-	<Header />
+<!-- 	<Header /> -->
 	<Title />
 	<Content />
 	<Footer />

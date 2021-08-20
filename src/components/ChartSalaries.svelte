@@ -12,6 +12,7 @@
 		_margin,
 		_width,
 		_xScaleS,
+		_bodyWidthM
 	} from '../stores';
 	import {scaleLinear} from 'd3-scale';
 	import {writable} from 'svelte/store';
@@ -74,10 +75,9 @@
 		const data_1_input = d.salaries.lower_bound.median
 		const data_2_input = d.salaries.upper_bound.median
 
-		const left =
-			$_xScaleS(50) +
-			yScale_s(d.salaries.lower_bound.median) *
-			Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries));
+		const left = ($_bodyWidthM==0) ? event.pageX :
+			$_xScaleS(50) + yScale_s(d.salaries.lower_bound.median) *
+		  	Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries));
 		const top = event.pageY-400
 
 		const text_color = (
@@ -195,7 +195,10 @@
 							)
 							rotate({(360*((d.index-rotate_adj)/no_salaries))})
 						'
-						on:mouseover ={(!isVerySmall) ? event => showTooltip(d, event) : ''}
+						on:mouseover ={(!isVerySmall) ? event => showTooltip(d, event) : null}
+						on:mousemove={!isVerySmall
+							? isevent => showTooltip(d, event)
+							: null}													
 						on:mouseout = {onMouseout}
 					/>
 
@@ -225,7 +228,10 @@
 							)
 							rotate({(360*((d.index-rotate_adj)/no_salaries))})
 						'
-						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
+						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : null}
+						on:mousemove={!isVerySmall
+							? isevent => showTooltip(d, event)
+							: null}													
 						on:mouseout = {onMouseout}
 					/>
 
@@ -255,7 +261,10 @@
 							)
 							rotate({(360*((d.index-rotate_adj)/no_salaries))})
 						'
-						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : ''}
+						on:mouseover ={(!isVerySmall) ? isevent => showTooltip(d, event) : null}
+						on:mousemove={!isVerySmall
+							? isevent => showTooltip(d, event)
+							: null}													
 						on:mouseout = {onMouseout}
 					/>
 
