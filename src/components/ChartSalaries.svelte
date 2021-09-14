@@ -3,8 +3,6 @@
 	import {
 		color_skills,
 		color_salary_rings,
-		color_salary_axis_bground,
-		color_salary_axis,
 		color_salary_names_bground,
 		color_salary_names,
 	} from '../shared/colours';
@@ -18,13 +16,19 @@
 	import {writable} from 'svelte/store';
 
 	// Number of salaries (add 5 to leave space for salary_rings_text
-	let no_salaries = data.salaries.length+5
+	let no_salaries = data.salaries.length+2
 
 	// Rotate the chart to ensure the min and max salaries straddle the top of the chart
-	let rotate_adj = 0.225*no_salaries
+	let rotate_adj = 0.215*no_salaries
 
 	// Salaries for rings
-	let salary_rings = [10,20,30,40,50];
+	let salary_rings = [10,20,30,40,50,60,70];
+
+	// Salary labels
+	let salary_labels = ['Higher salaries', 'Lower salaries']
+
+	// Start angles for salary labels
+	let salary_labels_start_angle = [136,200]
 
 	// Calculate domain for salary scale (yScale_s)
 	// -5 and +3 to give extra space
@@ -48,7 +52,7 @@
 
 	// Stroke widths
 	const thinStroke = '1px';
-	const thickStroke = '5px';
+	const thickStroke = '2.5px';
 
 	/* reactive vars */
 	$: width = $_width + $_margin.left + $_margin.right;
@@ -58,12 +62,46 @@
 	.domain([lowest_salary_shown,highest_salary_shown])
 	.range([0, 0.5*(width - $_margin.left - $_margin.right)])
 
+	// Radius for salary labels
+	$: salary_labels_radius = [yScale_s(70),yScale_s(50)]
+
+
+	/* functions to position high and low salary labels */
+
+	// Convert polar to cartesian co-ordainations 
+	function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+		let angleInRadians = (angleInDegrees-90) * Math.PI / 180.0;
+		return {
+			x: centerX + (radius * Math.cos(angleInRadians)),
+			y: centerY + (radius * Math.sin(angleInRadians))
+		};
+	}
+
+	// Arc that describes labels
+	function describeArc(x, y, radius, startAngle, endAngle){
+		let start = polarToCartesian(x, y, radius, endAngle);
+		let end = polarToCartesian(x, y, radius, startAngle);
+		let d = [
+			'M', start.x, start.y,
+			'A', radius, radius, 0, 1, 1, end.x, end.y
+		].join(' ');
+		return d;
+	}
+
+	// Make arc
+	$: makeArc = (startAngle, radius_circle) => {
+		let x = $_xScaleS(50)
+		let y = $_xScaleS(50)
+		let endAngle = startAngle-359
+		return describeArc(x, y, radius_circle, startAngle, endAngle)
+	}
+
 
 	/* mouseovers */
 
 	// Format text for mouseovers
 	$: format_text = (text,d) => {
-		return text+': £'+Math.round(d)+'k pa'
+		return text+': £'+Math.round(d).toLocaleString()+'k pa'
 	}
 
 	const _tooltip = writable({isVisible: false});
@@ -78,13 +116,7 @@
 		const left = ($_bodyWidthM==0) ? event.pageX :
 			$_xScaleS(50) + yScale_s(d.salaries.lower_bound.median) *
 		  	Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries));
-		const top = event.pageY-400
-
-		const text_color = (
-			d.broad_skill_group==color_skills.domain()[2] ||
-			d.broad_skill_group==color_skills.domain()[4] ||
-			d.broad_skill_group==color_skills.domain()[3]
-		) ? '#000000' : '#FFFFFF'
+		const top = event.pageY-380
 
 		_tooltip.set({
 			isVisible: true,
@@ -93,12 +125,11 @@
 			top_margin: top+'px',
 
 			background_color: color_skills(d.broad_skill_group),
-			text_color: text_color,
 
 			data_1: format_text('Median of MIN salaries', data_1_input),
 			data_2: format_text('Median of MAX salaries', data_2_input),
 
-			name: d.skill_name
+			name: d.narrow_skill_group
 		})
 	}
 
@@ -110,12 +141,14 @@
 	class:hidden={!$_tooltip.isVisible}
 	style='
 		left:{$_tooltip.left_margin};
-		top: {$_tooltip.top_margin};
-		background-color: {$_tooltip.background_color};
-		color: {$_tooltip.text_color};
-	'
+		top: {$_tooltip.top_margin};'
 >
-	<p><span class='line1_text'>{$_tooltip.name}</span></p>
+	<p>
+		<span style='background-color:{$_tooltip.background_color}; border-radius: 4px; border: 2px solid {$_tooltip.background_color}'
+			  >&nbsp;&nbsp;&nbsp;&nbsp;
+		</span>
+		<span class='line1_text'>{$_tooltip.name}</span>
+	</p>
 	<p><span class='line2_text'>Annualised salary ranges (MIN - MAX):</span></p>
 	<p><span class='line3_text'>{$_tooltip.data_1}</span></p>
 	<p><span class='line4_text'>{$_tooltip.data_2}</span></p>
@@ -140,30 +173,31 @@
 					/>
 				{/each}
 
-				<!-- Need a separate loop from above to prevent rings overlapping text -->
-				{#each salary_rings as d,i}
-					<!-- Salary associated with each ring - background -->
-					<text
-						class='salary_rings_text_bground'
-						fill={color_salary_axis_bground}
-						stroke-width={thickStroke}
-						stroke={color_salary_axis_bground}
-						x={($_xScaleS(50)+yScale_s(d)*Math.cos((1.5*Math.PI)))}
-						y={($_xScaleS(50)+yScale_s(d)*Math.sin((1.5*Math.PI)))}
-					>
-						{(i==salary_rings.length-1 || i==0) ? '£'+d+'k per annum'.toUpperCase() : '£'+d+'k'.toUpperCase()}
-					</text>
+				<!-- High and low salary labels -->				
+				{#each salary_labels as d,i}
 
-					<!-- Salary associated with each ring -->
-					<text
-						class='salary_rings_text'
-						fill={color_salary_axis}
-						x={($_xScaleS(50)+yScale_s(d)*Math.cos((1.5*Math.PI)))}
-						y={($_xScaleS(50)+yScale_s(d)*Math.sin((1.5*Math.PI)))}
-					>
-						{(i==salary_rings.length-1 || i==0) ? '£'+d+'k per annum'.toUpperCase() : '£'+d+'k'.toUpperCase()}
-					</text>
+					<!-- Arcs for high and low salary labels -->
+					<path
+						class='salary_labels_arc'
+						id='salary_arc{i}'
+						d={makeArc(salary_labels_start_angle[i], salary_labels_radius[i])}
+						fill='transparent'
+					/>
 
+					<!-- Text for high and low salary labels -->
+					<g class='salary_labels_arc_paths'>
+						<text>
+							<textPath
+								class='skills_labels_text'
+								fill={color_salary_rings}
+								startOffset='50%'
+								xlink:href='#salary_arc{i}'
+								font-size={(isVerySmall) ? '12px' : '15px'}
+							>
+								{d}
+							</textPath>
+						</text>
+					</g>
 				{/each}
 
 
@@ -179,7 +213,7 @@
 							d.salaries.lower_bound.median -
 							d.salaries.lower_bound.lower_q
 						)}
-						height={$_xScaleS(1.5)}
+						height={$_xScaleS(2)}
 						transform='
 							translate(
 								{
@@ -212,7 +246,7 @@
 							d.salaries.upper_bound.median -
 							d.salaries.lower_bound.median
 						)}
-						height={$_xScaleS(1.5)}
+						height={$_xScaleS(2)}
 						transform='
 							translate(
 								{
@@ -245,7 +279,7 @@
 							d.salaries.upper_bound.upper_q -
 							d.salaries.upper_bound.median
 						)}
-						height={$_xScaleS(1.5)}
+						height={$_xScaleS(2)}
 						transform='
 							translate(
 								{
@@ -274,7 +308,7 @@
 				<!-- Names of skills -->
 				{#each data.salaries as d,i}
 
-					<!-- One half of the circle -->
+					<!-- Left hand side of the circle -->
 					{#if (360*((d.index-rotate_adj)/no_salaries)>90)}
 
 						<!-- Names of skills - background -->
@@ -287,22 +321,23 @@
 								translate(
 									{
 										$_xScaleS(50) +
-										yScale_s(d.salaries.upper_bound.upper_q) *
+										yScale_s(d.salaries.upper_bound.median) *
 										Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))
 									},
 									{
 										$_xScaleS(50) +
-										yScale_s(d.salaries.upper_bound.upper_q) *
+										yScale_s(d.salaries.upper_bound.median) *
 										Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))
 									}
 								)
 								rotate({(360*((d.index-rotate_adj)/no_salaries)-180)})
 							'
-							dy='0.2em'
-							text-anchor='start'
-							opacity={(width<550) ? 0 : (i%5==0) ? 1 : 0}
+							dy='-0.5em'
+							dx='-0.2em'
+							text-anchor='end'
+							opacity={(width<750) ? 0 : (i%3==0) ? 1 : 0}
 	 					>
-							{d.skill_name.toUpperCase()}
+							{d.narrow_skill_group.toUpperCase()}
 						</text>
 
 						<!-- Names of skills -->
@@ -313,25 +348,26 @@
 								translate(
 									{
 										$_xScaleS(50) +
-										yScale_s(d.salaries.upper_bound.upper_q) *
+										yScale_s(d.salaries.upper_bound.median) *
 										Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))
 									},
 									{
 										$_xScaleS(50) +
-										yScale_s(d.salaries.upper_bound.upper_q) *
+										yScale_s(d.salaries.upper_bound.median) *
 										Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))
 									}
 								)
 								rotate({(360*((d.index-rotate_adj)/no_salaries)-180)})
 							'
-							dy='0.2em'
-							text-anchor='start'
-							opacity={(width<550) ? 0 : (i%5==0) ? 1 : 0}
+							dy='-0.5em'
+							dx='-0.2em'
+							text-anchor='end'
+							opacity={(width<750) ? 0 : (i%3==0) ? 1 : 0}
 	 					>
-							{d.skill_name.toUpperCase()}
+							{d.narrow_skill_group.toUpperCase()}
 						</text>
 
-					<!-- Other half of the circle -->
+					<!-- Right hand side of the circle -->
 					{:else}
 
 						<!-- Names of skills - background -->
@@ -344,22 +380,23 @@
 								translate(
 									{
 										$_xScaleS(50) +
-										yScale_s(d.salaries.upper_bound.upper_q) *
+										yScale_s(d.salaries.upper_bound.median) *
 										Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))
 									},
 									{
 										$_xScaleS(50) +
-										yScale_s(d.salaries.upper_bound.upper_q) *
+										yScale_s(d.salaries.upper_bound.median) *
 										Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))
 									}
 								)
 								rotate({(360*((d.index-rotate_adj)/no_salaries))})
 							'
-							dy='1.5em'
-							text-anchor='end'
-							opacity={(width<550) ? 0 : (i%5==0) ? 1 : 0}
+							dy='1.1em'
+							dx='0.2em'
+							text-anchor='start'
+							opacity={(width<750) ? 0 : (i%3==0) ? 1 : 0}
 	 					>
-							{d.skill_name.toUpperCase()}
+							{d.narrow_skill_group.toUpperCase()}
 						</text>
 
 						<!-- Names of skills -->
@@ -370,25 +407,42 @@
 								translate(
 									{
 										$_xScaleS(50) +
-										yScale_s(d.salaries.upper_bound.upper_q) *
+										yScale_s(d.salaries.upper_bound.median) *
 										Math.cos((2*Math.PI)*((d.index-rotate_adj)/no_salaries))
 									},
 									{
 										$_xScaleS(50) +
-										yScale_s(d.salaries.upper_bound.upper_q) *
+										yScale_s(d.salaries.upper_bound.median) *
 										Math.sin((2*Math.PI)*(((d.index-rotate_adj)/no_salaries)))
 									}
 								)
 								rotate({(360*((d.index-rotate_adj)/no_salaries))})
 							'
-							dy='1.5em'
-							text-anchor='end'
-							opacity={(width<550) ? 0 : (i%5==0) ? 1 : 0}
+							dy='1.1em'
+							dx='0.2em'
+							text-anchor='start'
+							opacity={(width<750) ? 0 : (i%3==0) ? 1 : 0}
 	 					>
-							{d.skill_name.toUpperCase()}
+							{d.narrow_skill_group.toUpperCase()}
 						</text>
 
 					{/if}
+
+				{/each}
+
+				<!-- Need a separate loop from above to prevent rings overlapping text -->
+				{#each salary_rings as d,i}
+					<!-- Salary associated with each ring -->
+					<text
+						class='salary_rings_text'
+						fill={color_salary_rings}
+						x={($_xScaleS(50)+yScale_s(d)*Math.cos((1.5*Math.PI)))}
+						dx={'-1em'}
+						y={($_xScaleS(49.75)+yScale_s(d)*Math.sin((1.5*Math.PI)))}
+						font-size={(isVerySmall) ? '10px' : '13px'}
+					>
+						{(i==salary_rings.length-1) ? '£'+d.toLocaleString()+'k per annum' : '£'+d.toLocaleString()+'k'}
+					</text>
 
 				{/each}
 
@@ -402,10 +456,18 @@
 		line-height: 0px;
 	}
 
-	.salary_rings_text,
-	.salary_rings_text_bground {
-		text-anchor: end;
-		font-size: 11px;
+	.salary_labels_arc,
+	.salary_labels_arc_paths, 
+	.skills_labels_text {
+		pointer-events: none;
+	}
+
+	.skills_labels_text {
+		font-weight:  bold;
+	}
+
+	.salary_rings_text {
+		text-anchor: start;
 		font-weight: bold;
 		pointer-events: none;
 	}
@@ -415,15 +477,21 @@
 		font-size: 10px;
 		font-weight: bold;
 		pointer-events: none;
+		vertical-align: middle;
 	}
 
 	.lower_bounds, .medians, .upper_bounds {
-		mix-blend-mode: multiply;
+		mix-blend-mode: normal;
+	}
+
+	.medians {
+		opacity:  1;
 	}
 
 	.lower_bounds, .upper_bounds {
-		opacity: 0.25;
+		opacity: 0.4;
 	}
+
 
 	.tooltip {
 		position: absolute;
@@ -432,7 +500,9 @@
 		font-family: 'AvertaRegular', Helvetica, sans-serif;
 		border-radius: 3px;
 		z-index: 6;
-		border: 3px solid #FFF
+		border: 3px solid #FFF;
+		background-color:  #FFFFFF;
+		color:  #000000;
 	}
 
 	.tooltip.hidden {

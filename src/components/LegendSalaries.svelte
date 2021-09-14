@@ -19,7 +19,7 @@
 		.domain([0, 100])
 		.range([legendsHeight, 0]);
 	const small_width = 500
-	const y_positions = [63,52,17,7]
+	const y_positions = [59,48,13,3]
 	const legend_text = [
 		'Upper quartile of MAX salaries',
 		'Median of MAX salaries',
@@ -29,8 +29,9 @@
 	const color_skills_range = color_skills.range()
 	const no_broad_skills = color_skills_range.length
 	const titleLines = [
-		'Annualised salary ranges from adverts',
-		'that mention the skill (MIN - MAX salary)'
+		'Annualised salary ranges',
+		'mentioning the skill group',
+		'(MIN offer - MAX offer)'
 	]
 
 	/* reactive vars */
@@ -65,8 +66,11 @@
 						class='salary_legend_title'
 						fill={color_salary_names}
 						x={$_xScale(x_text_start-6)}
-						y={yScaleLeg(y_positions[0]+23)}
-						dy={i*1.5+'em'}
+						y={yScaleLeg(y_positions[0]+27)}
+						dy={(i==2) ? i*1.7+'em' : i*1.5+'em'}
+						font-size={(i==2) ? '14px' : '16px'}
+						font-weight={(i==2) ? 'normal' : 'bold'}
+						text-transform={(i==2) ? 'uppercase' : 'none'};
 					>
 						{d}
 					</text>
@@ -82,7 +86,7 @@
 					width={$_xScale(5)}
 					height={yScaleLeg(100-(y_positions[0]-y_positions[3]))}
 					stroke-width={thinStroke}
-					opacity=0.25
+					opacity=0.4
 				/>
 
 				<rect
@@ -126,12 +130,6 @@
 <style>
 	.div_background {
 		line-height: 0px;
-	}
-
-	.salary_legend_title {
-		font-size: 14px;
-		font-weight: bold;
-		text-anchor: start;
 	}
 
 	.salary_legend_long_rect, .salary_legend_short_rect {

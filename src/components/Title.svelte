@@ -1,6 +1,5 @@
 <script>
 	import ChartTitle from './ChartTitle.svelte';
-	import SocialMedia from './SocialMedia.svelte';
 	import {
 		_heightContainerTitle,
 		_widthContainerTitle,
@@ -13,7 +12,6 @@
 	class='container_title'
 >
 	<ChartTitle/>
-	<SocialMedia/>
 </div>
 
 <style>
