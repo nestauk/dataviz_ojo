@@ -16,7 +16,11 @@
 
 	/* consts */
 
+	// Stroke width for text
+	const strokeWidth = '5px'
+
 	const smallWidth = 980
+
 	const month = [
 		'Jan',
 		'Feb',
@@ -47,7 +51,7 @@
 	$: subtitle_text = isSmall
 		? ['Providing new', 'insights on UK', 'skill demands']
 		: ['Providing new insights on UK skill demands'];
-	$: date_text = ['Last updated: '+monthLastUpdated+' '+yearLastUpdated]
+	$: date_text = 'Data: '+monthLastUpdated+' '+yearLastUpdated
 	$: root = treemap()
 		.tile(treemapSquarify)
 		.size([width, titleHeight])
@@ -57,6 +61,7 @@
 			.sum(d => d.value)
 			.sort((a, b) => b.value - a.value)
 		)
+
 </script>
 
 <div>
@@ -89,13 +94,12 @@
 					<rect
 						class='title_bground_rect'
 						width=285
-						height={yScale_t(15)}
+						height={yScale_t(12)}
 						x=10
 						y={yScale_t(92.5)}
 						fill={color_title_text_bground}
 						rx='4px'
 						ry='4px'
-						opacity=0.95
 					/>
 				{:else}
 					<!-- Sits behind title -->
@@ -108,7 +112,6 @@
 						fill={color_title_text_bground}
 						rx='4px'
 						ry='4px'
-						opacity=0.95
 					/>
 					<!-- Sits behind subtitle -->
 					<rect
@@ -120,19 +123,28 @@
 						fill={color_title_text_bground}
 						rx='4px'
 						ry='4px'
-						opacity=0.95
 					/>
 					<!-- Sits behind date -->
 					<rect
 						class='date_bground_rect'
-						width=215
+						width=135
 						height={yScale_t(92)}
 						x=10
-						y={yScale_t(17)}
+						y={yScale_t(22)}
 						fill={color_title_text_bground}
 						rx='4px'
 						ry='4px'
-						opacity=0.95
+					/>
+					<!-- Sits behind author -->
+					<rect
+						class='author_bground_rect'
+						width=120
+						height={yScale_t(94)}
+						x=10
+						y={yScale_t(11)}
+						fill={color_title_text_bground}
+						rx='4px'
+						ry='4px'
 					/>
 				{/if}
 
@@ -154,23 +166,53 @@
 						class='subtitle_text'
 						fill={color_title_text}
 						x=20
-						y={(isSmall) ? yScale_t(37-7*i) : yScale_t(35)}
+						y={(isSmall) ? yScale_t(39-7*i) : yScale_t(35)}
 					>
 						{d}
 					</text>
 				{/each}
 
 				<!-- Date -->
-				{#each date_text as d,i}
-					<text
-						class='date_text'
-						fill={color_title_text}
-						x=20
-						y={yScale_t(11)}
-					>
-						{d}
-					</text>
-				{/each}
+				<text
+					class='date_text'
+					fill={color_title_text}
+					x=20
+					y={yScale_t(16)}
+				>
+					{date_text}
+				</text>
+
+				<!-- Author -->
+				<text
+					class='author_text'
+					fill={color_title_text}
+					x=20
+					y={yScale_t(6.5)}
+				>
+					Cath Sleeman
+				</text>
+
+			<!-- Caption for tree diagram -->
+				<!-- Background to text -->
+				<text
+					class='explainer_text_bground'
+					fill={color_title_text}
+					stroke-width={strokeWidth}
+					stroke='#FFFFFF'
+					x={$_xScaleT(99.5)}
+					y={yScale_t(1.5)}
+				>
+					A treemap showing the demand for skill groups
+				</text>
+				<!-- Text -->
+				<text
+					class='explainer_text'
+					fill={color_title_text}
+					x={$_xScaleT(99.5)}
+					y={yScale_t(1.5)}
+				>
+					A treemap showing the demand for skill groups
+				</text>
 
 			</g>
 		</svg>
@@ -190,6 +232,20 @@
 		font-size: 18px;
 		text-anchor: start;
 	}
+	.author_text {
+		font-size: 15px;
+		text-anchor: start;
+	}
+
+	.explainer_text, .explainer_text_bground {
+		font-size: 12px;
+		text-anchor: end;
+		font-weight:  bold;
+	}
+
+	.title_bground_rect, .subtitle_bground_rect, .date_bground_rect, .author_bground_rect {
+		opacity: 0.9;
+	} 
 
 	/* Larger than 980px */
 	@media only screen and (min-width: 980px) {
