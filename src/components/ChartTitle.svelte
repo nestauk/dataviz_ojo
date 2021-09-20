@@ -193,23 +193,27 @@
 				</text>
 
 			<!-- Caption for tree diagram -->
-				<!-- Background to text -->
-				<text
-					class='explainer_text_bground'
-					fill={color_title_text}
-					stroke-width={strokeWidth}
-					stroke='#FFFFFF'
-					x={$_xScaleT(99.5)}
-					y={yScale_t(1.5)}
-				>
-					A treemap showing the demand for skill groups
-				</text>
+
+				<!-- Sits behind caption for tree diagram -->
+				<rect
+					class='explainer_bground_rect'
+					width=320
+					height={yScale_t(94)}
+					x={$_xScaleT(100)-320}
+					y={yScale_t(6)}
+					fill={color_title_text_bground}
+					rx='4px'
+					ry='4px'
+					opacity={(isSmall) ? 0 : 0.9}
+				/>
+
 				<!-- Text -->
 				<text
 					class='explainer_text'
 					fill={color_title_text}
 					x={$_xScaleT(99.5)}
 					y={yScale_t(1.5)}
+					opacity={(isSmall) ? 0 : 1}
 				>
 					A treemap showing the demand for skill groups
 				</text>
@@ -237,8 +241,8 @@
 		text-anchor: start;
 	}
 
-	.explainer_text, .explainer_text_bground {
-		font-size: 12px;
+	.explainer_text {
+		font-size: 14px;
 		text-anchor: end;
 		font-weight:  bold;
 	}

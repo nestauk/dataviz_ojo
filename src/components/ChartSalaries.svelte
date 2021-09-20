@@ -52,7 +52,7 @@
 
 	// Stroke widths
 	const thinStroke = '1px';
-	const thickStroke = '2.5px';
+	const thickStroke = '5px';
 
 	/* reactive vars */
 	$: width = $_width + $_margin.left + $_margin.right;
@@ -63,7 +63,7 @@
 	.range([0, 0.5*(width - $_margin.left - $_margin.right)])
 
 	// Radius for salary labels
-	$: salary_labels_radius = [yScale_s(70),yScale_s(50)]
+	$: salary_labels_radius = [yScale_s(72),yScale_s(52)]
 
 
 	/* functions to position high and low salary labels */
@@ -337,7 +337,7 @@
 							text-anchor='end'
 							opacity={(width<750) ? 0 : (i%3==0) ? 1 : 0}
 	 					>
-							{d.narrow_skill_group.toUpperCase()}
+							{d.narrow_skill_group}
 						</text>
 
 						<!-- Names of skills -->
@@ -364,7 +364,7 @@
 							text-anchor='end'
 							opacity={(width<750) ? 0 : (i%3==0) ? 1 : 0}
 	 					>
-							{d.narrow_skill_group.toUpperCase()}
+							{d.narrow_skill_group}
 						</text>
 
 					<!-- Right hand side of the circle -->
@@ -396,7 +396,7 @@
 							text-anchor='start'
 							opacity={(width<750) ? 0 : (i%3==0) ? 1 : 0}
 	 					>
-							{d.narrow_skill_group.toUpperCase()}
+							{d.narrow_skill_group}
 						</text>
 
 						<!-- Names of skills -->
@@ -423,7 +423,7 @@
 							text-anchor='start'
 							opacity={(width<750) ? 0 : (i%3==0) ? 1 : 0}
 	 					>
-							{d.narrow_skill_group.toUpperCase()}
+							{d.narrow_skill_group}
 						</text>
 
 					{/if}
@@ -474,7 +474,7 @@
 
 	.salary_skills_name,
 	.salary_skills_name_bground {
-		font-size: 10px;
+		font-size: 11px;
 		font-weight: bold;
 		pointer-events: none;
 		vertical-align: middle;

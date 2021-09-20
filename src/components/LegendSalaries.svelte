@@ -29,8 +29,8 @@
 	const color_skills_range = color_skills.range()
 	const no_broad_skills = color_skills_range.length
 	const titleLines = [
-		'Annualised salary ranges',
-		'mentioning the skill group',
+		'Salary ranges in adverts',
+		'that mention the skill group',
 		'(MIN offer - MAX offer)'
 	]
 
@@ -67,7 +67,7 @@
 						fill={color_salary_names}
 						x={$_xScale(x_text_start-6)}
 						y={yScaleLeg(y_positions[0]+27)}
-						dy={(i==2) ? i*1.7+'em' : i*1.5+'em'}
+						dy={(i==2) ? i*1.7+'em' : i*1.3+'em'}
 						font-size={(i==2) ? '14px' : '16px'}
 						font-weight={(i==2) ? 'normal' : 'bold'}
 						text-transform={(i==2) ? 'uppercase' : 'none'};
