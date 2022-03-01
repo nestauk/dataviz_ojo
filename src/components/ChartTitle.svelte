@@ -21,24 +21,6 @@
 
 	const smallWidth = 980
 
-	const month = [
-		'Jan',
-		'Feb',
-		'Mar',
-		'Apr',
-		'May',
-		'Jun',
-		'Jul',
-		'Aug',
-		'Sep',
-		'Oct',
-		'Nov',
-		'Dec',
-];
-	const lastUpdated = data.metadata.last_updated.split('/');
-	const monthLastUpdated = month[lastUpdated[1] - 1];
-	const yearLastUpdated = lastUpdated[2]
-
 	/* reactive vars */
 
 	$: width = $_widthContainerTitle;
@@ -51,7 +33,6 @@
 	$: subtitle_text = isSmall
 		? ['Providing new', 'insights on UK', 'skill demands']
 		: ['Providing new insights on UK skill demands'];
-	$: date_text = 'Data: '+monthLastUpdated+' '+yearLastUpdated
 	$: root = treemap()
 		.tile(treemapSquarify)
 		.size([width, titleHeight])
@@ -124,17 +105,6 @@
 						rx='4px'
 						ry='4px'
 					/>
-					<!-- Sits behind date -->
-					<rect
-						class='date_bground_rect'
-						width=135
-						height={yScale_t(92)}
-						x=10
-						y={yScale_t(22)}
-						fill={color_title_text_bground}
-						rx='4px'
-						ry='4px'
-					/>
 					<!-- Sits behind author -->
 					<rect
 						class='author_bground_rect'
@@ -171,16 +141,6 @@
 						{d}
 					</text>
 				{/each}
-
-				<!-- Date -->
-				<text
-					class='date_text'
-					fill={color_title_text}
-					x=20
-					y={yScale_t(16)}
-				>
-					{date_text}
-				</text>
 
 				<!-- Author -->
 				<text
