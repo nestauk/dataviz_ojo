@@ -18,7 +18,7 @@
 	} from '../stores';
 
 	const introParagraphs = [
-		'The Open Jobs Observatory is a pilot project that shares free, monthly insights on UK skill demands.'
+		'The Open Jobs Observatory is a pilot project that shares free insights on UK skill demands.'
 	];
 
 </script>
@@ -45,8 +45,7 @@
 		<!-- what is the observatory -->
 		<div class='text_content'>
 			<h2>What is the Observatory?</h2>
-			<p>The Observatory provides insights on the skills mentioned in UK job adverts. We began collecting online job postings in January 2021 and the Observatory now contains several million job adverts. Information on skill demands is not available from official vacancy statistics, and the need for timely and free intelligence about skills has only been heightened by the COVID-19 pandemic.</p>
-			<p>This article provides an introduction to the Observatory, and the data visualisations show some of <a href='https://github.com/nestauk/ojo_daps_mirror' target="_blank">the data series that are available to download</a>. These are based on <i>new job adverts</i> (excluding duplicates) that were collected in the 6 weeks leading up to the 15th day of the month. This approach approximates the <i>stock of all adverts</i> that were live on that date. The data series will be updated monthly.</p> 
+			<p>The Observatory provides insights on the skills mentioned in UK job adverts. We began collecting online job postings in January 2021 and the Observatory now contains millions of job adverts. Information on skill demands is not available from official vacancy statistics, and the need for timely and free intelligence about skills has only been heightened by the COVID-19 pandemic. This article provides an introduction to the Observatory, and the data visualisations illustrate some of <a href='https://github.com/nestauk/ojo_daps_mirror' target="_blank">the data series that are available to download</a>.  
 			<p><i>The pilot stage of the Observatory was created by Nesta, in partnership with the <a href='https://www.gov.uk/government/organisations/department-for-education' target="_blank">Department for Education</a> as part of the <a href='https://challenges.org/careertech-challenge-prize/' target="_blank">Career Tech Challenge</a>.</i></p>
 		</div>
 
@@ -54,7 +53,7 @@
 		<div class='text_content'>
 			<h2>Why did we create the Observatory?</h2>
 			<p>We created the Observatory to provide free and timely access to information on skill demands. In recent years we have spoken to many groups, who are interested in understanding the skills requested by employers, but who don’t have easy access to this information. These groups include local authorities, who must decide where to focus their funding for further education, and career advice organisations, who must keep up to date with the latest in-demand skills required for many different occupations.</p> 
-			<p>A broader aim of the project is to show how we can build new data infrastructure that enriches the supply of labour market information. Although the Observatory contains less than a year’s worth of job adverts, we can already begin to provide insights on a number of areas, including the most frequently-requested skills, the differences in skill demands across regions, the skills requested in the most advertised jobs and the salary ranges that are typically offered alongside the most in-demand skills.
+			<p>A broader aim of the project is to show how we can build new data infrastructure that enriches the supply of labour market information. Although the Observatory is relatively young, we can already begin to provide insights on a number of areas, including the most frequently-requested skills, the differences in skill demands across regions, the skills requested in the most advertised jobs and the salary ranges that are typically offered alongside the most in-demand skills.
 		</div>
 
 		<!-- locations -->
@@ -62,7 +61,7 @@
 		<LegendLocations />
 		<ChartLocations />
 		<div class='text_content'>
-			<p class='notes'>The chart above shows the make-up of skill demands across the UK. Each advert has been assigned to a <a href='https://en.wikipedia.org/wiki/NUTS_statistical_regions_of_the_United_Kingdom' target="_blank">NUTS-2 area</a> (London areas have been merged) and each skill has been clustered into a skills taxonomy. The chart shows the broadest skill groups in the taxonomy.</p>
+			<p class='notes'>The chart above shows the make-up of skill demands across the UK, in July 2021. Each advert has been assigned to a <a href='https://en.wikipedia.org/wiki/NUTS_statistical_regions_of_the_United_Kingdom' target="_blank">NUTS-2 area</a> (London areas have been merged) and each skill has been clustered into a skills taxonomy. The chart shows the broadest skill groups in the taxonomy.</p>
 		</div>
 
 		<!-- what do we mean by ‘skills’? -->
@@ -77,13 +76,13 @@
 		<!--<LegendOccupations/>-->
 		<ChartOccupations />
 		<div class='text_content'>
-			<p class='notes'>The chart above shows how adverts for frequently advertised occupations mention skills from each of the broad skill groups in the taxonomy.</p>
+			<p class='notes'>The chart above shows the broad skill groups required in frequently advertised occupations (based on adverts from July 2021).</p>
 		</div>
 
 		<!-- how can I access the data? -->
 		<div class='text_content'>
 			<h2>How can I access the data?</h2>
-			<p><a href='https://github.com/nestauk/ojo_daps_mirror' target="_blank">The aggregated data in the Observatory is free and can be downloaded from GitHub</a>. These data series will be updated on a monthly basis, as long as the project continues. The series in the Observatory are highly experimental and are subject to revision, as we continue to improve aspects of the pipeline such as removing duplicate adverts and extracting skills. Before using the data in the Observatory it is also important to remember that the skills mentioned within a job advert may not fully capture the skills required to perform that job. Moreover, not all vacant positions are advertised online and we are not collecting all online job adverts. Unfortunately, we cannot share our dataset of job adverts.</p>   
+			<p><a href='https://github.com/nestauk/ojo_daps_mirror' target="_blank">The aggregated data in the Observatory is free and can be downloaded from GitHub</a>. These data series will be updated regularly, as long as the project continues. The series in the Observatory are highly experimental and are subject to revision, as we continue to improve aspects of the pipeline such as removing duplicate adverts and extracting skills. Before using the data in the Observatory it is also important to remember that the skills mentioned within a job advert may not fully capture the skills required to perform that job. Moreover, not all vacant positions are advertised online and we are not collecting all online job adverts. Unfortunately, we cannot share our dataset of job adverts.</p>   
 		</div>
 
 		<!-- finding green jobs -->
@@ -104,7 +103,7 @@
 		<LegendSalaries />
 		<ChartSalaries />
 		<div class='text_content'>
-			<p class='notes'>The chart above shows the salary ranges in those adverts which also requested skills from the skill groups shown. These are estimates rather than precise figures as many adverts do not mention a salary. All salary ranges have been annualised.</p>
+			<p class='notes'>The chart above shows the salary ranges in those adverts which requested skills from the skill groups shown, based on adverts in July 2021. These are estimates rather than precise figures as many adverts do not mention a salary. All salary ranges have been annualised.</p>
 		</div>
 
 		<!-- what are our future plans for the observatory? -->

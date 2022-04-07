@@ -1,5 +1,5 @@
 <script>
-	export let year = 2021;
+	export let year = 2022;
 </script>
 
 <div class='app-footer'>
